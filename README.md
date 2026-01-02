@@ -1,4 +1,4 @@
-# Astro Starter Kit: Minimal
+# SmoothDescent
 
 ```sh
 npm create astro@latest -- --template minimal

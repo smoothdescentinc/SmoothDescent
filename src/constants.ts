@@ -21,7 +21,7 @@ export const REVIEWS_COPY = {
 };
 
 export const VALUE_PROPS_COPY = {
-  headline: "The Metabolic Defense Difference",
+  headline: "The SmoothDescent Difference",
   subheadline: "We believe in transparency, clinical dosing, and the power of targeted nutrition. Every formula is a promise of support without compromise."
 };
 
@@ -249,7 +249,7 @@ export const FAQS: FAQCategory[] = [
       {
         question: "Is this safe to take with my GLP-1 medication (Ozempic, Wegovy, Mounjaro)?",
         answer: [
-          "Yes. All Metabolic Defense products are nutritional supplements containing vitamins, minerals, and food-derived ingredients (whey protein, ginger root, electrolytes). They do not contain any pharmaceutical compounds that interact with GLP-1 receptor agonist medications.",
+          "Yes. All SmoothDescent products are nutritional supplements containing vitamins, minerals, and food-derived ingredients (whey protein, ginger root, electrolytes). They do not contain any pharmaceutical compounds that interact with GLP-1 receptor agonist medications.",
           "In short: These are food products designed to support your nutrition during treatment, not medications that alter how your prescription works."
         ]
       },
@@ -411,7 +411,7 @@ export const QUIZ_RESULTS: Record<string, QuizResult> = {
       "Hydration is the foundation of everything."
     ],
     products: [{ id: "hydration", name: "Gastric Shield+ Hydration Powder", price: 38, image: "https://picsum.photos/id/429/800/800" }],
-    testimonial: { quote: "Over 8,000 GLP-1 users trust Metabolic Defense to support their journey.", author: "Community Stat" },
+    testimonial: { quote: "Over 8,000 GLP-1 users trust SmoothDescent to support their journey.", author: "Community Stat" },
     ctaPrimary: "Start with Hydration",
     ctaSecondary: "Read the Science"
   }

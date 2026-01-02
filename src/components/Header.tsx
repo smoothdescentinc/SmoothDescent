@@ -38,7 +38,7 @@ const Header: React.FC = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center">
             <span className="text-xl md:text-2xl font-black text-brand-dark tracking-tight font-serif">
-              METABOLIC DEFENSE
+              SMOOTH DESCENT
             </span>
           </Link>
 
