@@ -11,6 +11,7 @@ import ProductPage from './components/ProductPage';
 import FAQ from './components/FAQ';
 import Footer from './components/Footer';
 import QuizCallout from './components/QuizCallout';
+import NewsletterModal from './components/NewsletterModal';
 
 const Home = () => (
   <>
@@ -43,6 +44,7 @@ const App: React.FC = () => {
         </Routes>
       </main>
       <Footer />
+      <NewsletterModal />
     </div>
   );
 };
