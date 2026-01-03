@@ -19,7 +19,7 @@ const FAQ: React.FC = () => {
           </h2>
           <button
             onClick={() => document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' })}
-            className="flex-shrink-0 bg-[#006B4D] hover:bg-[#00553d] text-white px-8 py-4 rounded-full font-bold text-lg shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 flex items-center gap-2 group"
+            className="flex-shrink-0 bg-brand-primary hover:bg-[#B88E8A] text-brand-light px-8 py-4 rounded-full font-bold text-lg shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 flex items-center gap-2 group"
           >
             No? Try SmoothDescent now
             <span className="group-hover:translate-x-1 transition-transform">→</span>
