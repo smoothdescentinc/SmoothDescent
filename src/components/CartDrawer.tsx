@@ -207,6 +207,21 @@ const CartDrawer: React.FC = () => {
                     {url ? (
                         <a
                             href={url}
+                            onClick={() => {
+                                // Track InitiateCheckout event for Meta Pixel
+                                if (typeof window !== 'undefined' && (window as any).fbq) {
+                                    (window as any).fbq('track', 'InitiateCheckout', {
+                                        content_ids: items.map(i => i.id),
+                                        contents: items.map(i => ({
+                                            id: i.id,
+                                            quantity: i.quantity
+                                        })),
+                                        value: subtotal,
+                                        currency: 'USD',
+                                        num_items: items.reduce((acc, i) => acc + i.quantity, 0)
+                                    });
+                                }
+                            }}
                             className="w-full bg-[#fa9f1c] hover:bg-[#e89010] text-black font-extrabold text-lg py-4 rounded-lg shadow-lg flex items-center justify-center gap-2 transition-colors"
                         >
                             Continue to Checkout

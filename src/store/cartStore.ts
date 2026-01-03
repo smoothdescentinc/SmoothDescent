@@ -84,6 +84,18 @@ export async function addCartItem(product: Product, quantity = 1, label = '') {
             const newItem: CartItem = { ...product, quantity, variantLabel: label };
             cartItems.set([...currentItems, newItem]);
         }
+
+        // Track AddToCart event for Meta Pixel
+        if (typeof window !== 'undefined' && (window as any).fbq) {
+            (window as any).fbq('track', 'AddToCart', {
+                content_name: product.name,
+                content_ids: [product.id],
+                content_type: 'product',
+                value: product.price * quantity,
+                currency: 'USD'
+            });
+        }
+
         return;
     }
 

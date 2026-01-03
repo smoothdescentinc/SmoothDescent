@@ -37,6 +37,19 @@ const ProductPage: React.FC = () => {
       }
    }, [product]);
 
+   // Track ViewContent event for Meta Pixel
+   useEffect(() => {
+      if (product && typeof window !== 'undefined' && (window as any).fbq) {
+         (window as any).fbq('track', 'ViewContent', {
+            content_name: product.name,
+            content_ids: [product.id],
+            content_type: 'product',
+            value: product.price,
+            currency: 'USD'
+         });
+      }
+   }, [product]);
+
    if ($isLoading) {
       return (
          <div className="min-h-screen flex items-center justify-center">

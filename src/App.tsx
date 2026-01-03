@@ -13,6 +13,7 @@ import Footer from './components/Footer';
 import QuizCallout from './components/QuizCallout';
 import NewsletterModal from './components/NewsletterModal';
 import SciencePage from './components/SciencePage';
+import MetaPurchaseTracker from './components/MetaPurchaseTracker';
 
 const Home = () => (
   <>
@@ -57,6 +58,7 @@ const App: React.FC = () => {
       </main>
       <Footer />
       <NewsletterModal isOpen={isNewsletterOpen} onClose={() => setIsNewsletterOpen(false)} />
+      <MetaPurchaseTracker />
     </div>
   );
 };
