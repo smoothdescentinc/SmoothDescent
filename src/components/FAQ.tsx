@@ -67,12 +67,7 @@ const FAQ: React.FC = () => {
           ))}
         </div>
 
-        <div className="mt-16 text-center">
-          <p className="text-brand-dark/60 mb-4">Can't find your answer?</p>
-          <a href="mailto:support@smoothdescent.com" className="font-bold text-brand-primary hover:text-brand-accent transition-colors border-b border-brand-primary/20 hover:border-brand-primary">
-            Contact Support
-          </a>
-        </div>
+
 
       </div>
     </section>
