@@ -28,15 +28,22 @@ import AnnouncementBar from './components/AnnouncementBar';
 
 const App: React.FC = () => {
   const location = useLocation();
+  const [isNewsletterOpen, setIsNewsletterOpen] = React.useState(false);
 
   // Scroll to top on route change
   React.useEffect(() => {
     window.scrollTo(0, 0);
   }, [location.pathname]);
 
+  // Auto-open modal after 3 seconds
+  React.useEffect(() => {
+    const timer = setTimeout(() => setIsNewsletterOpen(true), 3000);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div className="antialiased text-slate-900 bg-white">
-      <AnnouncementBar />
+      <AnnouncementBar onOpen={() => setIsNewsletterOpen(true)} />
       <Header />
       <CartDrawer />
       <main>
@@ -47,7 +54,7 @@ const App: React.FC = () => {
         </Routes>
       </main>
       <Footer />
-      <NewsletterModal />
+      <NewsletterModal isOpen={isNewsletterOpen} onClose={() => setIsNewsletterOpen(false)} />
     </div>
   );
 };

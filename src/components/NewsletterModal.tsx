@@ -1,19 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { X, ArrowRight, Loader2, Check } from 'lucide-react';
 
-export default function NewsletterModal() {
-    const [isOpen, setIsOpen] = useState(false);
+interface NewsletterModalProps {
+    isOpen: boolean;
+    onClose: () => void;
+}
+
+export default function NewsletterModal({ isOpen, onClose }: NewsletterModalProps) {
     const [step, setStep] = useState<'segmentation' | 'email' | 'phone' | 'success'>('segmentation');
     const [selectedGoal, setSelectedGoal] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [status, setStatus] = useState<'idle' | 'loading'>('idle');
 
-    // Open logic: Trigger after 3 seconds
+    // Reset flow when reopening
     useEffect(() => {
-        const timer = setTimeout(() => setIsOpen(true), 3000);
-        return () => clearTimeout(timer);
-    }, []);
+        if (isOpen && step === 'success') {
+            // Optional: keep success state or reset? Usually reset if they closed and reopened for some reason, 
+            // but if they just signed up, maybe keep success? 
+            // Let's not auto-reset for now to avoid losing the code if they accidentally close.
+        }
+    }, [isOpen]);
 
     const handleGoalSelect = (goal: string) => {
         setSelectedGoal(goal);
@@ -58,7 +65,7 @@ export default function NewsletterModal() {
                 {/* Close Button */}
                 {/* Close Button - High Contrast */}
                 <button
-                    onClick={() => setIsOpen(false)}
+                    onClick={onClose}
                     className="absolute top-4 right-4 z-50 p-2 bg-white rounded-full shadow-lg text-brand-dark hover:bg-brand-primary hover:text-white transition-all border border-gray-100 opacity-90 hover:opacity-100"
                     aria-label="Close modal"
                 >
@@ -97,7 +104,7 @@ export default function NewsletterModal() {
                                     </button>
                                 ))}
                             </div>
-                            <button onClick={() => setIsOpen(false)} className="mt-6 text-xs text-center w-full text-brand-dark/40 underline hover:text-brand-dark">
+                            <button onClick={onClose} className="mt-6 text-xs text-center w-full text-brand-dark/40 underline hover:text-brand-dark">
                                 No thanks, I don't like savings
                             </button>
                         </div>
@@ -164,7 +171,7 @@ export default function NewsletterModal() {
                                 Use code <span className="font-bold border-b-2 border-brand-primary">SMOOTH15</span> at checkout.
                             </p>
                             <button
-                                onClick={() => setIsOpen(false)}
+                                onClick={onClose}
                                 className="px-8 py-3 bg-brand-dark text-white font-bold rounded-lg hover:bg-brand-primary transition-all"
                             >
                                 Shop Now
