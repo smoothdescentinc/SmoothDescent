@@ -39,47 +39,67 @@ export default function Newsletter() {
 
     if (status === 'success') {
         return (
-            <div className="bg-green-50/10 border border-green-500/20 text-green-400 p-4 rounded-lg flex items-center gap-3 animate-fade-in shadow-sm backdrop-blur-sm">
-                <div className="bg-green-500/10 p-2 rounded-full">
-                    <Check className="w-5 h-5" />
+            <div className="bg-white py-24 px-4 border-t border-gray-100 font-sans">
+                <div className="max-w-md mx-auto text-center animate-fade-in">
+                    <div className="bg-green-100 p-4 rounded-full w-16 h-16 mx-auto mb-6 flex items-center justify-center">
+                        <Check className="w-8 h-8 text-green-600" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-gray-900 mb-2">You're on the list!</h3>
+                    <p className="text-gray-600">Check your inbox for your 10% off code.</p>
                 </div>
-                <p className="font-medium">{message}</p>
             </div>
         );
     }
 
     return (
-        <form onSubmit={handleSubmit} className="w-full max-w-sm relative group">
-            <div className="relative flex items-center">
-                <Mail className="absolute left-3 w-5 h-5 text-zinc-500 group-focus-within:text-brand-primary transition-colors" />
-                <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter your email for 10% off"
-                    className="w-full bg-zinc-900/50 border border-white/10 rounded-lg py-3 pl-10 pr-12 text-white placeholder:text-zinc-600 focus:outline-none focus:border-brand-primary/50 focus:ring-1 focus:ring-brand-primary/50 transition-all shadow-inner"
-                    disabled={status === 'loading'}
-                    required
-                />
-                <button
-                    type="submit"
-                    disabled={status === 'loading'}
-                    className="absolute right-1.5 p-2 bg-brand-primary hover:bg-brand-accent text-white rounded-md transition-all disabled:opacity-50 disabled:cursor-not-allowed hover:scale-105 active:scale-95 shadow-lg shadow-brand-primary/20"
-                    aria-label="Subscribe"
-                >
-                    {status === 'loading' ? (
-                        <Loader2 className="w-4 h-4 animate-spin" />
-                    ) : (
-                        <ArrowRight className="w-4 h-4" />
-                    )}
-                </button>
-            </div>
-            {status === 'error' && (
-                <p className="absolute -bottom-6 left-1 text-sm text-red-400 animate-slide-up">
-                    {message}
+        <div className="bg-white py-24 px-4 border-t border-brand-primary/10 font-sans">
+            <div className="max-w-xl mx-auto text-center">
+
+                <h2 className="text-4xl md:text-5xl font-serif font-bold text-brand-dark mb-4 tracking-tight">
+                    Get 15% Off!
+                </h2>
+
+                <p className="text-brand-dark/70 mb-10 text-lg font-medium leading-relaxed">
+                    Reveal your discount code by entering your email below:
                 </p>
-            )}
-            <div className="absolute inset-0 bg-brand-primary/5 rounded-lg blur-xl -z-10 opacity-0 group-focus-within:opacity-100 transition-opacity duration-500" />
-        </form>
+
+                <form onSubmit={handleSubmit} className="flex flex-col gap-5 max-w-md mx-auto">
+                    <div className="relative">
+                        <input
+                            type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            placeholder="Email *"
+                            className="w-full bg-[#F5F5F5] border-none focus:ring-2 focus:ring-brand-primary/20 focus:bg-white rounded-sm px-6 py-4 text-brand-dark placeholder:text-brand-dark/40 text-base font-medium transition-all"
+                            disabled={status === 'loading'}
+                            required
+                        />
+                    </div>
+
+                    <button
+                        type="submit"
+                        disabled={status === 'loading'}
+                        className="w-full bg-brand-dark hover:bg-brand-primary text-white font-bold py-4 rounded-sm uppercase tracking-widest text-sm transition-all hover:translate-y-[-1px] hover:shadow-lg flex items-center justify-center"
+                    >
+                        {status === 'loading' ? (
+                            <Loader2 className="w-5 h-5 animate-spin" />
+                        ) : (
+                            'NEXT'
+                        )}
+                    </button>
+                </form>
+
+                {status === 'error' && (
+                    <p className="mt-4 text-brand-accent font-medium animate-slide-up">
+                        {message}
+                    </p>
+                )}
+
+                <p className="mt-8 text-[11px] text-brand-dark/40 uppercase tracking-wide">
+                    Our emails have no unnecessary additives or fillers. Read our <a href="#" className="underline hover:text-brand-primary">Privacy Policy</a>.
+                </p>
+
+            </div>
+        </div>
     );
 }
