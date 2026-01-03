@@ -24,6 +24,8 @@ const Home = () => (
   </>
 );
 
+import AnnouncementBar from './components/AnnouncementBar';
+
 const App: React.FC = () => {
   const location = useLocation();
 
@@ -34,6 +36,7 @@ const App: React.FC = () => {
 
   return (
     <div className="antialiased text-slate-900 bg-white">
+      <AnnouncementBar />
       <Header />
       <CartDrawer />
       <main>

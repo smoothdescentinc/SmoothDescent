@@ -89,7 +89,7 @@ const Hero: React.FC = () => {
             {/* Guarantee */}
             <div className="flex items-center gap-2 text-brand-dark/70 font-medium text-sm justify-center lg:justify-start w-full">
               <ShieldCheck className="w-5 h-5 text-brand-primary" />
-              <span>60-Day Money-Back Guarantee</span>
+              <span>30-Day Money-Back Guarantee</span>
             </div>
 
           </div>
