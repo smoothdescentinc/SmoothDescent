@@ -285,7 +285,7 @@ export const FAQS: FAQCategory[] = [
       {
         question: "What's your return policy?",
         answer: [
-          "60-Day Money Back Guarantee. If you're not satisfied, email us. You don't need to ship the product back. Even if the container is empty, we'll refund you."
+          "30-Day Money Back Guarantee. If you're not satisfied, email us. You don't need to ship the product back. Even if the container is empty, we'll refund you."
         ]
       }
     ]
