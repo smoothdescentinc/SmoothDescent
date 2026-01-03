@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Newsletter from './Newsletter';
 
 const Footer: React.FC = () => {
   return (
@@ -44,16 +45,10 @@ const Footer: React.FC = () => {
           {/* Column 4 - Newsletter */}
           <div className="col-span-2 md:col-span-1">
             <h4 className="font-bold mb-6 tracking-widest text-xs text-brand-primary uppercase">Stay In The Flow</h4>
-            <form className="flex flex-col gap-3" onSubmit={(e) => e.preventDefault()}>
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="bg-brand-dark border border-brand-primary/20 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-primary transition-colors"
-              />
-              <button className="bg-brand-light text-brand-dark font-bold py-3 px-4 rounded-lg hover:bg-brand-primary hover:text-white transition-colors text-sm uppercase tracking-wide">
-                Subscribe
-              </button>
-            </form>
+            <p className="text-sm text-brand-light/70 mb-4">
+              Get expert GLP-1 tips and 10% off your first order.
+            </p>
+            <Newsletter />
           </div>
 
         </div>
