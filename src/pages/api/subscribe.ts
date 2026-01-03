@@ -6,18 +6,18 @@ export const prerender = false;
 const resend = new Resend(import.meta.env.RESEND_API_KEY);
 
 export const POST: APIRoute = async ({ request }) => {
-    const { email } = await request.json();
+  const { email, phone } = await request.json();
 
-    if (!email) {
-        return new Response(JSON.stringify({ message: 'Email is required' }), { status: 400 });
-    }
+  if (!email || !phone) {
+    return new Response(JSON.stringify({ message: 'Email and Phone are required' }), { status: 400 });
+  }
 
-    try {
-        const data = await resend.emails.send({
-            from: 'SmoothDescent <noreply@smoothdescent.com>',
-            to: [email],
-            subject: 'Welcome to SmoothDescent! (10% Off Inside)',
-            html: `
+  try {
+    const data = await resend.emails.send({
+      from: 'SmoothDescent <noreply@smoothdescent.com>',
+      to: [email],
+      subject: 'Welcome to SmoothDescent! (10% Off Inside)',
+      html: `
         <div style="font-family: sans-serif; color: #111;">
           <h1>Welcome to the family.</h1>
           <p>We're glad you're here.</p>
@@ -30,14 +30,14 @@ export const POST: APIRoute = async ({ request }) => {
           </p>
         </div>
       `,
-        });
+    });
 
-        return new Response(JSON.stringify(data), { status: 200 });
-    } catch (error) {
-        console.error(error);
-        return new Response(
-            JSON.stringify({ message: error instanceof Error ? error.message : 'Unknown error' }),
-            { status: 500 }
-        );
-    }
+    return new Response(JSON.stringify(data), { status: 200 });
+  } catch (error) {
+    console.error(error);
+    return new Response(
+      JSON.stringify({ message: error instanceof Error ? error.message : 'Unknown error' }),
+      { status: 500 }
+    );
+  }
 };
