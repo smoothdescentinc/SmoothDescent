@@ -59,8 +59,8 @@ export default function NewsletterModal({ isOpen, onClose }: NewsletterModalProp
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-fade-in">
-            <div className="bg-[#FAF7F2] w-full max-w-4xl rounded-2xl shadow-2xl overflow-hidden flex flex-col md:flex-row relative animate-slide-up">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-brand-dark/60 backdrop-blur-md animate-fade-in">
+            <div className="bg-[#FAF7F2] w-full max-w-4xl rounded-2xl shadow-2xl overflow-hidden flex flex-col md:flex-row relative animate-pop-in">
 
                 {/* Close Button */}
                 {/* Close Button - High Contrast */}
