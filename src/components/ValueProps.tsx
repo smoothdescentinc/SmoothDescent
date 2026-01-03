@@ -12,7 +12,7 @@ const ValueProps: React.FC = () => {
   return (
     <section id="difference" className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Header */}
         <div className="text-center mb-20">
           <h2 className="text-3xl md:text-4xl font-serif text-brand-dark mb-4">
@@ -53,7 +53,7 @@ const ValueProps: React.FC = () => {
             {PROMISE_COPY.body}
           </p>
           <div className="inline-block px-4 py-2 border border-brand-dark rounded-full text-sm font-bold text-brand-dark uppercase tracking-widest">
-            60 Day Money Back Guarantee
+            30 Day Money Back Guarantee
           </div>
         </div>
 

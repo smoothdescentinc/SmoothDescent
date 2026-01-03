@@ -18,8 +18,8 @@ const Home = () => (
     <Hero />
     <Reviews />
     <ValueProps />
-    <ProductGrid />
     <QuizCallout />
+    <ProductGrid />
     <FAQ />
   </>
 );
