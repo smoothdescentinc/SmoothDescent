@@ -54,11 +54,12 @@ const Hero: React.FC = () => {
 
             {/* Mobile/Tablet Order: Button comes BEFORE the words/list on mobile as per user request */}
             <div className="w-full sm:max-w-md lg:max-w-none mb-8">
-              <a href="#products" className="block w-full">
-                <button className="w-full bg-brand-dark hover:bg-brand-primary text-white font-bold text-lg py-5 px-8 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
-                  Shop New Year's Sale
-                </button>
-              </a>
+              <button
+                onClick={() => document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' })}
+                className="w-full bg-brand-dark hover:bg-brand-primary text-white font-bold text-lg py-5 px-8 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-2"
+              >
+                Shop New Year's Sale
+              </button>
             </div>
 
             {/* Words / List */}
