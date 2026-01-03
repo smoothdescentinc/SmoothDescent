@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const Hero: React.FC = () => {
   return (
-    <section className="relative overflow-hidden bg-[#FAF7F2] pt-8 pb-16 lg:pt-24 lg:pb-32 font-sans px-4">
+    <section className="relative overflow-hidden bg-brand-light pt-8 pb-16 lg:pt-24 lg:pb-32 font-sans px-4">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
 
@@ -36,7 +36,7 @@ const Hero: React.FC = () => {
 
             {/* Rating */}
             <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-3 mb-6 animate-fade-in">
-              <div className="flex gap-0.5 text-[#00B050]"> {/* Green stars matching reference */}
+              <div className="flex gap-0.5 text-brand-primary">
                 {[1, 2, 3, 4, 5].map((i) => (
                   <Star key={i} className="w-5 h-5 fill-current" />
                 ))}
@@ -55,7 +55,7 @@ const Hero: React.FC = () => {
             {/* Mobile/Tablet Order: Button comes BEFORE the words/list on mobile as per user request */}
             <div className="w-full sm:max-w-md lg:max-w-none mb-8">
               <a href="#products" className="block w-full">
-                <button className="w-full bg-[#006838] hover:bg-[#00522c] text-white font-bold text-lg py-5 px-8 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
+                <button className="w-full bg-brand-dark hover:bg-brand-primary text-white font-bold text-lg py-5 px-8 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
                   Shop New Year's Sale
                 </button>
               </a>
@@ -73,7 +73,7 @@ const Hero: React.FC = () => {
                   'Hair shedding and low energy'
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
-                    <div className="mt-1 min-w-[1.25rem] h-5 rounded-full bg-[#00B050]/10 flex items-center justify-center text-[#00B050]">
+                    <div className="mt-1 min-w-[1.25rem] h-5 rounded-full bg-brand-primary/10 flex items-center justify-center text-brand-primary">
                       <Check size={12} strokeWidth={4} />
                     </div>
                     <span className="text-brand-dark/80 font-medium leading-snug">{item}</span>
@@ -88,7 +88,7 @@ const Hero: React.FC = () => {
 
             {/* Guarantee */}
             <div className="flex items-center gap-2 text-brand-dark/70 font-medium text-sm justify-center lg:justify-start w-full">
-              <ShieldCheck className="w-5 h-5 text-[#00B050]" />
+              <ShieldCheck className="w-5 h-5 text-brand-primary" />
               <span>60-Day Money-Back Guarantee</span>
             </div>
 

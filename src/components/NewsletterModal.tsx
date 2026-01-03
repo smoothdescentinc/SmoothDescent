@@ -56,11 +56,13 @@ export default function NewsletterModal() {
             <div className="bg-[#FAF7F2] w-full max-w-4xl rounded-2xl shadow-2xl overflow-hidden flex flex-col md:flex-row relative animate-slide-up">
 
                 {/* Close Button */}
+                {/* Close Button - High Contrast */}
                 <button
                     onClick={() => setIsOpen(false)}
-                    className="absolute top-4 right-4 z-10 p-2 bg-black/5 hover:bg-black/10 rounded-full transition-colors"
+                    className="absolute top-4 right-4 z-50 p-2 bg-white rounded-full shadow-lg text-brand-dark hover:bg-brand-primary hover:text-white transition-all border border-gray-100 opacity-90 hover:opacity-100"
+                    aria-label="Close modal"
                 >
-                    <X className="w-5 h-5 text-brand-dark" />
+                    <X className="w-5 h-5" />
                 </button>
 
                 {/* Left Side: Content */}
