@@ -5,6 +5,7 @@ import { products, isLoading, fetchProducts } from '../store/productsStore';
 import Button from './Button';
 import { addCartItem } from '../store/cartStore';
 import { Star, Check, ShieldCheck, Truck, RefreshCw, ChevronRight, Plus, Minus, Loader2 } from 'lucide-react';
+import { getUserData } from '../lib/pixelUserData';
 
 const ProductPage: React.FC = () => {
    const { id } = useParams<{ id: string }>();
@@ -40,12 +41,14 @@ const ProductPage: React.FC = () => {
    // Track ViewContent event for Meta Pixel
    useEffect(() => {
       if (product && typeof window !== 'undefined' && (window as any).fbq) {
+         const userData = getUserData();
          (window as any).fbq('track', 'ViewContent', {
             content_name: product.name,
             content_ids: [product.id],
             content_type: 'product',
             value: product.price,
-            currency: 'USD'
+            currency: 'USD',
+            ...userData
          });
       }
    }, [product]);

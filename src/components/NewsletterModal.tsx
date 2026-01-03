@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { X, ArrowRight, Loader2, Check } from 'lucide-react';
+import { captureUserEmail } from '../lib/pixelUserData';
 
 interface NewsletterModalProps {
     isOpen: boolean;
@@ -32,8 +33,9 @@ export default function NewsletterModal({ isOpen, onClose }: NewsletterModalProp
 
         if (step === 'email') {
             if (!email) return;
+            // Capture and hash email for Meta Pixel
+            await captureUserEmail(email);
             setStep('phone');
-            return;
         }
 
         if (step === 'phone') {

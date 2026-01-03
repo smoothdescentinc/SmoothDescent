@@ -3,6 +3,7 @@ import { X, Lock, Minus, Plus } from 'lucide-react';
 import { useStore } from '@nanostores/react';
 import { isCartOpen, cartItems, removeCartItem, updateCartQuantity, addCartItem, checkoutUrl, isUpdating } from '../store/cartStore';
 import type { Product } from '../types';
+import { getUserData } from '../lib/pixelUserData';
 
 const FREE_SHIPPING_THRESHOLD = 99.00;
 
@@ -210,6 +211,7 @@ const CartDrawer: React.FC = () => {
                             onClick={() => {
                                 // Track InitiateCheckout event for Meta Pixel
                                 if (typeof window !== 'undefined' && (window as any).fbq) {
+                                    const userData = getUserData();
                                     (window as any).fbq('track', 'InitiateCheckout', {
                                         content_ids: items.map(i => i.id),
                                         contents: items.map(i => ({
@@ -218,7 +220,8 @@ const CartDrawer: React.FC = () => {
                                         })),
                                         value: subtotal,
                                         currency: 'USD',
-                                        num_items: items.reduce((acc, i) => acc + i.quantity, 0)
+                                        num_items: items.reduce((acc, i) => acc + i.quantity, 0),
+                                        ...userData
                                     });
                                 }
                             }}
