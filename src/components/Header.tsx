@@ -56,7 +56,7 @@ const Header: React.FC = () => {
           <div className="flex items-center space-x-6">
             {!isQuiz && (
               <Link to="/quiz" className="hidden md:block">
-                <span className="text-sm font-bold text-brand-primary hover:text-brand-accent transition-colors uppercase tracking-wide border-b-2 border-brand-primary/20 pb-0.5 hover:border-brand-primary">Take Quiz</span>
+                <span className="text-sm font-bold text-brand-primary hover:text-brand-accent transition-colors uppercase tracking-wide border-b-2 border-brand-primary/20 pb-0.5 hover:border-brand-primary">Find Your Match</span>
               </Link>
             )}
             <button
@@ -92,7 +92,7 @@ const Header: React.FC = () => {
             <button className="block w-full text-left px-3 py-3 text-base font-medium text-brand-dark hover:bg-brand-cream rounded-md" onClick={() => handleNavClick('#reviews')}>Reviews</button>
             <button className="block w-full text-left px-3 py-3 text-base font-medium text-brand-dark hover:bg-brand-cream rounded-md" onClick={() => handleNavClick('#faq')}>FAQs</button>
             <Link to="/quiz" className="block w-full mt-6 text-center bg-brand-primary text-brand-light font-bold py-4 rounded-full shadow-md" onClick={() => setIsMenuOpen(false)}>
-              Take The Quiz
+              Find Your Match
             </Link>
           </div>
         </div>
