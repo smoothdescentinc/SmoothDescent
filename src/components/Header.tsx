@@ -46,7 +46,7 @@ const Header: React.FC = () => {
           {!isQuiz && (
             <nav className="hidden md:flex space-x-8">
               <button onClick={() => handleNavClick('#products')} className="text-brand-dark hover:text-brand-primary font-medium tracking-wide text-sm uppercase">Shop</button>
-              <button onClick={() => handleNavClick('#difference')} className="text-brand-dark hover:text-brand-primary font-medium tracking-wide text-sm uppercase">The Science</button>
+              <Link to="/science" className="text-brand-dark hover:text-brand-primary font-medium tracking-wide text-sm uppercase">The Science</Link>
               <button onClick={() => handleNavClick('#reviews')} className="text-brand-dark hover:text-brand-primary font-medium tracking-wide text-sm uppercase">Reviews</button>
               <button onClick={() => handleNavClick('#faq')} className="text-brand-dark hover:text-brand-primary font-medium tracking-wide text-sm uppercase">FAQs</button>
             </nav>
@@ -88,7 +88,7 @@ const Header: React.FC = () => {
         <div className="md:hidden bg-brand-light border-b border-brand-primary/10">
           <div className="px-4 pt-4 pb-8 space-y-2">
             <button className="block w-full text-left px-3 py-3 text-base font-medium text-brand-dark hover:bg-brand-cream rounded-md" onClick={() => handleNavClick('#products')}>Shop</button>
-            <button className="block w-full text-left px-3 py-3 text-base font-medium text-brand-dark hover:bg-brand-cream rounded-md" onClick={() => handleNavClick('#difference')}>The Science</button>
+            <Link to="/science" className="block w-full text-left px-3 py-3 text-base font-medium text-brand-dark hover:bg-brand-cream rounded-md" onClick={() => setIsMenuOpen(false)}>The Science</Link>
             <button className="block w-full text-left px-3 py-3 text-base font-medium text-brand-dark hover:bg-brand-cream rounded-md" onClick={() => handleNavClick('#reviews')}>Reviews</button>
             <button className="block w-full text-left px-3 py-3 text-base font-medium text-brand-dark hover:bg-brand-cream rounded-md" onClick={() => handleNavClick('#faq')}>FAQs</button>
             <Link to="/quiz" className="block w-full mt-6 text-center bg-brand-primary text-brand-light font-bold py-4 rounded-full shadow-md" onClick={() => setIsMenuOpen(false)}>

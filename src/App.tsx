@@ -12,6 +12,7 @@ import FAQ from './components/FAQ';
 import Footer from './components/Footer';
 import QuizCallout from './components/QuizCallout';
 import NewsletterModal from './components/NewsletterModal';
+import SciencePage from './components/SciencePage';
 
 const Home = () => (
   <>
@@ -50,6 +51,7 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/quiz" element={<Quiz />} />
+          <Route path="/science" element={<SciencePage />} />
           <Route path="/product/:id" element={<ProductPage />} />
         </Routes>
       </main>
