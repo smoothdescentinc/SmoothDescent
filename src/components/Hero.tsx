@@ -1,74 +1,97 @@
 import React from 'react';
-import { HERO_COPY } from '../constants';
 import Button from './Button';
-import { Check, ShieldCheck } from 'lucide-react';
+import { Check, ShieldCheck, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Hero: React.FC = () => {
   return (
-    <section className="relative overflow-hidden bg-brand-light pt-12 pb-16 lg:pt-24 lg:pb-32">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+    <section className="relative overflow-hidden bg-[#FAF7F2] pt-8 pb-16 lg:pt-24 lg:pb-32 font-sans px-4">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
 
-          {/* Content */}
-          <div className="text-center lg:text-left">
-            <p className="inline-block px-4 py-1.5 mb-6 text-xs font-bold tracking-widest text-brand-dark uppercase bg-brand-secondary/30 rounded-full">
-              {HERO_COPY.eyebrow}
-            </p>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif text-brand-dark tracking-tight leading-[1.1] mb-6">
-              {HERO_COPY.headline}
-            </h1>
-            <p className="text-lg sm:text-xl text-brand-dark/80 mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0 font-light">
-              {HERO_COPY.subheadline}
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-10">
-              <a href="#products" className="w-full sm:w-auto">
-                <Button fullWidth>{HERO_COPY.ctaPrimary}</Button>
-              </a>
-              <Link to="/quiz" className="w-full sm:w-auto">
-                <Button variant="outline" fullWidth>{HERO_COPY.ctaSecondary}</Button>
-              </Link>
-            </div>
-
-            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 sm:gap-8 text-sm font-medium text-brand-dark/60">
-              {HERO_COPY.trustBadges.map((badge, index) => (
-                <div key={index} className="flex items-center">
-                  <div className="flex-shrink-0 mr-2 bg-brand-success/20 p-1 rounded-full text-brand-dark">
-                    <Check size={14} strokeWidth={3} />
-                  </div>
-                  {badge}
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Visual */}
-          <div className="relative">
-            <div className="relative rounded-t-[100px] rounded-b-[40px] overflow-hidden shadow-2xl border-4 border-white aspect-[4/5] sm:aspect-square lg:aspect-[4/5] mx-auto max-w-md lg:max-w-none">
+          {/* Visual (Mobile: Order 1, Desktop: Order 2) */}
+          <div className="w-full order-1 lg:order-2">
+            <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white aspect-[4/3] sm:aspect-square lg:aspect-[4/5] mx-auto max-w-lg lg:max-w-none transform transition-transform hover:scale-[1.01] duration-500">
               <img
-                src="https://picsum.photos/id/338/800/1000"
-                alt="Healthy lifestyle"
+                src="https://images.unsplash.com/photo-1544367563-12123d8959c9?q=80&w=2070&auto=format&fit=crop"
+                alt="Thriving on the journey"
                 className="w-full h-full object-cover"
               />
 
-              {/* Float Overlay */}
-              <div className="absolute bottom-6 left-6 right-6 bg-white/90 backdrop-blur-md p-5 rounded-2xl shadow-lg border border-brand-primary/10">
-                <div className="flex items-center gap-4">
-                  <div className="bg-brand-primary/10 p-2.5 rounded-full text-brand-primary">
-                    <ShieldCheck className="h-6 w-6" />
-                  </div>
-                  <div>
-                    <p className="font-bold text-brand-dark font-serif text-base">Doctor Trusted</p>
-                    <p className="text-xs text-gray-500 uppercase tracking-wide">Safe for daily use</p>
-                  </div>
+              {/* Desktop Float Overlay */}
+              <div className="absolute bottom-6 left-6 right-6 hidden lg:flex items-center gap-4 bg-white/95 backdrop-blur-sm p-4 rounded-xl shadow-lg border border-brand-primary/10">
+                <div className="bg-brand-primary/10 p-2 rounded-full text-brand-primary">
+                  <ShieldCheck className="h-6 w-6" />
+                </div>
+                <div>
+                  <p className="font-bold text-brand-dark font-serif">Doctor Trusted</p>
+                  <p className="text-xs text-gray-500 uppercase tracking-wide">Safe for daily use</p>
                 </div>
               </div>
             </div>
+          </div>
 
-            {/* Decorative Elements */}
-            <div className="absolute top-10 -right-10 w-40 h-40 bg-brand-primary/20 rounded-full blur-3xl -z-10"></div>
-            <div className="absolute -bottom-10 -left-10 w-60 h-60 bg-brand-secondary/30 rounded-full blur-3xl -z-10"></div>
+          {/* Content (Mobile: Order 2, Desktop: Order 1) */}
+          <div className="w-full order-2 lg:order-1 text-center lg:text-left flex flex-col items-center lg:items-start">
+
+            {/* Rating */}
+            <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-3 mb-6 animate-fade-in">
+              <div className="flex gap-0.5 text-[#00B050]"> {/* Green stars matching reference */}
+                {[1, 2, 3, 4, 5].map((i) => (
+                  <Star key={i} className="w-5 h-5 fill-current" />
+                ))}
+              </div>
+              <span className="text-brand-dark/80 font-medium text-sm sm:text-base">
+                Join 10,000+ Users Thriving on Their Journey
+              </span>
+            </div>
+
+            {/* Header */}
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl/[1.1] font-serif font-bold text-brand-dark tracking-tight mb-8">
+              You Spent $1,000 on the Medication. <br className="hidden lg:block" />
+              <span className="text-brand-primary">Don't Let a $20 Headache Make You Quit.</span>
+            </h1>
+
+            {/* Mobile/Tablet Order: Button comes BEFORE the words/list on mobile as per user request */}
+            <div className="w-full sm:max-w-md lg:max-w-none mb-8">
+              <a href="#products" className="block w-full">
+                <button className="w-full bg-[#006838] hover:bg-[#00522c] text-white font-bold text-lg py-5 px-8 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
+                  Shop New Year's Sale
+                </button>
+              </a>
+            </div>
+
+            {/* Words / List */}
+            <div className="bg-white/50 rounded-2xl p-6 border border-brand-primary/10 w-full mb-8 text-left">
+              <p className="font-bold text-brand-dark mb-4 text-lg">Shop Solutions For:</p>
+              <ul className="space-y-3 mb-6">
+                {[
+                  'Post-injection nausea and "Sunday Scaries"',
+                  'Dehydration headaches that feel like hangovers',
+                  'Food sitting like a brick in your stomach',
+                  'Muscle loss and "skinny fat" concerns',
+                  'Hair shedding and low energy'
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <div className="mt-1 min-w-[1.25rem] h-5 rounded-full bg-[#00B050]/10 flex items-center justify-center text-[#00B050]">
+                      <Check size={12} strokeWidth={4} />
+                    </div>
+                    <span className="text-brand-dark/80 font-medium leading-snug">{item}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <p className="text-brand-dark/70 italic leading-relaxed border-t border-brand-dark/5 pt-4">
+                "Micro-solubility formulas designed for sensitive, slowed stomachs. Because your body deserves the same investment as your prescription."
+              </p>
+            </div>
+
+            {/* Guarantee */}
+            <div className="flex items-center gap-2 text-brand-dark/70 font-medium text-sm justify-center lg:justify-start w-full">
+              <ShieldCheck className="w-5 h-5 text-[#00B050]" />
+              <span>60-Day Money-Back Guarantee</span>
+            </div>
+
           </div>
 
         </div>
