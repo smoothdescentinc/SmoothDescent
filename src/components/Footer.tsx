@@ -29,9 +29,10 @@ const Footer: React.FC = () => {
             <div>
               <h4 className="font-bold mb-6 tracking-widest text-xs text-brand-primary uppercase">Shop</h4>
               <ul className="space-y-4 text-sm text-brand-light/70">
-                <li><a href="#products" className="hover:text-brand-primary transition-colors">Gastric Shield+ Hydration</a></li>
-                <li><a href="#products" className="hover:text-brand-primary transition-colors">LeanLock™ Protein</a></li>
-                <li><a href="#products" className="hover:text-brand-primary transition-colors">Injection Day Rescue Kit</a></li>
+                {/* Note: In a real app these would link to specific product pages. For now, they scroll to the grid or use the product page route if known. */}
+                <li><Link to="/product/hydration" className="hover:text-brand-primary transition-colors">Gastric Shield+ Hydration</Link></li>
+                <li><Link to="/product/protein" className="hover:text-brand-primary transition-colors">LeanLock™ Protein</Link></li>
+                <li><Link to="/product/rescue-kit" className="hover:text-brand-primary transition-colors">Injection Day Rescue Kit</Link></li>
               </ul>
             </div>
 

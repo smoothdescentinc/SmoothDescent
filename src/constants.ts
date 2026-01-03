@@ -27,7 +27,7 @@ export const VALUE_PROPS_COPY = {
 
 export const PROMISE_COPY = {
   headline: "Our Promise To You",
-  body: "If you don't feel a difference within 60 days, we don't want your money. It's that simple. We are so confident in our formulas that we offer a completely risk-free trial. Try any product. If it doesn't help you stay comfortable and compliant with your medication, return it—even if the container is empty—and we'll refund you. No questions asked."
+  body: "If you don't feel a difference within 30 days, we don't want your money. It's that simple. We are so confident in our formulas that we offer a completely risk-free trial. Try any product. If it doesn't help you stay comfortable and compliant with your medication, return it—even if the container is empty—and we'll refund you. No questions asked."
 };
 
 // --- DATA LISTS ---

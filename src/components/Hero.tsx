@@ -47,9 +47,10 @@ const Hero: React.FC = () => {
             </div>
 
             {/* Header */}
+            {/* Header */}
             <h1 className="text-3xl sm:text-4xl lg:text-5xl/[1.1] font-serif font-bold text-brand-dark tracking-tight mb-8">
               You Spent $1,000 on the Medication. <br className="hidden lg:block" />
-              <span className="text-brand-primary">Don't Let a $20 Headache Make You Quit.</span>
+              <span className="text-brand-primary">Don't Let Side Effects Waste That Investment.</span>
             </h1>
 
             {/* Mobile/Tablet Order: Button comes BEFORE the words/list on mobile as per user request */}
