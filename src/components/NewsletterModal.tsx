@@ -160,7 +160,7 @@ export default function NewsletterModal({ isOpen, onClose }: NewsletterModalProp
                     )}
 
                     {step === 'success' && (
-                        <div className="text-center animate-fade-in py-10">
+                        <div className="text-center animate-fade-in py-8">
                             <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
                                 <Check className="w-8 h-8 text-green-600" />
                             </div>
@@ -168,14 +168,26 @@ export default function NewsletterModal({ isOpen, onClose }: NewsletterModalProp
                                 You're In!
                             </h2>
                             <p className="text-brand-dark/80 mb-6">
-                                Use code <span className="font-bold border-b-2 border-brand-primary">SMOOTH15</span> at checkout.
+                                Use code <span className="font-bold text-2xl text-brand-primary block mt-2 border-2 border-dashed border-brand-primary/30 py-2 rounded-lg bg-brand-primary/5 select-all">SMOOTH15</span>
                             </p>
                             <button
                                 onClick={onClose}
-                                className="px-8 py-3 bg-brand-dark text-white font-bold rounded-lg hover:bg-brand-primary transition-all"
+                                className="w-full px-8 py-4 bg-brand-dark text-white font-bold rounded-xl hover:bg-brand-primary transition-all mb-8 shadow-lg"
                             >
                                 Shop Now
                             </button>
+
+                            <div className="border-t border-brand-primary/10 pt-6">
+                                <p className="text-sm text-brand-dark/60 mb-3">Unsure what you need?</p>
+                                <a
+                                    href="/#/quiz"
+                                    onClick={onClose}
+                                    className="text-brand-primary font-bold hover:underline flex items-center justify-center gap-2 group text-sm"
+                                >
+                                    Take the 60-second quiz to find your match
+                                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                </a>
+                            </div>
                         </div>
                     )}
 
