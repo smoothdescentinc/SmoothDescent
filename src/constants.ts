@@ -39,7 +39,7 @@ export const PRODUCTS: Product[] = [
     category: "HYDRATION",
     rating: 5,
     reviews: 312,
-    image: "https://picsum.photos/id/429/800/800",
+    image: "/images/HydrationPowderHero.jpeg",
     price: 38.00,
     bestSeller: true,
     description: "The Injection Day Elixir. Stop the \"Ozempic Headache\" before it starts. Hydrate without the bloat. Lemonade flavor soothes nausea naturally. This isn't just hydration—it's your survival strategy for the 48 hours after your injection.",
@@ -136,7 +136,7 @@ export const PRODUCTS: Product[] = [
     category: "ON-THE-GO RELIEF",
     rating: 4.8,
     reviews: 267,
-    image: "https://picsum.photos/id/364/800/800",
+    image: "/images/StripsHero.jpeg",
     price: 28.00,
     description: "Your Pocket Savior. Feeling queasy at dinner? Slip a strip under your tongue. Dissolves in 10 seconds. No water needed. No running to the bathroom. Just fast, discreet nausea relief when you need it most.",
     subscriptionDiscount: 0.15,
@@ -340,7 +340,7 @@ export const QUIZ_RESULTS: Record<string, QuizResult> = {
       "Gastric Shield+ Hydration Powder (Lemonade) is designed for this exact moment. It uses micro-solubility electrolytes to absorb through the stomach lining immediately, bypassing the delay that makes other drinks sit heavy.",
       "This isn't a luxury. It's survival gear."
     ],
-    products: [{ id: "hydration", name: "Gastric Shield+ Hydration Powder", price: 38, image: "https://picsum.photos/id/429/800/800" }],
+    products: [{ id: "hydration", name: "Gastric Shield+ Hydration Powder", price: 38, image: "/images/HydrationPowderHero.jpeg" }],
     testimonial: { quote: "I was about to quit. I couldn't handle injection day anymore. This powder changed everything. It sounds simple, but having actual hydration that absorbs made me feel in control again.", author: "David C. | Verified Buyer" },
     ctaPrimary: "Start with Hydration",
     ctaSecondary: "See What's Inside"
@@ -368,7 +368,7 @@ export const QUIZ_RESULTS: Record<string, QuizResult> = {
       "These mint-flavored dissolving strips are your secret weapon. Place one under your tongue, and it dissolves in 10 seconds. The ingredients absorb directly into your bloodstream, calming nausea in minutes without drawing attention.",
       "No water needed. No panic. Just relief."
     ],
-    products: [{ id: "nausea-strips", name: "Digestive + Gut Health Strips", price: 28, image: "https://picsum.photos/id/364/800/800" }],
+    products: [{ id: "nausea-strips", name: "Digestive + Gut Health Strips", price: 28, image: "/images/StripsHero.jpeg" }],
     testimonial: { quote: "I can go on dates again. I keep these in my purse and slip one under my tongue if I feel weird. It stops the panic instantly.", author: "Amanda L. | Verified Buyer" },
     ctaPrimary: "Get Pocket Relief",
     ctaSecondary: "See How It Works"
@@ -382,7 +382,7 @@ export const QUIZ_RESULTS: Record<string, QuizResult> = {
       "Gastric Shield+ fixes this with micro-solubility electrolytes designed to absorb through the stomach lining immediately. The Lemonade flavor is naturally anti-nausea and cuts through the \"heavy\" feeling.",
       "This is the single most important supplement you can add right now."
     ],
-    products: [{ id: "hydration", name: "Gastric Shield+ Hydration Powder", price: 38, image: "https://picsum.photos/id/429/800/800" }],
+    products: [{ id: "hydration", name: "Gastric Shield+ Hydration Powder", price: 38, image: "/images/HydrationPowderHero.jpeg" }],
     testimonial: { quote: "I tried Liquid IV, LMNT, all of them. They all made me feel worse—like I was sloshing around with a gallon of water in my stomach. Gastric Shield+ is the first hydration powder that doesn't sit heavy.", author: "Jessica P. | Verified Buyer" },
     ctaPrimary: "Start with Hydration",
     ctaSecondary: "Subscribe & Save"
