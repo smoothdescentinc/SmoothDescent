@@ -6,20 +6,13 @@ export const prerender = false;
 const resend = new Resend(import.meta.env.RESEND_API_KEY);
 
 export const POST: APIRoute = async ({ request }) => {
-  console.log('🚀 Subscribe API called');
-  console.log('📧 API Key present:', !!import.meta.env.RESEND_API_KEY);
-  console.log('📧 API Key first 10 chars:', import.meta.env.RESEND_API_KEY?.substring(0, 10));
-
   const { email, phone } = await request.json();
-  console.log('📝 Received data:', { email, phone });
 
   if (!email || !phone) {
-    console.log('❌ Missing email or phone');
     return new Response(JSON.stringify({ message: 'Email and Phone are required' }), { status: 400 });
   }
 
   try {
-    console.log('📤 Sending email to:', email);
     const data = await resend.emails.send({
       from: 'SmoothDescent <noreply@smoothdescent.com>',
       to: [email],
@@ -54,11 +47,8 @@ export const POST: APIRoute = async ({ request }) => {
       `,
     });
 
-    console.log('✅ Email sent successfully!');
-    console.log('📧 Resend response:', JSON.stringify(data, null, 2));
     return new Response(JSON.stringify(data), { status: 200 });
   } catch (error) {
-    console.error('❌ Error sending email:');
     console.error(error);
     return new Response(
       JSON.stringify({ message: error instanceof Error ? error.message : 'Unknown error' }),
