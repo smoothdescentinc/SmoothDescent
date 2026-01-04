@@ -92,7 +92,7 @@ export const PRODUCTS: Product[] = [
     category: "DIGESTIVE SUPPORT",
     rating: 4.9,
     reviews: 418,
-    image: "https://picsum.photos/id/225/800/800",
+    image: "/images/DigestiveEnzyme.jpeg",
     price: 32.00,
     description: "The End of Sulfur Burps. Your stomach is too slow to digest food before it ferments. The result? Rotten egg burps, bloating, and embarrassment. These enzymes do the work your stomach can't.",
     subscriptionDiscount: 0.15,
