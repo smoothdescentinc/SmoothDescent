@@ -1,0 +1,9 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Main from '../Main';
+import '../styles/global.css';
+---
+
+<BaseLayout>
+	<Main client:only="react" />
+</BaseLayout>
