@@ -119,7 +119,10 @@ const ProductPage: React.FC = () => {
                      <img
                         src={activeImage || product.image}
                         alt={product.name}
-                        className="w-full h-full object-cover scale-[1.12]"
+                        className={`w-full h-full transition-transform duration-500 ${(activeImage === product.nutritionLabel)
+                              ? 'object-contain scale-100 p-2'
+                              : 'object-cover scale-[1.12]'
+                           }`}
                      />
                   </div>
                   {/* Thumbnails */}
