@@ -11,7 +11,7 @@ const Hero: React.FC = () => {
 
           {/* Visual (Mobile: Order 1, Desktop: Order 2) */}
           <div className="w-full order-1 lg:order-2">
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white mx-auto max-w-lg lg:max-w-none transform transition-transform hover:scale-[1.01] duration-500">
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white mx-auto w-full transform transition-transform hover:scale-[1.01] duration-500">
               <img
                 src="/images/MainHero.png"
                 alt="Thriving on the journey"
