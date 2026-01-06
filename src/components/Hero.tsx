@@ -18,15 +18,20 @@ const Hero: React.FC = () => {
                 className="w-full h-auto scale-[1.05]"
               />
 
-              {/* Desktop Float Overlay */}
-              <div className="absolute bottom-6 left-6 right-6 hidden lg:flex items-center gap-4 bg-white/95 backdrop-blur-sm p-4 rounded-xl shadow-lg border border-brand-primary/10">
-                <div className="bg-brand-primary/10 p-2 rounded-full text-brand-primary">
-                  <ShieldCheck className="h-6 w-6" />
-                </div>
-                <div>
-                  <p className="font-bold text-brand-dark font-serif">Doctor Trusted</p>
-                  <p className="text-xs text-gray-500 uppercase tracking-wide">Safe for daily use</p>
-                </div>
+            </div>
+
+            {/* Doctor Trusted Card (Below Image) */}
+            <div className="mt-6 flex items-center gap-4 bg-white/90 backdrop-blur-sm p-4 rounded-xl shadow-md border border-brand-primary/10 w-full max-w-sm mx-auto lg:max-w-none">
+              <div className="flex-shrink-0">
+                <img
+                  src="/images/DoctorPhoto.png"
+                  alt="Board Certified Doctor"
+                  className="h-12 w-12 rounded-full object-cover border-2 border-brand-primary/20"
+                />
+              </div>
+              <div>
+                <p className="font-bold text-brand-dark font-serif text-lg">Doctor Trusted</p>
+                <p className="text-xs text-gray-500 uppercase tracking-wide font-medium">Safe for daily use</p>
               </div>
             </div>
           </div>
@@ -98,7 +103,7 @@ const Hero: React.FC = () => {
 
         </div>
       </div>
-    </section>
+    </section >
   );
 };
 
