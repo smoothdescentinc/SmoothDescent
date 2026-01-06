@@ -19,7 +19,7 @@ const DoctorCard: React.FC<{ className?: string }> = ({ className = "" }) => {
                     </div>
                 </div>
                 <p className="text-brand-dark/80 italic mb-2 leading-relaxed text-sm">
-                    "Gastric Shield+ consistently ranks at the top of my list for GLP-1 patients. Its micro-solubility and isotonic balance are exactly what the stomach needs."
+                    "Smooth Descent creates the gold standard for GLP-1 support. I trust their precise formulations to keep my patients hydrated, comfortable, and successful on their weight loss journey."
                 </p>
                 <p className="font-bold text-sm text-brand-primary uppercase tracking-wider">Dr. Sarah Jenkins</p>
             </div>

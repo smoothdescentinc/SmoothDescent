@@ -16,14 +16,16 @@ import NewsletterModal from './components/NewsletterModal';
 import SciencePage from './components/SciencePage';
 import MetaPurchaseTracker from './components/MetaPurchaseTracker';
 import UsVsThem from './components/UsVsThem';
+import PromiseSection from './components/PromiseSection';
 
 const Home = () => (
   <>
     <Hero />
     <TrustMarquee />
     <ProductGrid />
-    <Reviews />
     <ValueProps />
+    <Reviews />
+    <PromiseSection />
     <QuizCallout />
     <UsVsThem />
     <FAQ />
