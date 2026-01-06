@@ -40,14 +40,16 @@ const ProductGrid: React.FC = () => {
 
                 {/* Image Container */}
                 <Link to={`/product/${product.id}`} className="block relative aspect-square bg-gray-100 overflow-hidden cursor-pointer">
-                  <span className="absolute top-2 left-2 md:top-4 md:left-4 bg-[#D4A5A5] text-white text-[9px] md:text-[10px] font-bold px-2 py-1 md:px-3 md:py-1.5 rounded-full z-10 tracking-widest uppercase shadow-sm">
-                    {product.category}
-                  </span>
-                  {product.bestSeller && (
-                    <span className="absolute top-2 right-2 md:top-4 md:right-4 bg-brand-secondary text-brand-dark text-[9px] md:text-[10px] font-bold px-2 py-1 md:px-3 md:py-1.5 rounded-full z-10 tracking-widest uppercase shadow-sm">
-                      Best Seller
+                  <div className="absolute top-2 left-2 md:top-4 md:left-4 z-10 flex flex-col items-start gap-1">
+                    <span className="bg-[#D4A5A5] text-white text-[9px] md:text-[10px] font-bold px-2 py-1 md:px-3 md:py-1.5 rounded-full tracking-widest uppercase shadow-sm">
+                      {product.category}
                     </span>
-                  )}
+                    {product.bestSeller && (
+                      <span className="bg-brand-secondary text-brand-dark text-[9px] md:text-[10px] font-bold px-2 py-1 md:px-3 md:py-1.5 rounded-full tracking-widest uppercase shadow-sm">
+                        Best Seller
+                      </span>
+                    )}
+                  </div>
                   <img
                     src={product.image}
                     alt={product.name}
