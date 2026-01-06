@@ -213,7 +213,7 @@ export default function NewsletterModal({ isOpen, onClose }: NewsletterModalProp
                             "I've never felt more energetic. This 15% off was just the cherry on top."
                         </p>
                         <p className="text-sm font-bold tracking-widest uppercase text-brand-primary">
-                            Sarah J. - Verified Buyer
+                            Sarah J. | Verified Buyer
                         </p>
                     </div>
                 </div>

@@ -5,7 +5,7 @@ import type { Product, Review, QuizQuestion, Feature, QuizResult, FAQCategory } 
 export const HERO_COPY = {
   eyebrow: "GLP-1 OPTIMIZED NUTRITION",
   headline: "Thrive While You Shrink",
-  subheadline: "Your medication handles the appetite. We handle everything else - the nausea, the dehydration, the muscle loss, and the energy crashes.",
+  subheadline: "Your medication handles the appetite. We handle everything else: the nausea, the dehydration, the muscle loss, and the energy crashes.",
   ctaPrimary: "Shop The Protocol",
   ctaSecondary: "Take The Support Quiz",
   trustBadges: [
@@ -27,7 +27,7 @@ export const VALUE_PROPS_COPY = {
 
 export const PROMISE_COPY = {
   headline: "Our Promise To You",
-  body: "If you don't feel a difference within 30 days, we don't want your money. It's that simple. We are so confident in our formulas that we offer a completely risk-free trial. Try any product. If it doesn't help you stay comfortable and compliant with your medication, return it - even if the container is empty - and we'll refund you. No questions asked."
+  body: "If you don't feel a difference within 30 days, we don't want your money. It's that simple. We are so confident in our formulas that we offer a completely risk-free trial. Try any product. If it doesn't help you stay comfortable and compliant with your medication, return it, even if the container is empty, and we'll refund you. No questions asked."
 };
 
 // --- DATA LISTS ---
@@ -43,7 +43,7 @@ export const PRODUCTS: Product[] = [
     nutritionLabel: "/images/HydratinoPowderNutritionLabel.png",
     price: 38.00,
     bestSeller: true,
-    description: "The Injection Day Elixir. Stop the \"Ozempic Headache\" before it starts. Hydrate without the bloat. Lemonade flavor soothes nausea naturally. This isn't just hydration - it's your survival strategy for the 48 hours after your injection.",
+    description: "The Injection Day Elixir. Stop the \"Ozempic Headache\" before it starts. Hydrate without the bloat. Lemonade flavor soothes nausea naturally. This isn't just hydration. It's your survival strategy for the 48 hours after your injection.",
     subscriptionDiscount: 0.15,
     details: {
       subtitle: "The Only Thing You Can Stomach on Day 1 & 2",
@@ -337,9 +337,9 @@ export const QUIZ_RESULTS: Record<string, QuizResult> = {
   "injection_day_survivor": {
     id: "injection_day_survivor",
     headline: "Your Protocol: Gastric Shield+ Hydration",
-    subheadline: "You're in the hardest phase - acclimation. Your body is in shock and you need immediate relief to stay compliant.",
+    subheadline: "You're in the hardest phase: acclimation. Your body is in shock and you need immediate relief to stay compliant.",
     bodyCopy: [
-      "Right now, your biggest enemy is the \"Sunday Scaries\" - that 48-hour window after your injection when nausea and headaches make you question if this medication is worth it. These symptoms aren't random; they're caused by severe dehydration and gastric stalling.",
+      "Right now, your biggest enemy is the \"Sunday Scaries,\" that 48-hour window after your injection when nausea and headaches make you question if this medication is worth it. These symptoms aren't random; they're caused by severe dehydration and gastric stalling.",
       "Gastric Shield+ Hydration Powder (Lemonade) is designed for this exact moment. It uses micro-solubility electrolytes to absorb through the stomach lining immediately, bypassing the delay that makes other drinks sit heavy.",
       "This isn't a luxury. It's survival gear."
     ],
@@ -379,14 +379,14 @@ export const QUIZ_RESULTS: Record<string, QuizResult> = {
   "hydration_hero": {
     id: "hydration_hero",
     headline: "Your Protocol: Gastric Shield+ Hydration Powder",
-    subheadline: "You're chronically dehydrated - and it's making everything worse. Let's fix the foundation first.",
+    subheadline: "You're chronically dehydrated, and it's making everything worse. Let's fix the foundation first.",
     bodyCopy: [
       "The \"Ozempic Headache\" isn't in your head. It's dehydration. Your medication suppresses your thirst signals, so even though your body is screaming for water, you don't feel thirsty.",
       "Gastric Shield+ fixes this with micro-solubility electrolytes designed to absorb through the stomach lining immediately. The Lemonade flavor is naturally anti-nausea and cuts through the \"heavy\" feeling.",
       "This is the single most important supplement you can add right now."
     ],
     products: [{ id: "hydration", name: "Gastric Shield+ Hydration Powder", price: 38, image: "/images/HydrationPowderHero.jpeg" }],
-    testimonial: { quote: "I tried Liquid IV, LMNT, all of them. They all made me feel worse - like I was sloshing around with a gallon of water in my stomach. Gastric Shield+ is the first hydration powder that doesn't sit heavy.", author: "Jessica P. | Verified Buyer" },
+    testimonial: { quote: "I tried Liquid IV, LMNT, all of them. They all made me feel worse, like I was sloshing around with a gallon of water in my stomach. Gastric Shield+ is the first hydration powder that doesn't sit heavy.", author: "Jessica P. | Verified Buyer" },
     ctaPrimary: "Start with Hydration",
     ctaSecondary: "Subscribe & Save"
   },
@@ -407,7 +407,7 @@ export const QUIZ_RESULTS: Record<string, QuizResult> = {
   "researcher": {
     id: "researcher",
     headline: "Still Exploring? Start Here.",
-    subheadline: "You're doing your homework - smart. Here's what you need to know before you buy anything.",
+    subheadline: "You're doing your homework. Smart. Here's what you need to know before you buy anything.",
     bodyCopy: [
       "You're not ready to buy yet. That's okay. But here's what most people don't realize until it's too late: The first 72 hours after your first injection will determine whether you quit or succeed.",
       "We recommend starting with Gastric Shield+ Hydration Powder. It's the single most important thing you can do to avoid the \"Ozempic Headache\" and injection day nausea.",

@@ -86,7 +86,7 @@ const SciencePage: React.FC = () => {
 
                                         <div>
                                             <h4 className="font-bold text-brand-dark mb-2 text-lg">Neurological Nausea Defense</h4>
-                                            <p>Clinical research shows Vitamin B6 at therapeutic doses (10-25mg) reduces nausea by modulating serotonin receptors in the brain's vomiting center (chemoreceptor trigger zone). This isn't just hydration - it's a neurological intervention.</p>
+                                            <p>Clinical research shows Vitamin B6 at therapeutic doses (10-25mg) reduces nausea by modulating serotonin receptors in the brain's vomiting center (chemoreceptor trigger zone). This isn't just hydration. It's a neurological intervention.</p>
                                         </div>
                                     </div>
 
@@ -179,7 +179,7 @@ const SciencePage: React.FC = () => {
                                         <div className="absolute top-0 right-0 p-8 opacity-10">
                                             <Quote size={80} />
                                         </div>
-                                        <p className="text-lg font-medium italic relative z-10">"Sulfur burps aren't just embarrassing - they're a sign of bacterial overgrowth. Enzyme supplementation is the mechanical solution to a mechanical problem."</p>
+                                        <p className="text-lg font-medium italic relative z-10">"Sulfur burps aren't just embarrassing. They're a sign of bacterial overgrowth. Enzyme supplementation is the mechanical solution to a mechanical problem."</p>
                                     </div>
                                 </div>
                             </div>
@@ -272,7 +272,7 @@ const SciencePage: React.FC = () => {
                                         <div className="absolute top-0 right-0 p-8 opacity-10">
                                             <Quote size={80} />
                                         </div>
-                                        <p className="text-lg font-medium italic relative z-10">"For acute nausea, speed is the only metric that matters. Sublingual delivery isn't just a convenience - it is mechanically superior."</p>
+                                        <p className="text-lg font-medium italic relative z-10">"For acute nausea, speed is the only metric that matters. Sublingual delivery isn't just a convenience. It is mechanically superior."</p>
                                     </div>
                                 </div>
                             </div>
