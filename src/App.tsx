@@ -18,10 +18,10 @@ import MetaPurchaseTracker from './components/MetaPurchaseTracker';
 const Home = () => (
   <>
     <Hero />
+    <ProductGrid />
     <Reviews />
     <ValueProps />
     <QuizCallout />
-    <ProductGrid />
     <FAQ />
   </>
 );
