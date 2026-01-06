@@ -17,14 +17,14 @@ const ProductGrid: React.FC = () => {
   }, []);
 
   return (
-    <section id="products" className="py-24 bg-brand-light">
+    <section id="products" className="py-12 md:py-24 bg-brand-light">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        <div className="text-center mb-16">
+        <div className="text-center mb-10 md:mb-16">
           <h2 className="text-3xl md:text-4xl font-serif text-brand-dark mb-4">
             Shop By What You Need
           </h2>
-          <p className="text-lg text-brand-dark/70 max-w-2xl mx-auto">
+          <p className="text-lg text-brand-dark/70 max-w-2xl mx-auto hidden md:block">
             Targeted solutions designed to support every stage of your GLP-1 journey.
           </p>
         </div>
@@ -34,17 +34,17 @@ const ProductGrid: React.FC = () => {
             <Loader2 className="w-12 h-12 text-brand-primary animate-spin" />
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-8">
             {$products.map((product) => (
-              <div key={product.id} className="group relative flex flex-col bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300">
+              <div key={product.id} className="group relative flex flex-col bg-white rounded-2xl md:rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300">
 
                 {/* Image Container */}
                 <Link to={`/product/${product.id}`} className="block relative aspect-square bg-gray-100 overflow-hidden cursor-pointer">
-                  <span className="absolute top-4 left-4 bg-[#D4A5A5] text-white text-[10px] font-bold px-3 py-1.5 rounded-full z-10 tracking-widest uppercase">
+                  <span className="absolute top-2 left-2 md:top-4 md:left-4 bg-[#D4A5A5] text-white text-[9px] md:text-[10px] font-bold px-2 py-1 md:px-3 md:py-1.5 rounded-full z-10 tracking-widest uppercase shadow-sm">
                     {product.category}
                   </span>
                   {product.bestSeller && (
-                    <span className="absolute top-4 right-4 bg-brand-secondary text-brand-dark text-[10px] font-bold px-3 py-1.5 rounded-full z-10 tracking-widest uppercase">
+                    <span className="absolute top-2 right-2 md:top-4 md:right-4 bg-brand-secondary text-brand-dark text-[9px] md:text-[10px] font-bold px-2 py-1 md:px-3 md:py-1.5 rounded-full z-10 tracking-widest uppercase shadow-sm">
                       Best Seller
                     </span>
                   )}
@@ -56,37 +56,37 @@ const ProductGrid: React.FC = () => {
                 </Link>
 
                 {/* Details */}
-                <div className="flex-grow flex flex-col p-6">
+                <div className="flex-grow flex flex-col p-3 md:p-6">
                   <Link to={`/product/${product.id}`} className="hover:text-brand-primary transition-colors">
-                    <h3 className="text-xl font-bold font-serif text-brand-dark mb-2">
+                    <h3 className="text-sm md:text-xl font-bold font-serif text-brand-dark mb-1 md:mb-2 line-clamp-2 md:line-clamp-none leading-tight min-h-[2.5em] md:min-h-0">
                       {product.name}
                     </h3>
                   </Link>
 
-                  <div className="flex items-center gap-2 mb-4">
+                  <div className="flex items-center gap-1 md:gap-2 mb-2 md:mb-4">
                     <div className="flex text-brand-secondary">
                       {[...Array(5)].map((_, i) => (
-                        <Star key={i} size={14} fill={i < product.rating ? "currentColor" : "none"} strokeWidth={i < product.rating ? 0 : 2} />
+                        <Star key={i} size={12} fill={i < product.rating ? "currentColor" : "none"} strokeWidth={i < product.rating ? 0 : 2} className="md:w-3.5 md:h-3.5" />
                       ))}
                     </div>
-                    <span className="text-xs text-gray-400 font-medium">({product.reviews} REVIEWS)</span>
+                    <span className="text-[10px] md:text-xs text-gray-400 font-medium">({product.reviews})</span>
                   </div>
 
                   {product.description && (
-                    <p className="text-brand-dark/70 text-sm leading-relaxed mb-6">
+                    <p className="hidden md:block text-brand-dark/70 text-sm leading-relaxed mb-6">
                       {product.description}
                     </p>
                   )}
 
-                  <div className="mt-auto flex items-end justify-between gap-4">
+                  <div className="mt-auto flex flex-col md:flex-row md:items-end md:justify-between gap-2 md:gap-4">
                     <div className="flex flex-col">
                       {product.originalPrice && (
-                        <span className="text-xs text-gray-400 line-through mb-0.5">${product.originalPrice}</span>
+                        <span className="text-[10px] md:text-xs text-gray-400 line-through mb-0 text-left">${product.originalPrice}</span>
                       )}
-                      <span className="text-2xl font-bold text-brand-dark font-serif">${product.price}</span>
+                      <span className="text-lg md:text-2xl font-bold text-brand-dark font-serif text-left">${product.price}</span>
                     </div>
-                    <Link to={`/product/${product.id}`}>
-                      <Button variant="secondary" className="px-6 py-2 text-sm">Add to Cart</Button>
+                    <Link to={`/product/${product.id}`} className="w-full md:w-auto">
+                      <Button variant="secondary" className="w-full md:w-auto px-4 py-1.5 md:py-2 text-xs md:text-sm h-8 md:h-10 flex items-center justify-center">Add</Button>
                     </Link>
                   </div>
                 </div>

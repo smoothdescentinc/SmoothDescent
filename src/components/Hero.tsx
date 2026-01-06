@@ -22,7 +22,8 @@ const Hero: React.FC = () => {
             </div>
 
             {/* Doctor Trusted Card (Below Image) */}
-            <div className="mt-6 flex justify-center">
+            {/* Doctor Trusted Card (Below Image - Desktop Only) */}
+            <div className="mt-6 hidden lg:flex justify-center">
               <DoctorCard className="max-w-md shadow-lg border-2" />
             </div>
           </div>
@@ -87,6 +88,11 @@ const Hero: React.FC = () => {
               <p className="text-brand-dark/70 italic leading-relaxed border-t border-brand-dark/5 pt-4">
                 "Micro-solubility formulas designed for sensitive, slowed stomachs. Because your body deserves the same investment as your prescription."
               </p>
+            </div>
+
+            {/* Doctor Trusted Card (Mobile Only - Bottom of Content) */}
+            <div className="w-full lg:hidden mt-2 mb-8">
+              <DoctorCard className="shadow-lg border-2" />
             </div>
 
           </div>

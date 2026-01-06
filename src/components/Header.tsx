@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { Menu, ShoppingCart, X } from 'lucide-react';
+import { ShoppingCart } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import { useStore } from '@nanostores/react';
 import { isCartOpen, cartItems } from '../store/cartStore';
 
 const Header: React.FC = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   const $cartItems = useStore(cartItems);
@@ -16,7 +15,6 @@ const Header: React.FC = () => {
   const isQuiz = location.pathname === '/quiz';
 
   const handleNavClick = (hash: string) => {
-    setIsMenuOpen(false);
     if (location.pathname !== '/') {
       navigate('/');
       // Wait for navigation then scroll
@@ -33,7 +31,7 @@ const Header: React.FC = () => {
   return (
     <header className="sticky top-0 z-50 bg-brand-light/95 backdrop-blur-sm border-b border-brand-primary/10 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
+        <div className="flex justify-between items-center h-16 md:h-20">
 
           {/* Logo */}
           <Link to="/" className="flex items-center">
@@ -70,31 +68,20 @@ const Header: React.FC = () => {
                 </span>
               )}
             </button>
-            {/* Mobile Menu Button */}
-            {!isQuiz && (
-              <button
-                className="md:hidden text-brand-dark"
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-              >
-                {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-              </button>
-            )}
           </div>
         </div>
       </div>
 
-      {/* Mobile Menu */}
-      {isMenuOpen && !isQuiz && (
-        <div className="md:hidden bg-brand-light border-b border-brand-primary/10">
-          <div className="px-4 pt-4 pb-8 space-y-2">
-            <button className="block w-full text-left px-3 py-3 text-base font-medium text-brand-dark hover:bg-brand-cream rounded-md" onClick={() => handleNavClick('#products')}>Shop</button>
-            <Link to="/science" className="block w-full text-left px-3 py-3 text-base font-medium text-brand-dark hover:bg-brand-cream rounded-md" onClick={() => setIsMenuOpen(false)}>The Science</Link>
-            <button className="block w-full text-left px-3 py-3 text-base font-medium text-brand-dark hover:bg-brand-cream rounded-md" onClick={() => handleNavClick('#reviews')}>Reviews</button>
-            <button className="block w-full text-left px-3 py-3 text-base font-medium text-brand-dark hover:bg-brand-cream rounded-md" onClick={() => handleNavClick('#faq')}>FAQs</button>
-            <Link to="/quiz" className="block w-full mt-6 text-center bg-brand-primary text-brand-light font-bold py-4 rounded-full shadow-md" onClick={() => setIsMenuOpen(false)}>
-              Find Your Match
-            </Link>
-          </div>
+      {/* Mobile Extended Nav (Always Visible on Mobile) */}
+      {!isQuiz && (
+        <div className="md:hidden border-t border-brand-dark/5 bg-brand-light overflow-x-auto"> {/* Removed hide-scrollbar to let user know it scrolls if needed, or keeping default */}
+          <nav className="flex items-center px-4 h-12 space-x-8 min-w-max">
+            <button onClick={() => handleNavClick('#products')} className="text-brand-dark font-bold text-xs uppercase tracking-widest whitespace-nowrap">Shop</button>
+            <Link to="/science" className="text-brand-dark font-bold text-xs uppercase tracking-widest whitespace-nowrap">Science</Link>
+            <button onClick={() => handleNavClick('#reviews')} className="text-brand-dark font-bold text-xs uppercase tracking-widest whitespace-nowrap">Reviews</button>
+            <button onClick={() => handleNavClick('#faq')} className="text-brand-dark font-bold text-xs uppercase tracking-widest whitespace-nowrap">FAQs</button>
+            <Link to="/quiz" className="text-brand-primary font-bold text-xs uppercase tracking-widest whitespace-nowrap">Quiz</Link>
+          </nav>
         </div>
       )}
     </header>
