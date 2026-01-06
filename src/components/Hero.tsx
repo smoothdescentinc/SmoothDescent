@@ -11,11 +11,11 @@ const Hero: React.FC = () => {
 
           {/* Visual (Mobile: Order 1, Desktop: Order 2) */}
           <div className="w-full order-1 lg:order-2">
-            <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white aspect-[4/3] sm:aspect-square lg:aspect-[4/5] mx-auto max-w-lg lg:max-w-none transform transition-transform hover:scale-[1.01] duration-500">
+            <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white mx-auto max-w-lg lg:max-w-none transform transition-transform hover:scale-[1.01] duration-500">
               <img
                 src="/images/MainHero.png"
                 alt="Thriving on the journey"
-                className="w-full h-full object-cover"
+                className="w-full h-auto"
               />
 
               {/* Desktop Float Overlay */}

@@ -38,6 +38,7 @@ export interface Product {
   tiers?: PricingTier[];
   subscriptionDiscount?: number; // e.g. 0.15 for 15%
   faqs?: FAQItem[]; // Product-specific FAQs
+  nutritionLabel?: string; // Path to nutrition label image
 }
 
 export interface Review {

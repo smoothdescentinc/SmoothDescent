@@ -22,6 +22,7 @@ const ProductPage: React.FC = () => {
 
    // States
    const [selectedTierId, setSelectedTierId] = useState<string>('');
+   const [activeImage, setActiveImage] = useState<string>('');
    const [isSubscribe, setIsSubscribe] = useState(false);
    const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
 
@@ -35,6 +36,10 @@ const ProductPage: React.FC = () => {
          } else {
             setSelectedTierId(product.tiers[0].id);
          }
+      }
+      // Set initial active image
+      if (product) {
+         setActiveImage(product.image);
       }
    }, [product]);
 
@@ -84,6 +89,12 @@ const ProductPage: React.FC = () => {
       setOpenFaqIndex(openFaqIndex === index ? null : index);
    };
 
+   // Prepare images list
+   const images = [product.image];
+   if (product.nutritionLabel) {
+      images.push(product.nutritionLabel);
+   }
+
    return (
       <div className="bg-brand-light min-h-screen pb-20">
 
@@ -106,19 +117,25 @@ const ProductPage: React.FC = () => {
                         {product.category}
                      </span>
                      <img
-                        src={product.image}
+                        src={activeImage || product.image}
                         alt={product.name}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-contain p-4"
                      />
                   </div>
-                  {/* Thumbnails placeholder */}
-                  <div className="grid grid-cols-4 gap-4">
-                     {[1, 2, 3, 4].map((i) => (
-                        <div key={i} className={`aspect-square rounded-xl bg-white border cursor-pointer overflow-hidden ${i === 1 ? 'border-brand-primary ring-1 ring-brand-primary' : 'border-transparent hover:border-brand-primary/30'}`}>
-                           <img src={product.image} alt="" className="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity" />
-                        </div>
-                     ))}
-                  </div>
+                  {/* Thumbnails */}
+                  {images.length > 1 && (
+                     <div className="grid grid-cols-4 gap-4">
+                        {images.map((img, i) => (
+                           <div
+                              key={i}
+                              onClick={() => setActiveImage(img)}
+                              className={`aspect-square rounded-xl bg-white border cursor-pointer overflow-hidden p-2 ${activeImage === img ? 'border-brand-primary ring-1 ring-brand-primary' : 'border-transparent hover:border-brand-primary/30'}`}
+                           >
+                              <img src={img} alt="" className="w-full h-full object-contain opacity-90 hover:opacity-100 transition-opacity" />
+                           </div>
+                        ))}
+                     </div>
+                  )}
                </div>
 
                {/* Right: Details & Buy Box */}
