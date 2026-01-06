@@ -27,7 +27,7 @@ const Reviews: React.FC = () => {
     if (!isDragging || !scrollRef.current) return;
     e.preventDefault();
     const x = e.pageX - scrollRef.current.offsetLeft;
-    const walk = (x - startX) * 2; // scroll-fast
+    const walk = (x - startX); // 1:1 scroll speed
     scrollRef.current.scrollLeft = scrollLeft - walk;
   };
 
@@ -68,7 +68,7 @@ const Reviews: React.FC = () => {
           onMouseLeave={handleMouseLeave}
           onMouseUp={handleMouseUp}
           onMouseMove={handleMouseMove}
-          className={`flex overflow-x-auto gap-6 snap-x snap-mandatory pb-8 px-4 -mx-4 md:mx-0 md:px-0 no-scrollbar cursor-grab active:cursor-grabbing ${isDragging ? 'cursor-grabbing select-none snap-none' : ''}`}
+          className={`flex overflow-x-auto gap-6 pb-8 px-4 -mx-4 md:mx-0 md:px-0 no-scrollbar cursor-grab active:cursor-grabbing ${isDragging ? 'cursor-grabbing select-none snap-none' : 'snap-x snap-mandatory'}`}
         >
           {REVIEWS.map((review) => (
             <div
