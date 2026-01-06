@@ -40,7 +40,7 @@ const ProductGrid: React.FC = () => {
 
                 {/* Image Container */}
                 <Link to={`/product/${product.id}`} className="block relative aspect-square bg-gray-100 overflow-hidden cursor-pointer">
-                  <span className="absolute top-4 left-4 bg-brand-primary text-white text-[10px] font-bold px-3 py-1.5 rounded-full z-10 tracking-widest uppercase">
+                  <span className="absolute top-4 left-4 bg-[#D4A5A5] text-white text-[10px] font-bold px-3 py-1.5 rounded-full z-10 tracking-widest uppercase">
                     {product.category}
                   </span>
                   {product.bestSeller && (

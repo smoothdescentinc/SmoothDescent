@@ -113,15 +113,15 @@ const ProductPage: React.FC = () => {
                {/* Left: Images */}
                <div className="space-y-6">
                   <div className="aspect-square bg-white rounded-3xl overflow-hidden shadow-sm border border-brand-primary/10 relative">
-                     <span className="absolute top-6 left-6 bg-brand-primary text-white text-xs font-bold px-3 py-1.5 rounded-full z-10 tracking-widest uppercase">
+                     <span className="absolute top-6 left-6 bg-[#D4A5A5] text-white text-xs font-bold px-3 py-1.5 rounded-full z-10 tracking-widest uppercase">
                         {product.category}
                      </span>
                      <img
                         src={activeImage || product.image}
                         alt={product.name}
                         className={`w-full h-full transition-transform duration-500 ${(activeImage === product.nutritionLabel)
-                              ? 'object-contain scale-100 p-2'
-                              : 'object-cover scale-[1.12]'
+                           ? 'object-contain scale-100 p-2'
+                           : 'object-cover scale-[1.12]'
                            }`}
                      />
                   </div>

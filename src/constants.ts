@@ -90,7 +90,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 'digestive-enzymes',
     name: "Digestive Enzyme Pro Blend",
-    category: "DIGESTIVE SUPPORT",
+    category: "HEADACHES/DIGESTION",
     rating: 4.9,
     reviews: 418,
     image: "/images/DigestiveEnzymeHero.png",

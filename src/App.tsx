@@ -14,6 +14,7 @@ import QuizCallout from './components/QuizCallout';
 import NewsletterModal from './components/NewsletterModal';
 import SciencePage from './components/SciencePage';
 import MetaPurchaseTracker from './components/MetaPurchaseTracker';
+import UsVsThem from './components/UsVsThem';
 
 const Home = () => (
   <>
@@ -22,6 +23,7 @@ const Home = () => (
     <Reviews />
     <ValueProps />
     <QuizCallout />
+    <UsVsThem />
     <FAQ />
   </>
 );
