@@ -59,6 +59,7 @@ const App: React.FC = () => {
           <Route path="/" element={<Home />} />
           <Route path="/quiz" element={<Quiz />} />
           <Route path="/science" element={<SciencePage />} />
+          <Route path="/shop" element={<div className="pt-24 min-h-screen bg-brand-light pb-20"><ProductGrid /></div>} />
           <Route path="/product/:id" element={<ProductPage />} />
         </Routes>
       </main>
