@@ -3,6 +3,7 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import CartDrawer from './components/CartDrawer';
 import Hero from './components/Hero';
+import TrustMarquee from './components/TrustMarquee';
 import Reviews from './components/Reviews';
 import Quiz from './components/Quiz';
 import ValueProps from './components/ValueProps';
@@ -19,6 +20,7 @@ import UsVsThem from './components/UsVsThem';
 const Home = () => (
   <>
     <Hero />
+    <TrustMarquee />
     <ProductGrid />
     <Reviews />
     <ValueProps />
