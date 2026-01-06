@@ -13,7 +13,7 @@ const Hero: React.FC = () => {
           <div className="w-full order-1 lg:order-2">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white mx-auto w-full transform transition-transform hover:scale-[1.01] duration-500">
               <img
-                src="/images/DigestiveEnzymeHero.png"
+                src="/images/MainHero.png"
                 alt="Thriving on the journey"
                 className="w-full h-auto scale-[1.05]"
               />
@@ -21,17 +21,17 @@ const Hero: React.FC = () => {
             </div>
 
             {/* Doctor Trusted Card (Below Image) */}
-            <div className="mt-6 flex items-center gap-4 bg-white/90 backdrop-blur-sm p-4 rounded-xl shadow-md border border-brand-primary/10 w-full max-w-sm mx-auto lg:max-w-none">
+            <div className="mt-6 flex items-center justify-center gap-6 bg-white/90 backdrop-blur-sm p-4 rounded-xl shadow-md border border-brand-primary/10 w-fit mx-auto">
               <div className="flex-shrink-0">
                 <img
                   src="/images/DoctorPhoto.png"
                   alt="Board Certified Doctor"
-                  className="h-12 w-12 rounded-full object-cover border-2 border-brand-primary/20"
+                  className="h-20 w-20 rounded-full object-cover border-2 border-brand-primary/20"
                 />
               </div>
-              <div>
-                <p className="font-bold text-brand-dark font-serif text-lg">Doctor Trusted</p>
-                <p className="text-xs text-gray-500 uppercase tracking-wide font-medium">Safe for daily use</p>
+              <div className="text-left">
+                <p className="font-bold text-brand-dark font-serif text-xl">Doctor Trusted</p>
+                <p className="text-sm text-gray-500 uppercase tracking-wide font-medium">Safe for daily use</p>
               </div>
             </div>
           </div>
