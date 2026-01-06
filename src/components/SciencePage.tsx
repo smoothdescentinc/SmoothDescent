@@ -38,7 +38,7 @@ const SciencePage: React.FC = () => {
                         <div className="grid lg:grid-cols-12 gap-12 lg:gap-24 items-start">
 
                             {/* Content Side */}
-                            <div className="lg:col-span-7 order-2 lg:order-1">
+                            <div className="lg:col-span-7 order-1 lg:order-1">
                                 <div className="flex items-center gap-4 mb-8">
                                     <div className="w-12 h-12 rounded-full bg-yellow-100 flex items-center justify-center flex-shrink-0">
                                         <Zap className="w-6 h-6 text-yellow-600" />
@@ -100,7 +100,7 @@ const SciencePage: React.FC = () => {
                             </div>
 
                             {/* Product Card Side */}
-                            <div className="lg:col-span-5 order-1 lg:order-2 lg:sticky lg:top-32">
+                            <div className="lg:col-span-5 order-2 lg:order-2 lg:sticky lg:top-32">
                                 <div className="bg-white rounded-3xl p-6 shadow-xl shadow-brand-dark/5 border border-brand-primary/10">
                                     <div className="aspect-square bg-gray-100 rounded-2xl mb-6 overflow-hidden">
                                         <img src={hydrationProduct?.image} alt={hydrationProduct?.name} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
@@ -134,7 +134,7 @@ const SciencePage: React.FC = () => {
                         <div className="grid lg:grid-cols-12 gap-12 lg:gap-24 items-start">
 
                             {/* Content Side */}
-                            <div className="lg:col-span-7 order-2 lg:order-1">
+                            <div className="lg:col-span-7 order-1 lg:order-1">
                                 <div className="flex items-center gap-4 mb-8">
                                     <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
                                         <Leaf className="w-6 h-6 text-green-600" />
@@ -185,7 +185,7 @@ const SciencePage: React.FC = () => {
                             </div>
 
                             {/* Product Card Side */}
-                            <div className="lg:col-span-5 order-1 lg:order-2 lg:sticky lg:top-32">
+                            <div className="lg:col-span-5 order-2 lg:order-2 lg:sticky lg:top-32">
                                 <div className="bg-white rounded-3xl p-6 shadow-xl shadow-brand-dark/5 border border-brand-primary/10">
                                     <div className="aspect-square bg-gray-100 rounded-2xl mb-6 overflow-hidden">
                                         <img src={enzymesProduct?.image} alt={enzymesProduct?.name} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
@@ -219,7 +219,7 @@ const SciencePage: React.FC = () => {
                         <div className="grid lg:grid-cols-12 gap-12 lg:gap-24 items-start">
 
                             {/* Content Side */}
-                            <div className="lg:col-span-7 order-2 lg:order-1">
+                            <div className="lg:col-span-7 order-1 lg:order-1">
                                 <div className="flex items-center gap-4 mb-8">
                                     <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
                                         <Pill className="w-6 h-6 text-blue-600" />
@@ -278,7 +278,7 @@ const SciencePage: React.FC = () => {
                             </div>
 
                             {/* Product Card Side */}
-                            <div className="lg:col-span-5 order-1 lg:order-2 lg:sticky lg:top-32">
+                            <div className="lg:col-span-5 order-2 lg:order-2 lg:sticky lg:top-32">
                                 <div className="bg-white rounded-3xl p-6 shadow-xl shadow-brand-dark/5 border border-brand-primary/10">
                                     <div className="aspect-square bg-gray-100 rounded-2xl mb-6 overflow-hidden">
                                         <img src={stripsProduct?.image} alt={stripsProduct?.name} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
