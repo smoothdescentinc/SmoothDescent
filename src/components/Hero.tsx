@@ -2,6 +2,7 @@ import React from 'react';
 import Button from './Button';
 import { Check, ShieldCheck, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import DoctorCard from './DoctorCard';
 
 const Hero: React.FC = () => {
   return (
@@ -21,18 +22,9 @@ const Hero: React.FC = () => {
             </div>
 
             {/* Doctor Trusted Card (Below Image) */}
-            <div className="mt-6 flex items-center justify-center gap-6 bg-white/90 backdrop-blur-sm p-4 rounded-xl shadow-md border border-brand-primary/10 w-fit mx-auto">
-              <div className="flex-shrink-0">
-                <img
-                  src="/images/DoctorPhoto.png"
-                  alt="Board Certified Doctor"
-                  className="h-20 w-20 rounded-full object-cover border-2 border-brand-primary/20"
-                />
-              </div>
-              <div className="text-left">
-                <p className="font-bold text-brand-dark font-serif text-xl">Doctor Trusted</p>
-                <p className="text-sm text-gray-500 uppercase tracking-wide font-medium">Safe for daily use</p>
-              </div>
+            {/* Doctor Trusted Card (Below Image) */}
+            <div className="mt-6 flex justify-center">
+              <DoctorCard className="max-w-md shadow-lg border-2" />
             </div>
           </div>
 

@@ -7,6 +7,7 @@ import { addCartItem } from '../store/cartStore';
 import { Star, Check, ShieldCheck, Truck, RefreshCw, ChevronRight, Plus, Minus, Loader2 } from 'lucide-react';
 import { trackViewContent } from '../lib/metaPixel';
 import HydrationContent from './HydrationContent';
+import DoctorCard from './DoctorCard';
 
 const ProductPage: React.FC = () => {
    const { id } = useParams<{ id: string }>();
@@ -145,6 +146,7 @@ const ProductPage: React.FC = () => {
                            ))}
                         </div>
                      )}
+                     <DoctorCard className="mt-8" />
                   </div>
 
                   {/* Right: Details & Buy Box */}

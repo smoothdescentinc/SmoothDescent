@@ -357,7 +357,7 @@ export const QUIZ_RESULTS: Record<string, QuizResult> = {
       "The Digestive Enzyme Pro Blend is formulated with 50,000 HUT Protease and Ox Bile to break down proteins and fats BEFORE they can rot. This effectively eliminates sulfur burps and that heavy 'bowling ball' feeling after meals.",
       "Take 2 capsules before every meal and reclaim your social life."
     ],
-    products: [{ id: "digestive-enzymes", name: "Digestive Enzyme Pro Blend", price: 32, image: "/images/DigestiveEnzyme.png" }],
+    products: [{ id: "digestive-enzymes", name: "Digestive Enzyme Pro Blend", price: 32, image: "/images/DigestiveEnzymeHero.png" }],
     testimonial: { quote: "I've been on semaglutide for 5 months and the sulfur burps were so bad I was avoiding all protein. I take 2 of these before every meal and I haven't had a sulfur burp in 3 weeks.", author: "Jennifer M. | Verified Buyer" },
     ctaPrimary: "Stop Sulfur Burps",
     ctaSecondary: "Learn More"
@@ -385,7 +385,7 @@ export const QUIZ_RESULTS: Record<string, QuizResult> = {
       "Gastric Shield+ fixes this with micro-solubility electrolytes designed to absorb through the stomach lining immediately. The Lemonade flavor is naturally anti-nausea and cuts through the \"heavy\" feeling.",
       "This is the single most important supplement you can add right now."
     ],
-    products: [{ id: "hydration", name: "Gastric Shield+ Hydration Powder", price: 38, image: "/images/HydrationPowderHero.jpeg" }],
+    products: [{ id: "hydration", name: "Gastric Shield+ Hydration Powder", price: 38, image: "/images/GastricShield.png" }],
     testimonial: { quote: "I tried Liquid IV, LMNT, all of them. They all made me feel worse, like I was sloshing around with a gallon of water in my stomach. Gastric Shield+ is the first hydration powder that doesn't sit heavy.", author: "Jessica P. | Verified Buyer" },
     ctaPrimary: "Start with Hydration",
     ctaSecondary: "Subscribe & Save"
@@ -399,7 +399,7 @@ export const QUIZ_RESULTS: Record<string, QuizResult> = {
       "This blend ensures that your protein and healthy fats are properly broken down, preventing that heavy feeling after meals and supporting long-term gut health.",
       "Think of this as your insurance policy for comfortable eating."
     ],
-    products: [{ id: "digestive-enzymes", name: "Digestive Enzyme Pro Blend", price: 32, image: "/images/DigestiveEnzyme.png" }],
+    products: [{ id: "digestive-enzymes", name: "Digestive Enzyme Pro Blend", price: 32, image: "/images/DigestiveEnzymeHero.png" }],
     testimonial: { quote: "I'm on a maintenance dose now but I still take these with big meals. It just helps everything digest better.", author: "Karen L. | Verified Buyer" },
     ctaPrimary: "Optimize Digestion",
     ctaSecondary: "Learn More"
@@ -413,7 +413,7 @@ export const QUIZ_RESULTS: Record<string, QuizResult> = {
       "We recommend starting with Gastric Shield+ Hydration Powder. It's the single most important thing you can do to avoid the \"Ozempic Headache\" and injection day nausea.",
       "Hydration is the foundation of everything."
     ],
-    products: [{ id: "hydration", name: "Gastric Shield+ Hydration Powder", price: 38, image: "https://picsum.photos/id/429/800/800" }],
+    products: [{ id: "hydration", name: "Gastric Shield+ Hydration Powder", price: 38, image: "/images/GastricShield.png" }],
     testimonial: { quote: "Over 8,000 GLP-1 users trust SmoothDescent to support their journey.", author: "Community Stat" },
     ctaPrimary: "Start with Hydration",
     ctaSecondary: "Read the Science"
