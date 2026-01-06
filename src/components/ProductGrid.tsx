@@ -51,7 +51,7 @@ const ProductGrid: React.FC = () => {
                   <img
                     src={product.image}
                     alt={product.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    className="w-full h-full object-cover scale-[1.12] group-hover:scale-[1.15] transition-transform duration-700"
                   />
                 </Link>
 

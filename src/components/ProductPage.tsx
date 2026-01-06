@@ -119,7 +119,7 @@ const ProductPage: React.FC = () => {
                      <img
                         src={activeImage || product.image}
                         alt={product.name}
-                        className="w-full h-full object-contain p-4"
+                        className="w-full h-full object-cover scale-[1.12]"
                      />
                   </div>
                   {/* Thumbnails */}
