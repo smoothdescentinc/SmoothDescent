@@ -3,7 +3,7 @@ import { X, Lock, Minus, Plus } from 'lucide-react';
 import { useStore } from '@nanostores/react';
 import { isCartOpen, cartItems, removeCartItem, updateCartQuantity, addCartItem, checkoutUrl, isUpdating } from '../store/cartStore';
 import type { Product } from '../types';
-import { getUserData } from '../lib/pixelUserData';
+import { trackInitiateCheckout } from '../lib/metaPixel';
 
 const FREE_SHIPPING_THRESHOLD = 99.00;
 
@@ -210,20 +210,10 @@ const CartDrawer: React.FC = () => {
                             href={url}
                             onClick={() => {
                                 // Track InitiateCheckout event for Meta Pixel
-                                if (typeof window !== 'undefined' && (window as any).fbq) {
-                                    const userData = getUserData();
-                                    (window as any).fbq('track', 'InitiateCheckout', {
-                                        content_ids: items.map(i => i.id),
-                                        contents: items.map(i => ({
-                                            id: i.id,
-                                            quantity: i.quantity
-                                        })),
-                                        value: subtotal,
-                                        currency: 'USD',
-                                        num_items: items.reduce((acc, i) => acc + i.quantity, 0),
-                                        ...userData
-                                    });
-                                }
+                                trackInitiateCheckout({
+                                    items: items.map(i => ({ id: i.id, quantity: i.quantity })),
+                                    total: subtotal
+                                });
                             }}
                             className="w-full bg-[#fa9f1c] hover:bg-[#e89010] text-black font-extrabold text-lg py-4 rounded-lg shadow-lg flex items-center justify-center gap-2 transition-colors"
                         >

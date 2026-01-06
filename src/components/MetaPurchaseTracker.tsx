@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { trackPurchase } from '../lib/metaPixel';
 
 /**
  * Meta Pixel Purchase Event Tracker
@@ -12,11 +13,11 @@ import { useLocation } from 'react-router-dom';
  * 
  * <script>
  *   if (Shopify && Shopify.checkout) {
- *     const urlParams = new URLSearchParams(window.location.search);
- *     const redirectUrl = new URL('{YOUR_SITE_URL}');
+ *     const redirectUrl =new URL('https://www.smoothdescent.com');
  *     redirectUrl.searchParams.set('purchase', '1');
  *     redirectUrl.searchParams.set('order_id', Shopify.checkout.order_id);
  *     redirectUrl.searchParams.set('total', Shopify.checkout.total_price);
+ *     redirectUrl.searchParams.set('email', Shopify.checkout.email);
  *     window.location.href = redirectUrl.toString();
  *   }
  * </script>
@@ -30,12 +31,13 @@ const MetaPurchaseTracker = () => {
         if (params.get('purchase') === '1') {
             const orderId = params.get('order_id');
             const orderTotal = params.get('total');
+            const email = params.get('email');
 
-            if (typeof window !== 'undefined' && (window as any).fbq && orderId && orderTotal) {
-                (window as any).fbq('track', 'Purchase', {
-                    value: parseFloat(orderTotal),
-                    currency: 'USD',
-                    order_id: orderId
+            if (orderId && orderTotal) {
+                trackPurchase({
+                    orderId,
+                    total: parseFloat(orderTotal),
+                    email: email || undefined
                 });
 
                 // Clean up URL so it doesn't fire again on refresh

@@ -1,7 +1,7 @@
 import { atom, onMount } from 'nanostores';
 import { shopifyClient } from '../lib/shopify';
 import type { Product, CartItem } from '../types';
-import { getUserData } from '../lib/pixelUserData';
+import { trackAddToCart } from '../lib/metaPixel';
 
 export const isCartOpen = atom(false);
 export const cartItems = atom<CartItem[]>([]);
@@ -87,17 +87,12 @@ export async function addCartItem(product: Product, quantity = 1, label = '') {
         }
 
         // Track AddToCart event for Meta Pixel
-        if (typeof window !== 'undefined' && (window as any).fbq) {
-            const userData = getUserData();
-            (window as any).fbq('track', 'AddToCart', {
-                content_name: product.name,
-                content_ids: [product.id],
-                content_type: 'product',
-                value: product.price * quantity,
-                currency: 'USD',
-                ...userData
-            });
-        }
+        trackAddToCart({
+            id: product.id,
+            name: product.name,
+            price: product.price,
+            quantity
+        });
 
         return;
     }
