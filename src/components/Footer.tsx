@@ -30,8 +30,8 @@ const Footer: React.FC = () => {
               <h4 className="font-bold mb-6 tracking-widest text-xs text-brand-primary uppercase">Shop</h4>
               <ul className="space-y-4 text-sm text-brand-light/70">
                 <li><Link to="/product/hydration" className="hover:text-brand-primary transition-colors">Gastric Shield+ Hydration</Link></li>
-                <li><Link to="/product/protein" className="hover:text-brand-primary transition-colors">LeanLock™ Protein</Link></li>
-                <li><Link to="/product/rescue-kit" className="hover:text-brand-primary transition-colors">Injection Day Rescue Kit</Link></li>
+                <li><Link to="/product/digestive-enzymes" className="hover:text-brand-primary transition-colors">Digestive Enzyme Pro Blend</Link></li>
+                <li><Link to="/product/nausea-strips" className="hover:text-brand-primary transition-colors">Digestive + Gut Health Strips</Link></li>
               </ul>
             </div>
 
@@ -40,9 +40,7 @@ const Footer: React.FC = () => {
               <h4 className="font-bold mb-6 tracking-widest text-xs text-brand-primary uppercase">Support</h4>
               <ul className="space-y-4 text-sm text-brand-light/70">
                 <li><Link to="/contact" className="hover:text-brand-primary transition-colors">Contact Us</Link></li>
-                <li><a href="#faq" className="hover:text-brand-primary transition-colors">Shipping & Returns</a></li>
-                <li><a href="#faq" className="hover:text-brand-primary transition-colors">FAQs</a></li>
-                <li><a href="#faq" className="hover:text-brand-primary transition-colors">Track Your Order</a></li>
+                <li><a href="/#reviews" className="hover:text-brand-primary transition-colors">Reviews</a></li>
               </ul>
             </div>
 
