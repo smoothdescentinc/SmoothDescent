@@ -7,7 +7,7 @@ const Hero: React.FC = () => {
   return (
     <section className="relative overflow-hidden bg-brand-light pt-8 pb-16 lg:pt-24 lg:pb-32 font-sans px-4">
       <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+        <div className="flex flex-col lg:grid lg:grid-cols-[2fr_3fr] gap-8 lg:gap-16 items-center">
 
           {/* Visual (Mobile: Order 1, Desktop: Order 2) */}
           <div className="w-full order-1 lg:order-2">

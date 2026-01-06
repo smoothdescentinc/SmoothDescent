@@ -111,10 +111,16 @@ const Quiz: React.FC = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-3 gap-6 opacity-80 max-w-lg mx-auto">
-            <div className="bg-brand-cream aspect-[3/4] rounded-xl shadow-sm border border-brand-primary/10"></div>
-            <div className="bg-brand-cream aspect-[3/4] rounded-xl shadow-sm border border-brand-primary/10 -mt-4"></div>
-            <div className="bg-brand-cream aspect-[3/4] rounded-xl shadow-sm border border-brand-primary/10"></div>
+          <div className="grid grid-cols-3 gap-6 max-w-lg mx-auto">
+            <div className="bg-brand-cream aspect-[3/4] rounded-xl shadow-sm border border-brand-primary/10 overflow-hidden">
+              <img src="/images/GastricShield.png" alt="" className="w-full h-full object-cover scale-[1.12]" />
+            </div>
+            <div className="bg-brand-cream aspect-[3/4] rounded-xl shadow-sm border border-brand-primary/10 overflow-hidden -mt-4">
+              <img src="/images/DigestiveEnzyme.png" alt="" className="w-full h-full object-cover scale-[1.12]" />
+            </div>
+            <div className="bg-brand-cream aspect-[3/4] rounded-xl shadow-sm border border-brand-primary/10 overflow-hidden">
+              <img src="/images/stripimage.png" alt="" className="w-full h-full object-cover scale-[1.12]" />
+            </div>
           </div>
         </div>
       </div>
