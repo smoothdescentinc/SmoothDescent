@@ -12,7 +12,7 @@ const BADGES = [
 
 const TrustMarquee: React.FC = () => {
     return (
-        <div className="bg-[#F5F1E8] py-5 overflow-hidden whitespace-nowrap border-y border-[#D4A5A5]/20 relative z-20">
+        <div className="bg-brand-dark py-5 overflow-hidden whitespace-nowrap border-y border-brand-primary/20 relative z-20">
             <div className="inline-flex items-center animate-marquee hover:[animation-play-state:paused]">
                 {/* Render badges 4 times to ensure smooth loop on wide screens */}
                 {[...Array(4)].map((_, setIndex) => (
@@ -21,13 +21,13 @@ const TrustMarquee: React.FC = () => {
                             <div key={`${setIndex}-${i}`} className="flex items-center px-8 md:px-12 group">
                                 <badge.icon
                                     size={20}
-                                    className="text-[#D4A5A5] mr-3 flex-shrink-0 group-hover:scale-110 transition-transform duration-300"
+                                    className="text-brand-primary mr-3 flex-shrink-0 group-hover:scale-110 transition-transform duration-300"
                                     strokeWidth={2}
                                 />
-                                <span className="text-[#2C2C2C] font-medium text-sm md:text-base tracking-wide font-sans whitespace-nowrap">
+                                <span className="text-white font-medium text-sm md:text-base tracking-wide font-sans whitespace-nowrap">
                                     {badge.text}
                                 </span>
-                                <div className="h-4 w-px bg-[#D4A5A5]/30 ml-8 md:ml-12" />
+                                <div className="h-4 w-px bg-white/20 ml-8 md:ml-12" />
                             </div>
                         ))}
                     </div>

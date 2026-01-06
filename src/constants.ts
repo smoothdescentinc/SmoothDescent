@@ -36,7 +36,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 'hydration',
     name: "Gastric Shield+ Hydration Powder",
-    category: "HYDRATION",
+    category: "HYDRATION/HEADACHE",
     rating: 5,
     reviews: 312,
     image: "/images/GastricShield.png",
@@ -90,7 +90,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 'digestive-enzymes',
     name: "Digestive Enzyme Pro Blend",
-    category: "HEADACHES/DIGESTION",
+    category: "DIGESTION",
     rating: 4.9,
     reviews: 418,
     image: "/images/DigestiveEnzymeHero.png",
