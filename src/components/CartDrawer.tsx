@@ -17,7 +17,7 @@ const UPSELLS: Product[] = [
         reviews: 120,
         subtitle: 'Fast Nausea Relief',
         price: 28.00,
-        image: 'https://picsum.photos/id/364/100/100',
+        image: '/images/stripimage.png',
         originalPrice: 34.00
     },
     {
@@ -28,7 +28,7 @@ const UPSELLS: Product[] = [
         reviews: 400,
         subtitle: 'Stop Sulfur Burps',
         price: 32.00,
-        image: 'https://picsum.photos/id/225/100/100',
+        image: '/images/DigestiveEnzymeHero.png',
         originalPrice: 40.00
     }
 ];
@@ -202,7 +202,7 @@ const CartDrawer: React.FC = () => {
                         <div className="bg-green-500 rounded-full p-0.5">
                             <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
                         </div>
-                        60-Day Money-Back Guarantee
+                        30-Day Money-Back Guarantee
                     </div>
 
                     {url ? (
