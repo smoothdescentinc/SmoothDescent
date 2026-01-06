@@ -3,7 +3,7 @@ import { ShieldCheck, Award, FlaskConical, RefreshCw, Truck, Heart } from 'lucid
 
 const BADGES = [
     { icon: ShieldCheck, text: "Formulated for GLP-1 Users" },
-    { icon: Award, text: "60-Day Money-Back Guarantee" },
+    { icon: Award, text: "30-Day Money-Back Guarantee" },
     { icon: FlaskConical, text: "Made in cGMP Certified Facility" },
     { icon: RefreshCw, text: "Subscribe & Save 20%" },
     { icon: Truck, text: "Free Shipping Over $50" },
