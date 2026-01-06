@@ -6,7 +6,7 @@ import DoctorCard from './DoctorCard';
 
 const Hero: React.FC = () => {
   return (
-    <section className="relative overflow-hidden bg-brand-light pt-8 pb-10 lg:pt-24 lg:pb-16 font-sans px-4">
+    <section className="relative overflow-hidden bg-brand-light pt-8 pb-10 lg:pt-12 lg:pb-12 font-sans px-4">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col lg:grid lg:grid-cols-[2fr_3fr] gap-8 lg:gap-16 items-center">
 
@@ -18,10 +18,8 @@ const Hero: React.FC = () => {
                 alt="Thriving on the journey"
                 className="w-full h-auto scale-[1.05]"
               />
-
             </div>
 
-            {/* Doctor Trusted Card (Below Image) */}
             {/* Doctor Trusted Card (Below Image - Desktop Only) */}
             <div className="mt-6 hidden lg:flex justify-center">
               <DoctorCard className="max-w-md shadow-lg border-2" />
@@ -32,7 +30,7 @@ const Hero: React.FC = () => {
           <div className="w-full order-2 lg:order-1 text-center lg:text-left flex flex-col items-center lg:items-start">
 
             {/* Rating */}
-            <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-3 mb-6 animate-fade-in">
+            <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-3 mb-4 animate-fade-in">
               <div className="flex gap-0.5 text-brand-primary">
                 {[1, 2, 3, 4, 5].map((i) => (
                   <Star key={i} className="w-5 h-5 fill-current" />
@@ -44,7 +42,7 @@ const Hero: React.FC = () => {
             </div>
 
             {/* Header */}
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl/[1.1] font-serif font-bold text-brand-dark tracking-tight mb-8">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl/[1.1] font-serif font-bold text-brand-dark tracking-tight mb-6">
               You Spent $1,000 on the Medication. <br className="hidden lg:block" />
               <span className="text-brand-primary">Don't Let Side Effects Waste That Investment.</span>
             </h1>
@@ -60,15 +58,15 @@ const Hero: React.FC = () => {
             </div>
 
             {/* Guarantee */}
-            <div className="flex items-center gap-2 text-brand-dark font-bold text-base justify-center w-full mb-8 mt-2">
+            <div className="flex items-center gap-2 text-brand-dark font-bold text-base justify-center w-full mb-6 mt-2">
               <ShieldCheck className="w-6 h-6 text-brand-primary" />
               <span>30-Day Money-Back Guarantee</span>
             </div>
 
             {/* Words / List */}
-            <div className="bg-white/50 rounded-2xl p-6 border border-brand-primary/10 w-full mb-8 text-left">
+            <div className="bg-white/50 rounded-2xl p-6 border border-brand-primary/10 w-full mb-6 text-left">
               <p className="font-bold text-brand-dark mb-4 text-lg">Shop Solutions For:</p>
-              <ul className="space-y-3 mb-6">
+              <ul className="space-y-3 mb-4">
                 {[
                   'Post-injection nausea and "Sunday Scaries"',
                   'Dehydration headaches that feel like hangovers',
@@ -99,7 +97,7 @@ const Hero: React.FC = () => {
 
         </div>
       </div>
-    </section >
+    </section>
   );
 };
 
