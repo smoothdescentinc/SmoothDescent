@@ -141,11 +141,13 @@ const Quiz: React.FC = () => {
               {/* Product Visual */}
               <div className="w-full lg:w-5/12">
                 <div className="bg-brand-cream rounded-2xl p-6 mb-6">
-                  <img
-                    src={result.products[0].image}
-                    alt={result.products[0].name}
-                    className="w-full h-auto rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-500"
-                  />
+                  <div className="rounded-xl overflow-hidden shadow-lg">
+                    <img
+                      src={result.products[0].image}
+                      alt={result.products[0].name}
+                      className="w-full h-auto object-cover scale-[1.12] transform hover:scale-[1.15] transition-transform duration-500"
+                    />
+                  </div>
                 </div>
 
                 {/* Testimonial Card */}

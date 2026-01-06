@@ -198,7 +198,7 @@ export default function NewsletterModal({ isOpen, onClose }: NewsletterModalProp
                 {/* Right Side: Image/Visual */}
                 <div className="hidden md:block w-1/2 bg-brand-dark relative overflow-hidden">
                     {/* Abstract Shapes or Placeholder Image */}
-                    <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1544367563-12123d8959c9?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-80 mix-blend-overlay"></div>
+                    <div className="absolute inset-0 bg-[url('/images/PopupImage.png')] bg-cover bg-center"></div>
                     <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/90 to-transparent"></div>
 
                     <div className="absolute bottom-12 left-12 right-12 text-white">
