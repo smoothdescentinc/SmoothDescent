@@ -39,7 +39,7 @@ export const PRODUCTS: Product[] = [
     category: "HYDRATION",
     rating: 5,
     reviews: 312,
-    image: "/images/HydrationPowderHero.jpeg",
+    image: "/images/GastricShield.png",
     price: 38.00,
     bestSeller: true,
     description: "The Injection Day Elixir. Stop the \"Ozempic Headache\" before it starts. Hydrate without the bloat. Lemonade flavor soothes nausea naturally. This isn't just hydration—it's your survival strategy for the 48 hours after your injection.",
@@ -92,7 +92,7 @@ export const PRODUCTS: Product[] = [
     category: "DIGESTIVE SUPPORT",
     rating: 4.9,
     reviews: 418,
-    image: "/images/DigestiveEnzyme.jpeg",
+    image: "/images/DigestiveEnzyme.png",
     price: 32.00,
     description: "The End of Sulfur Burps. Your stomach is too slow to digest food before it ferments. The result? Rotten egg burps, bloating, and embarrassment. These enzymes do the work your stomach can't.",
     subscriptionDiscount: 0.15,
@@ -136,7 +136,7 @@ export const PRODUCTS: Product[] = [
     category: "ON-THE-GO RELIEF",
     rating: 4.8,
     reviews: 267,
-    image: "/images/StripsHero.jpeg",
+    image: "/images/stripimage.png",
     price: 28.00,
     description: "Your Pocket Savior. Feeling queasy at dinner? Slip a strip under your tongue. Dissolves in 10 seconds. No water needed. No running to the bathroom. Just fast, discreet nausea relief when you need it most.",
     subscriptionDiscount: 0.15,
@@ -340,7 +340,7 @@ export const QUIZ_RESULTS: Record<string, QuizResult> = {
       "Gastric Shield+ Hydration Powder (Lemonade) is designed for this exact moment. It uses micro-solubility electrolytes to absorb through the stomach lining immediately, bypassing the delay that makes other drinks sit heavy.",
       "This isn't a luxury. It's survival gear."
     ],
-    products: [{ id: "hydration", name: "Gastric Shield+ Hydration Powder", price: 38, image: "/images/HydrationPowderHero.jpeg" }],
+    products: [{ id: "hydration", name: "Gastric Shield+ Hydration Powder", price: 38, image: "/images/GastricShield.png" }],
     testimonial: { quote: "I was about to quit. I couldn't handle injection day anymore. This powder changed everything. It sounds simple, but having actual hydration that absorbs made me feel in control again.", author: "David C. | Verified Buyer" },
     ctaPrimary: "Start with Hydration",
     ctaSecondary: "See What's Inside"
@@ -354,7 +354,7 @@ export const QUIZ_RESULTS: Record<string, QuizResult> = {
       "The Digestive Enzyme Pro Blend is formulated with 50,000 HUT Protease and Ox Bile to break down proteins and fats BEFORE they can rot. This effectively eliminates sulfur burps and that heavy 'bowling ball' feeling after meals.",
       "Take 2 capsules before every meal and reclaim your social life."
     ],
-    products: [{ id: "digestive-enzymes", name: "Digestive Enzyme Pro Blend", price: 32, image: "https://picsum.photos/id/225/800/800" }],
+    products: [{ id: "digestive-enzymes", name: "Digestive Enzyme Pro Blend", price: 32, image: "/images/DigestiveEnzyme.png" }],
     testimonial: { quote: "I've been on semaglutide for 5 months and the sulfur burps were so bad I was avoiding all protein. I take 2 of these before every meal and I haven't had a sulfur burp in 3 weeks.", author: "Jennifer M. | Verified Buyer" },
     ctaPrimary: "Stop Sulfur Burps",
     ctaSecondary: "Learn More"
@@ -368,7 +368,7 @@ export const QUIZ_RESULTS: Record<string, QuizResult> = {
       "These mint-flavored dissolving strips are your secret weapon. Place one under your tongue, and it dissolves in 10 seconds. The ingredients absorb directly into your bloodstream, calming nausea in minutes without drawing attention.",
       "No water needed. No panic. Just relief."
     ],
-    products: [{ id: "nausea-strips", name: "Digestive + Gut Health Strips", price: 28, image: "/images/StripsHero.jpeg" }],
+    products: [{ id: "nausea-strips", name: "Digestive + Gut Health Strips", price: 28, image: "/images/stripimage.png" }],
     testimonial: { quote: "I can go on dates again. I keep these in my purse and slip one under my tongue if I feel weird. It stops the panic instantly.", author: "Amanda L. | Verified Buyer" },
     ctaPrimary: "Get Pocket Relief",
     ctaSecondary: "See How It Works"
@@ -396,7 +396,7 @@ export const QUIZ_RESULTS: Record<string, QuizResult> = {
       "This blend ensures that your protein and healthy fats are properly broken down, preventing that heavy feeling after meals and supporting long-term gut health.",
       "Think of this as your insurance policy for comfortable eating."
     ],
-    products: [{ id: "digestive-enzymes", name: "Digestive Enzyme Pro Blend", price: 32, image: "https://picsum.photos/id/225/800/800" }],
+    products: [{ id: "digestive-enzymes", name: "Digestive Enzyme Pro Blend", price: 32, image: "/images/DigestiveEnzyme.png" }],
     testimonial: { quote: "I'm on a maintenance dose now but I still take these with big meals. It just helps everything digest better.", author: "Karen L. | Verified Buyer" },
     ctaPrimary: "Optimize Digestion",
     ctaSecondary: "Learn More"

@@ -13,7 +13,7 @@ const Hero: React.FC = () => {
           <div className="w-full order-1 lg:order-2">
             <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white aspect-[4/3] sm:aspect-square lg:aspect-[4/5] mx-auto max-w-lg lg:max-w-none transform transition-transform hover:scale-[1.01] duration-500">
               <img
-                src="https://images.unsplash.com/photo-1544367563-12123d8959c9?q=80&w=2070&auto=format&fit=crop"
+                src="/images/MainHero.png"
                 alt="Thriving on the journey"
                 className="w-full h-full object-cover"
               />
@@ -54,13 +54,19 @@ const Hero: React.FC = () => {
             </h1>
 
             {/* Mobile/Tablet Order: Button comes BEFORE the words/list on mobile as per user request */}
-            <div className="w-full sm:max-w-md lg:max-w-none mb-8">
+            <div className="w-full sm:max-w-md lg:max-w-none mb-4">
               <button
                 onClick={() => document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' })}
                 className="w-full bg-brand-dark hover:bg-brand-primary text-white font-bold text-lg py-5 px-8 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-2"
               >
                 Shop New Year's Sale
               </button>
+            </div>
+
+            {/* Guarantee */}
+            <div className="flex items-center gap-2 text-brand-dark/70 font-medium text-sm justify-center lg:justify-start w-full mb-8">
+              <ShieldCheck className="w-5 h-5 text-brand-primary" />
+              <span>30-Day Money-Back Guarantee</span>
             </div>
 
             {/* Words / List */}
@@ -86,12 +92,6 @@ const Hero: React.FC = () => {
               <p className="text-brand-dark/70 italic leading-relaxed border-t border-brand-dark/5 pt-4">
                 "Micro-solubility formulas designed for sensitive, slowed stomachs. Because your body deserves the same investment as your prescription."
               </p>
-            </div>
-
-            {/* Guarantee */}
-            <div className="flex items-center gap-2 text-brand-dark/70 font-medium text-sm justify-center lg:justify-start w-full">
-              <ShieldCheck className="w-5 h-5 text-brand-primary" />
-              <span>30-Day Money-Back Guarantee</span>
             </div>
 
           </div>
