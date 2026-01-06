@@ -1,0 +1,76 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import ContactForm from '../components/ContactForm';
+import { Mail, MessageSquare, Phone } from 'lucide-react';
+---
+
+<BaseLayout title="Contact Us | Smooth Descent">
+  <div className="min-h-screen flex flex-col bg-brand-light">
+    <Header client:load />
+
+    <main className="flex-grow pt-24 pb-20 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
+        
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-start">
+          
+          {/* Left Column: Info */}
+          <div className="lg:order-1 order-2">
+            <span className="text-brand-primary font-bold tracking-widest uppercase text-sm mb-3 block">
+              Get in Touch
+            </span>
+            <h1 className="text-4xl md:text-5xl font-serif text-brand-dark font-bold mb-6">
+              We're Here for Your Journey
+            </h1>
+            <p className="text-lg text-brand-dark/70 leading-relaxed mb-10 max-w-lg">
+              Whether you have questions about our ingredients, need help with an order, or just want to share your success story, our team is ready to listen.
+            </p>
+
+            <div className="space-y-8">
+              <div className="flex gap-5">
+                <div className="w-12 h-12 rounded-full bg-brand-cream border border-brand-primary/20 flex items-center justify-center text-brand-primary flex-shrink-0">
+                  <Mail className="w-6 h-6" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-brand-dark text-lg mb-1">Email Support</h3>
+                  <p className="text-brand-dark/70 mb-2">Direct access to our support team.</p>
+                  <a href="mailto:smoothdescentinc@gmail.com" className="text-brand-primary font-bold hover:underline">
+                    smoothdescentinc@gmail.com
+                  </a>
+                </div>
+              </div>
+
+              <div className="flex gap-5">
+                <div className="w-12 h-12 rounded-full bg-brand-cream border border-brand-primary/20 flex items-center justify-center text-brand-primary flex-shrink-0">
+                  <MessageSquare className="w-6 h-6" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-brand-dark text-lg mb-1">Response Time</h3>
+                  <p className="text-brand-dark/70">
+                    We typically respond within 24 hours on business days.<br/>
+                    (Mon-Fri, 9am-5pm EST)
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+             <div className="mt-12 p-6 bg-brand-dark rounded-2xl text-white relative overflow-hidden">
+                <p className="relative z-10 font-serif text-xl italic leading-relaxed">
+                   "Our promise is simple: If we can't help you feel better on your GLP-1 journey, you don't pay. We're in this together."
+                </p>
+             </div>
+          </div>
+
+          {/* Right Column: Form */}
+          <div className="lg:order-2 order-1">
+            <ContactForm client:load />
+          </div>
+
+        </div>
+      </div>
+    </main>
+
+    <Footer />
+  </div>
+</BaseLayout>

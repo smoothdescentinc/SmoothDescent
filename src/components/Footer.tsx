@@ -40,7 +40,7 @@ const Footer: React.FC = () => {
             <div>
               <h4 className="font-bold mb-6 tracking-widest text-xs text-brand-primary uppercase">Support</h4>
               <ul className="space-y-4 text-sm text-brand-light/70">
-                <li><a href="mailto:support@smoothdescent.com" className="hover:text-brand-primary transition-colors">Contact Us</a></li>
+                <li><Link to="/contact" className="hover:text-brand-primary transition-colors">Contact Us</Link></li>
                 <li><a href="#faq" className="hover:text-brand-primary transition-colors">Shipping & Returns</a></li>
                 <li><a href="#faq" className="hover:text-brand-primary transition-colors">FAQs</a></li>
                 <li><a href="#faq" className="hover:text-brand-primary transition-colors">Track Your Order</a></li>
