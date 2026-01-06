@@ -1,7 +1,7 @@
 /**
- * Meta Pixel Utility Library
+ * Tracking Utility Library
  * 
- * Centralized helpers for Meta Pixel tracking with:
+ * Centralized helpers for GTM Data Layer tracking with:
  * - SHA-256 email/phone hashing for advanced matching
  * - Safe tracking with error handling
  * - Debug mode logging
@@ -10,6 +10,22 @@
 
 // Check if we're in debug mode
 const DEBUG_MODE = import.meta.env.PUBLIC_META_PIXEL_DEBUG === 'true';
+
+// Define Data Layer type
+type DataLayerEvent = {
+    event: string;
+    eventName?: string;
+    eventData?: Record<string, any>;
+    userData?: Record<string, string>;
+    [key: string]: any;
+};
+
+// Safe access to dataLayer
+declare global {
+    interface Window {
+        dataLayer: DataLayerEvent[];
+    }
+}
 
 /**
  * SHA-256 hash a string using Web Crypto API
@@ -24,14 +40,11 @@ async function sha256(text: string): Promise<string> {
 }
 
 /**
- * Normalize and hash email for Meta Pixel advanced matching
- * - Converts to lowercase
- * - Trims whitespace
- * - Hashes with SHA-256
+ * Normalize and hash email for Advanced Matching
  */
 export async function hashEmail(email: string): Promise<string> {
     if (!email || typeof email !== 'string') {
-        console.warn('[Meta Pixel] Invalid email provided for hashing');
+        console.warn('[Tracking] Invalid email provided for hashing');
         return '';
     }
 
@@ -39,68 +52,72 @@ export async function hashEmail(email: string): Promise<string> {
     const hashed = await sha256(normalized);
 
     if (DEBUG_MODE) {
-        console.log('[Meta Pixel] Email hashed:', { original: normalized, hash: hashed.substring(0, 16) + '...' });
+        console.log('[Tracking] Email hashed:', { original: normalized, hash: hashed.substring(0, 16) + '...' });
     }
 
     return hashed;
 }
 
 /**
- * Normalize and hash phone for Meta Pixel advanced matching
- * - Removes all non-numeric characters
- * - Hashes with SHA-256
+ * Normalize and hash phone for Advanced Matching
  */
 export async function hashPhone(phone: string): Promise<string> {
     if (!phone || typeof phone !== 'string') {
-        console.warn('[Meta Pixel] Invalid phone provided for hashing');
+        console.warn('[Tracking] Invalid phone provided for hashing');
         return '';
     }
 
-    // Remove all non-numeric characters
     const normalized = phone.replace(/\D/g, '');
 
     if (normalized.length < 10) {
-        console.warn('[Meta Pixel] Phone number too short:', normalized.length);
+        console.warn('[Tracking] Phone number too short:', normalized.length);
         return '';
     }
 
     const hashed = await sha256(normalized);
 
     if (DEBUG_MODE) {
-        console.log('[Meta Pixel] Phone hashed:', { original: normalized, hash: hashed.substring(0, 16) + '...' });
+        console.log('[Tracking] Phone hashed:', { original: normalized, hash: hashed.substring(0, 16) + '...' });
     }
 
     return hashed;
 }
 
 /**
- * Safely call fbq() with error handling
+ * Push event to GTM Data Layer
  */
-export function safeTrack(event: string, params: Record<string, any> = {}) {
+export function pushToDataLayer(
+    eventName: string,
+    eventData: Record<string, any> = {},
+    hashedUserData?: Record<string, string>
+) {
     if (typeof window === 'undefined') {
-        return; // SSR - no window object
+        return; // SSR
     }
 
-    const fbq = (window as any).fbq;
+    window.dataLayer = window.dataLayer || [];
 
-    if (!fbq) {
-        console.warn('[Meta Pixel] fbq not loaded - event not tracked:', event);
-        return;
-    }
+    const payload: DataLayerEvent = {
+        event: 'meta_event', // Generic trigger for GTM
+        eventName: eventName, // Specific FB/GA4 event name
+        eventData: eventData, // Parameters
+        userData: hashedUserData, // Hashed user data for Matching
+        _clear: true // Optional: helper for some GTM setups to clear previous state
+    };
 
     try {
-        fbq('track', event, params);
+        window.dataLayer.push(payload);
 
         if (DEBUG_MODE) {
-            console.log(`[Meta Pixel] ${event} tracked:`, params);
+            console.log(`[Tracking] Pushed to Data Layer:`, payload);
         }
     } catch (error) {
-        console.error('[Meta Pixel] Error tracking event:', event, error);
+        console.error('[Tracking] Error pushing to Data Layer:', error);
     }
 }
 
 /**
- * Track event with customer data (advanced matching)
+ * Track event with customer data (Advanced Matching wrapper)
  */
 export async function trackWithCustomerData(
     event: string,
@@ -115,17 +132,6 @@ export async function trackWithCustomerData(
         zip?: string;
     }
 ) {
-    if (typeof window === 'undefined') {
-        return;
-    }
-
-    const fbq = (window as any).fbq;
-
-    if (!fbq) {
-        console.warn('[Meta Pixel] fbq not loaded - event not tracked:', event);
-        return;
-    }
-
     try {
         // Hash sensitive data
         const hashedUserData: Record<string, string> = {};
@@ -158,22 +164,11 @@ export async function trackWithCustomerData(
             hashedUserData.zp = await sha256(userData.zip.toLowerCase().trim());
         }
 
-        // Track with advanced matching
-        fbq('track', event, params, { eventID: generateEventId() });
+        // Push to Data Layer
+        pushToDataLayer(event, { ...params, eventID: generateEventId() }, hashedUserData);
 
-        // Update user data if provided
-        if (Object.keys(hashedUserData).length > 0) {
-            fbq('init', import.meta.env.PUBLIC_META_PIXEL_ID || '3411322232377394', hashedUserData);
-        }
-
-        if (DEBUG_MODE) {
-            console.log(`[Meta Pixel] ${event} tracked with customer data:`, {
-                params,
-                userData: Object.keys(hashedUserData)
-            });
-        }
     } catch (error) {
-        console.error('[Meta Pixel] Error tracking with customer data:', event, error);
+        console.error('[Tracking] Error processing customer data:', event, error);
     }
 }
 
@@ -204,7 +199,8 @@ export function trackViewContent(product: {
     price: number;
     category?: string;
 }) {
-    safeTrack('ViewContent', {
+    // ViewContent generally doesn't have user data unless logged in, but we use the generic pusher
+    pushToDataLayer('ViewContent', {
         content_name: product.name,
         content_ids: [product.id],
         content_type: 'product',
@@ -223,7 +219,7 @@ export function trackAddToCart(product: {
     price: number;
     quantity: number;
 }) {
-    safeTrack('AddToCart', {
+    pushToDataLayer('AddToCart', {
         content_name: product.name,
         content_ids: [product.id],
         content_type: 'product',
@@ -240,7 +236,7 @@ export function trackInitiateCheckout(cart: {
     items: Array<{ id: string; quantity: number }>;
     total: number;
 }) {
-    safeTrack('InitiateCheckout', {
+    pushToDataLayer('InitiateCheckout', {
         content_ids: cart.items.map(i => i.id),
         content_type: 'product',
         value: cart.total,
@@ -267,3 +263,4 @@ export async function trackPurchase(order: {
         num_items: order.items?.reduce((sum, i) => sum + i.quantity, 0) || 1
     }, order.email ? { email: order.email } : undefined);
 }
+
