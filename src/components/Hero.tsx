@@ -6,7 +6,7 @@ import DoctorCard from './DoctorCard';
 
 const Hero: React.FC = () => {
   return (
-    <section className="relative overflow-hidden bg-brand-light pt-8 pb-16 lg:pt-24 lg:pb-32 font-sans px-4">
+    <section className="relative overflow-hidden bg-brand-light pt-8 pb-10 lg:pt-24 lg:pb-16 font-sans px-4">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col lg:grid lg:grid-cols-[2fr_3fr] gap-8 lg:gap-16 items-center">
 
@@ -21,7 +21,6 @@ const Hero: React.FC = () => {
 
             </div>
 
-            {/* Doctor Trusted Card (Below Image) */}
             {/* Doctor Trusted Card (Below Image) */}
             <div className="mt-6 flex justify-center">
               <DoctorCard className="max-w-md shadow-lg border-2" />
@@ -44,7 +43,6 @@ const Hero: React.FC = () => {
             </div>
 
             {/* Header */}
-            {/* Header */}
             <h1 className="text-3xl sm:text-4xl lg:text-5xl/[1.1] font-serif font-bold text-brand-dark tracking-tight mb-8">
               You Spent $1,000 on the Medication. <br className="hidden lg:block" />
               <span className="text-brand-primary">Don't Let Side Effects Waste That Investment.</span>
@@ -61,8 +59,8 @@ const Hero: React.FC = () => {
             </div>
 
             {/* Guarantee */}
-            <div className="flex items-center gap-2 text-brand-dark/70 font-medium text-sm justify-center lg:justify-start w-full mb-8">
-              <ShieldCheck className="w-5 h-5 text-brand-primary" />
+            <div className="flex items-center gap-2 text-brand-dark font-bold text-base justify-center w-full mb-8 mt-2">
+              <ShieldCheck className="w-6 h-6 text-brand-primary" />
               <span>30-Day Money-Back Guarantee</span>
             </div>
 
