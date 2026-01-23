@@ -103,11 +103,11 @@ export async function addCartItem(product: Product, quantity = 1, label = '') {
         const currentCheckoutId = getCheckoutId();
         if (!currentCheckoutId) await createNewCheckout(); // Should exist from init, but safety check
 
-        // We need the Variant ID. 
+        // We need the Variant ID.
         // Logic: product.id should be the ID we got from Shopify.
         // If we have tiers/variants, we need to match the label to the specific variant ID.
-        // For simplicity in this step, if 'product' comes from our mapped store, 
-        // we might store the real Variant ID in tiers. 
+        // For simplicity in this step, if 'product' comes from our mapped store,
+        // we might store the real Variant ID in tiers.
         // Fallback: Use product.id as variant ID (if it was mapped that way).
 
         let variantId = product.id;
@@ -121,6 +121,14 @@ export async function addCartItem(product: Product, quantity = 1, label = '') {
         const lineItemsToAdd = [{ variantId: variantId, quantity: quantity }];
         const checkout = await shopifyClient.checkout.addLineItems(getCheckoutId() as string, lineItemsToAdd);
         updateStoreFromCheckout(checkout);
+
+        // Track AddToCart event for Meta Pixel (Shopify path)
+        trackAddToCart({
+            id: product.id,
+            name: product.name,
+            price: product.price,
+            quantity
+        });
 
     } catch (e) {
         console.error("Failed to add to cart", e);

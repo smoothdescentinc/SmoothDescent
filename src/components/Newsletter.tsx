@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { ArrowRight, Check, Loader2, Mail } from 'lucide-react';
+import { trackLead } from '../lib/metaPixel';
 
 export default function Newsletter() {
     const [step, setStep] = useState<'email' | 'phone' | 'success'>('email');
@@ -30,10 +31,15 @@ export default function Newsletter() {
                     body: JSON.stringify({ email, phone }),
                 });
 
+                // Track Lead event for Meta Pixel
+                trackLead(email, 0);
+
                 // Always succeed to show code (User Intent)
                 setStep('success');
                 setStatus('idle');
             } catch (error) {
+                // Track Lead even on error (user intent matters)
+                trackLead(email, 0);
                 setStep('success');
                 setStatus('idle');
             }

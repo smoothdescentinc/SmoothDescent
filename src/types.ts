@@ -7,12 +7,17 @@ export interface PricingTier {
   originalPrice?: number;
   badge?: string;
   saveLabel?: string;
+  savePercent?: number;
+  perDay?: number | null;
 }
 
 export interface ProductDetails {
   subtitle: string;
   features: string[];
   usage: string;
+  checklist?: string[]; // Feature checklist with checkmarks
+  banner?: string; // e.g. "1 Tub Contains 60 Servings"
+  bannerEmoji?: string; // e.g. "🍒" or "💊"
 }
 
 export interface FAQItem {

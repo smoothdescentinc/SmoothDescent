@@ -17,14 +17,21 @@ import SciencePage from './components/SciencePage';
 import MetaPurchaseTracker from './components/MetaPurchaseTracker';
 import UsVsThem from './components/UsVsThem';
 import PromiseSection from './components/PromiseSection';
+import ContactForm from './components/ContactForm';
+import DoctorSection from './components/DoctorSection';
+import TrustBadges from './components/TrustBadges';
+import SaleBanner from './components/SaleBanner';
+import { trackPageView } from './lib/metaPixel';
 
 const Home = () => (
   <>
     <Hero />
+    <TrustBadges />
     <TrustMarquee />
     <ProductGrid />
     <ValueProps />
     <Reviews />
+    <DoctorSection />
     <PromiseSection />
     <QuizCallout />
     <UsVsThem />
@@ -38,10 +45,28 @@ const App: React.FC = () => {
   const location = useLocation();
   const [isNewsletterOpen, setIsNewsletterOpen] = React.useState(false);
 
-  // Scroll to top on route change
+  // Scroll to top or section on route change + track PageView
   React.useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [location.pathname]);
+    const params = new URLSearchParams(location.search);
+    const section = params.get('section');
+
+    // Track PageView for SPA navigation (skip initial load - handled by BaseLayout)
+    if (location.key !== 'default') {
+      trackPageView(location.pathname);
+    }
+
+    if (section || location.hash) {
+      const targetId = section || location.hash.substring(1);
+      const element = document.getElementById(targetId);
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [location.pathname, location.hash, location.search]);
 
   // Auto-open modal after 3 seconds
   React.useEffect(() => {
@@ -61,10 +86,12 @@ const App: React.FC = () => {
           <Route path="/science" element={<SciencePage />} />
           <Route path="/shop" element={<div className="pt-24 min-h-screen bg-brand-light pb-20"><ProductGrid /></div>} />
           <Route path="/product/:id" element={<ProductPage />} />
+          <Route path="/contact" element={<div className="pt-24 min-h-screen bg-brand-light pb-20"><div className="max-w-4xl mx-auto px-4"><h1 className="text-4xl font-bold text-center mb-12 font-heading text-brand-primary">Contact Us</h1><ContactForm /></div></div>} />
         </Routes>
       </main>
       <Footer />
       <NewsletterModal isOpen={isNewsletterOpen} onClose={() => setIsNewsletterOpen(false)} />
+      <SaleBanner />
       <MetaPurchaseTracker />
     </div>
   );

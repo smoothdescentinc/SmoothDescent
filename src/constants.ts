@@ -53,12 +53,21 @@ export const PRODUCTS: Product[] = [
         "Natural Lemonade flavor reduces nausea",
         "Fortified with B6 & B12 for energy"
       ],
-      usage: "Mix 1 scoop with 16oz water. Drink immediately upon waking and 30 mins before injection."
+      usage: "Mix 1 scoop with 16oz water. Drink immediately upon waking and 30 mins before injection.",
+      checklist: [
+        "Micro-Solubility Electrolytes for Instant Absorption",
+        "Deep Hydration Without the Bloat",
+        "Natural Lemonade Flavor Reduces Nausea",
+        "Zero Sugar, Zero Caffeine",
+        "100% Satisfaction Guarantee or Money Back"
+      ],
+      banner: "1 Tub Contains 60 Servings",
+      bannerEmoji: "🍋"
     },
     tiers: [
-      { id: '1-tub', quantity: 1, label: "1 Tub", subLabel: "30 day supply", price: 38.00 },
-      { id: '2-tubs', quantity: 2, label: "2 Tubs", subLabel: "60 day supply", price: 68.00, originalPrice: 76.00, badge: "Best Seller", saveLabel: "Save $8" },
-      { id: '3-tubs', quantity: 3, label: "3 Tubs", subLabel: "90 day supply", price: 95.00, originalPrice: 114.00, badge: "Best Value", saveLabel: "Save $19" }
+      { id: '1-tub', quantity: 1, label: "Buy 1", subLabel: "", price: 33.96, originalPrice: 59.95, savePercent: 33, perDay: null },
+      { id: '2-tubs', quantity: 3, label: "Buy 2 Get 1 Free", subLabel: "$1.13/day", price: 67.96, originalPrice: 179.85, savePercent: 56, perDay: 1.13, badge: "Most Popular" },
+      { id: '3-tubs', quantity: 5, label: "Buy 3 Get 2 Free", subLabel: "$1.02/day", price: 101.96, originalPrice: 299.75, savePercent: 60, perDay: 1.02, badge: "Best Value" }
     ],
     faqs: [
       {
@@ -95,7 +104,7 @@ export const PRODUCTS: Product[] = [
     reviews: 418,
     image: "/images/DigestiveEnzymeHero.png",
     nutritionLabel: "/images/DigestiveEnzymeNutritionLabel.png",
-    price: 32.00,
+    price: 42.00,
     description: "The End of Sulfur Burps. Your stomach is too slow to digest food before it ferments. The result? Rotten egg burps, bloating, and embarrassment. These enzymes do the work your stomach can't.",
     subscriptionDiscount: 0.15,
     details: {
@@ -106,12 +115,21 @@ export const PRODUCTS: Product[] = [
         "Clinical strength 50,000 HUT Protease",
         "Works in minutes, designed for delayed emptying"
       ],
-      usage: "Take 2 capsules 10-15 minutes before eating. For high-risk meals (steak, fried foods), take 3 capsules."
+      usage: "Take 2 capsules 10-15 minutes before eating. For high-risk meals (steak, fried foods), take 3 capsules.",
+      checklist: [
+        "Eliminates Sulfur Burps at the Source",
+        "Breaks Down Protein Before It Ferments",
+        "Includes Ox Bile for Fat Digestion",
+        "Clinical Strength 50,000 HUT Protease",
+        "100% Satisfaction Guarantee or Money Back"
+      ],
+      banner: "1 Bottle Contains 60 Capsules",
+      bannerEmoji: "💊"
     },
     tiers: [
-      { id: '1-bottle', quantity: 1, label: "1 Bottle", subLabel: "30 day supply (60 caps)", price: 32.00 },
-      { id: '2-bottles', quantity: 2, label: "2 Bottles", subLabel: "60 day supply", price: 57.00, originalPrice: 64.00, badge: "Best Seller", saveLabel: "Save $7" },
-      { id: '3-bottles', quantity: 3, label: "3 Bottles", subLabel: "90 day supply", price: 80.00, originalPrice: 96.00, badge: "Best Value", saveLabel: "Save $16" }
+      { id: '1-bottle', quantity: 1, label: "Buy 1", subLabel: "", price: 42.00, originalPrice: 59.95, savePercent: 30, perDay: null },
+      { id: '2-bottles', quantity: 3, label: "Buy 2 Get 1 Free", subLabel: "$0.93/day", price: 84.00, originalPrice: 179.85, savePercent: 53, perDay: 0.93, badge: "Most Popular" },
+      { id: '3-bottles', quantity: 5, label: "Buy 3 Get 2 Free", subLabel: "$0.84/day", price: 126.00, originalPrice: 299.75, savePercent: 58, perDay: 0.84, badge: "Best Value" }
     ],
     faqs: [
       {
@@ -151,12 +169,21 @@ export const PRODUCTS: Product[] = [
         "Works in 5-10 minutes (bypasses stomach)",
         "Pocket-sized & discreet"
       ],
-      usage: "Preventative: Place 1 strip under tongue 10-15 mins before eating. Reactive: Use immediately when nausea hits."
+      usage: "Preventative: Place 1 strip under tongue 10-15 mins before eating. Reactive: Use immediately when nausea hits.",
+      checklist: [
+        "Dissolves in 10 Seconds Under Tongue",
+        "Fast Relief in 5-10 Minutes",
+        "50mg Ginger Root + Vitamin B6",
+        "Pocket-Sized & Completely Discreet",
+        "100% Satisfaction Guarantee or Money Back"
+      ],
+      banner: "1 Box Contains 30 Strips",
+      bannerEmoji: "✨"
     },
     tiers: [
-      { id: '1-box', quantity: 1, label: "1 Box", subLabel: "30 strips", price: 28.00 },
-      { id: '2-boxes', quantity: 2, label: "2 Boxes", subLabel: "60 strips", price: 50.00, originalPrice: 56.00, badge: "Best Seller", saveLabel: "Save $6" },
-      { id: '3-boxes', quantity: 3, label: "3 Boxes", subLabel: "90 strips", price: 70.00, originalPrice: 84.00, badge: "Best Value", saveLabel: "Save $14" }
+      { id: '1-box', quantity: 1, label: "Buy 1", subLabel: "", price: 28.00, originalPrice: 39.95, savePercent: 30, perDay: null },
+      { id: '2-boxes', quantity: 2, label: "Buy 2 Get 15% Off", subLabel: "$0.79/strip", price: 47.60, originalPrice: 79.90, savePercent: 40, perDay: 0.79, badge: "Most Popular" },
+      { id: '3-boxes', quantity: 3, label: "Buy 3 Get 25% Off", subLabel: "$0.70/strip", price: 62.93, originalPrice: 119.85, savePercent: 47, perDay: 0.70, badge: "Best Value" }
     ],
     faqs: [
       {
@@ -224,6 +251,186 @@ export const REVIEWS: Review[] = [
     author: "Jason K.",
     verifiedProduct: "Digestive + Gut Health Strips",
     timeAgo: "2 months ago"
+  },
+  {
+    id: '6',
+    stars: 5,
+    headline: "Finally sleeping through the night",
+    body: "The dehydration headaches were waking me up at 3am every single night. Started using the hydration powder before bed and I'm finally getting real sleep again.",
+    author: "Rachel H.",
+    verifiedProduct: "Gastric Shield+ Hydration Powder",
+    timeAgo: "1 week ago"
+  },
+  {
+    id: '7',
+    stars: 5,
+    headline: "My husband noticed immediately",
+    body: "He said I stopped making that face after meals. You know the one. The 'I feel like I'm going to be sick' face. These enzymes are a game changer.",
+    author: "Patricia D.",
+    verifiedProduct: "Digestive Enzyme Pro Blend",
+    timeAgo: "3 weeks ago"
+  },
+  {
+    id: '8',
+    stars: 5,
+    headline: "No more excuses",
+    body: "I used to cancel plans constantly because of unpredictable nausea. Now I keep the strips in my bag and actually live my life. Down 47 lbs and counting!",
+    author: "Christina B.",
+    verifiedProduct: "Digestive + Gut Health Strips",
+    timeAgo: "1 month ago"
+  },
+  {
+    id: '9',
+    stars: 5,
+    headline: "The taste doesn't make me gag",
+    body: "Every other electrolyte drink I tried made me MORE nauseous. This one is light, not too sweet, and actually stays down. That's huge for me.",
+    author: "Kelly M.",
+    verifiedProduct: "Gastric Shield+ Hydration Powder",
+    timeAgo: "2 weeks ago"
+  },
+  {
+    id: '10',
+    stars: 5,
+    headline: "Wedding day lifesaver",
+    body: "I was terrified about my daughter's wedding. Took enzymes before the meal, had strips in my clutch. Danced all night without a single issue. Cried happy tears.",
+    author: "Diane R.",
+    verifiedProduct: "Digestive Enzyme Pro Blend",
+    timeAgo: "3 weeks ago"
+  },
+  {
+    id: '11',
+    stars: 5,
+    headline: "Better than prescription anti-nausea",
+    body: "My doctor had me on Zofran but it made me so constipated. These strips work just as fast and no side effects. Why didn't I find these sooner?",
+    author: "Linda S.",
+    verifiedProduct: "Digestive + Gut Health Strips",
+    timeAgo: "1 month ago"
+  },
+  {
+    id: '12',
+    stars: 5,
+    headline: "My energy is back",
+    body: "I thought fatigue was just part of the medication. Turns out I was severely dehydrated. Two weeks on this powder and I feel like myself again.",
+    author: "Mark T.",
+    verifiedProduct: "Gastric Shield+ Hydration Powder",
+    timeAgo: "2 weeks ago"
+  },
+  {
+    id: '13',
+    stars: 5,
+    headline: "Protein without punishment",
+    body: "I was avoiding all meat because of the sulfur burps. Now I take these enzymes and I can actually hit my protein goals without suffering.",
+    author: "Brian K.",
+    verifiedProduct: "Digestive Enzyme Pro Blend",
+    timeAgo: "1 week ago"
+  },
+  {
+    id: '14',
+    stars: 5,
+    headline: "Flight anxiety gone",
+    body: "I had to fly for work and was TERRIFIED of getting sick on the plane. Strips saved me. Quick, discreet, effective. 10/10 recommend.",
+    author: "Stephanie W.",
+    verifiedProduct: "Digestive + Gut Health Strips",
+    timeAgo: "2 months ago"
+  },
+  {
+    id: '15',
+    stars: 5,
+    headline: "The Sunday Scaries are manageable now",
+    body: "Injection day used to ruin my entire week. Now I prep with the hydration powder and the first 48 hours are so much easier.",
+    author: "Tom P.",
+    verifiedProduct: "Gastric Shield+ Hydration Powder",
+    timeAgo: "3 weeks ago"
+  },
+  {
+    id: '16',
+    stars: 5,
+    headline: "Restaurant meals are possible again",
+    body: "I take 2 enzymes before I eat out and I don't get that horrible bloated feeling anymore. I actually enjoy food again.",
+    author: "Nancy G.",
+    verifiedProduct: "Digestive Enzyme Pro Blend",
+    timeAgo: "1 month ago"
+  },
+  {
+    id: '17',
+    stars: 5,
+    headline: "Quick and discreet",
+    body: "Love that I can use the strips without anyone knowing. No water, no pills to swallow. Just slip it under my tongue and wait.",
+    author: "Michelle F.",
+    verifiedProduct: "Digestive + Gut Health Strips",
+    timeAgo: "2 weeks ago"
+  },
+  {
+    id: '18',
+    stars: 5,
+    headline: "Doctor recommended these",
+    body: "My bariatric specialist actually recommended SmoothDescent. Said their formulas are designed for delayed gastric emptying. She was right.",
+    author: "Karen L.",
+    verifiedProduct: "Gastric Shield+ Hydration Powder",
+    timeAgo: "1 month ago"
+  },
+  {
+    id: '19',
+    stars: 5,
+    headline: "No more embarrassing moments",
+    body: "The sulfur burps were so bad my coworkers noticed. I was mortified. Three weeks on these enzymes and the problem is completely gone.",
+    author: "David M.",
+    verifiedProduct: "Digestive Enzyme Pro Blend",
+    timeAgo: "3 weeks ago"
+  },
+  {
+    id: '20',
+    stars: 5,
+    headline: "First date success",
+    body: "Went on my first date since starting Ozempic. Had the strips ready just in case. Didn't need them but knowing they were there gave me confidence.",
+    author: "Jessica R.",
+    verifiedProduct: "Digestive + Gut Health Strips",
+    timeAgo: "2 weeks ago"
+  },
+  {
+    id: '21',
+    stars: 5,
+    headline: "Gym performance improved",
+    body: "I was getting dizzy during workouts from dehydration. This powder absorbs so much better than regular water. My lifts are back to normal.",
+    author: "Chris A.",
+    verifiedProduct: "Gastric Shield+ Hydration Powder",
+    timeAgo: "1 week ago"
+  },
+  {
+    id: '22',
+    stars: 5,
+    headline: "Wish I found these sooner",
+    body: "I suffered for 4 months before finding SmoothDescent. The enzymes stopped my bloating within days. Don't wait like I did.",
+    author: "Sandra J.",
+    verifiedProduct: "Digestive Enzyme Pro Blend",
+    timeAgo: "1 month ago"
+  },
+  {
+    id: '23',
+    stars: 5,
+    headline: "Travel essential",
+    body: "Packed the strips for vacation and used them every day. No nausea, no missed experiences. Best $28 I've ever spent.",
+    author: "Robert C.",
+    verifiedProduct: "Digestive + Gut Health Strips",
+    timeAgo: "3 weeks ago"
+  },
+  {
+    id: '24',
+    stars: 5,
+    headline: "My whole family notices the difference",
+    body: "I'm not miserable anymore. I'm present. I'm engaged. The hydration powder helped me actually enjoy my weight loss journey.",
+    author: "Lisa B.",
+    verifiedProduct: "Gastric Shield+ Hydration Powder",
+    timeAgo: "2 weeks ago"
+  },
+  {
+    id: '25',
+    stars: 5,
+    headline: "Worth every penny",
+    body: "I was skeptical of the price but these products WORK. The enzymes alone saved me from quitting my medication. Can't put a price on that.",
+    author: "Angela H.",
+    verifiedProduct: "Digestive Enzyme Pro Blend",
+    timeAgo: "1 month ago"
   }
 ];
 

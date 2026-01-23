@@ -29,6 +29,13 @@ const Hero: React.FC = () => {
           {/* Content (Mobile: Order 2, Desktop: Order 1) */}
           <div className="w-full order-2 lg:order-1 text-center lg:text-left flex flex-col items-center lg:items-start">
 
+            {/* Specialization Tag */}
+            <div className="mb-4">
+              <span className="inline-block bg-brand-dark text-white text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full">
+                The GLP-1 Support Specialists
+              </span>
+            </div>
+
             {/* Rating */}
             <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-3 mb-4 animate-fade-in">
               <div className="flex gap-0.5 text-brand-primary">
@@ -47,14 +54,21 @@ const Hero: React.FC = () => {
               <span className="text-brand-primary">Don't Let Side Effects Waste That Investment.</span>
             </h1>
 
-            {/* Mobile/Tablet Order: Button comes BEFORE the words/list on mobile as per user request */}
-            <div className="w-full sm:max-w-md lg:max-w-none mb-4">
+            {/* Dual CTA Buttons */}
+            <div className="w-full sm:max-w-lg lg:max-w-none mb-4 flex flex-col sm:flex-row gap-3">
               <button
                 onClick={() => document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' })}
-                className="w-full bg-brand-dark hover:bg-brand-primary text-white font-bold text-lg py-5 px-8 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-2"
+                className="flex-1 bg-brand-dark hover:bg-brand-primary text-white font-bold text-base py-4 px-6 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-2"
               >
-                Shop New Year's Sale
+                Shop Best Sellers
+                <span className="text-lg">→</span>
               </button>
+              <Link
+                to="/science"
+                className="flex-1 bg-white hover:bg-brand-cream text-brand-dark font-bold text-base py-4 px-6 rounded-full border-2 border-brand-dark/20 hover:border-brand-dark transition-all flex items-center justify-center gap-2"
+              >
+                How It Works
+              </Link>
             </div>
 
             {/* Guarantee */}

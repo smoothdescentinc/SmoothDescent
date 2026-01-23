@@ -1,314 +1,501 @@
-import React from 'react';
-import { Beaker, Leaf, Zap, Pill, ArrowRight, Star, Quote } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Droplets, Flame, Pill, Zap, ArrowRight, Star, Quote, Stethoscope, ClipboardCheck, Leaf, Award, CheckCircle2, ChevronDown, Plus, Minus } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { PRODUCTS } from '../constants';
+import { PRODUCTS, REVIEWS } from '../constants';
+
+// Pain point navigator data
+const painPoints = [
+    { id: 'hydration', label: 'Nausea & Headaches', icon: Zap, color: 'bg-amber-100 text-amber-700' },
+    { id: 'hydration', label: 'Dehydration', icon: Droplets, color: 'bg-blue-100 text-blue-700' },
+    { id: 'enzymes', label: 'Sulfur Burps', icon: Flame, color: 'bg-green-100 text-green-700' },
+    { id: 'enzymes', label: 'Bloating', icon: Flame, color: 'bg-emerald-100 text-emerald-700' },
+    { id: 'strips', label: 'Public Nausea', icon: Pill, color: 'bg-purple-100 text-purple-700' },
+];
+
+// Trust badges
+const trustBadges = [
+    { icon: Stethoscope, label: 'Physician Formulated' },
+    { icon: ClipboardCheck, label: 'Third-Party Tested' },
+    { icon: Leaf, label: 'No Artificial Ingredients' },
+    { icon: Award, label: 'Made in the USA' },
+];
+
+// FAQs
+const faqs = [
+    {
+        question: "Is this safe to take with my GLP-1 medication?",
+        answer: "Yes. All SmoothDescent products are nutritional supplements containing vitamins, minerals, and food-derived ingredients. They do not contain any pharmaceutical compounds that interact with GLP-1 receptor agonist medications."
+    },
+    {
+        question: "How quickly will I see results?",
+        answer: "Most users report feeling relief within the first use. Hydration improvements are typically felt within 30-60 minutes. Digestive enzyme benefits are immediate with meals. The strips work in under 60 seconds."
+    },
+    {
+        question: "Can I take all three products together?",
+        answer: "Absolutely. Our products are designed to work synergistically. Many users follow the complete protocol: Hydration daily, Enzymes before meals, and Strips as needed for breakthrough nausea."
+    },
+    {
+        question: "What's your return policy?",
+        answer: "30-Day Money Back Guarantee. If you're not satisfied, email us. You don't need to ship the product back. Even if the container is empty, we'll refund you. No questions asked."
+    }
+];
 
 const SciencePage: React.FC = () => {
-    // Safety check: ensure PRODUCTS is defined and is an array
+    const [activeSection, setActiveSection] = useState('hydration');
+    const [openFaq, setOpenFaq] = useState<number | null>(null);
+
     const inventory = (typeof PRODUCTS !== 'undefined' && Array.isArray(PRODUCTS)) ? PRODUCTS : [];
+    const reviews = (typeof REVIEWS !== 'undefined' && Array.isArray(REVIEWS)) ? REVIEWS : [];
 
     const hydrationProduct = inventory.find(p => p.id === 'hydration');
     const enzymesProduct = inventory.find(p => p.id === 'digestive-enzymes');
     const stripsProduct = inventory.find(p => p.id === 'nausea-strips');
 
-    // If critical data is missing, we can return null or a skeleton, but let's try to render what we can
-    const hasData = hydrationProduct && enzymesProduct && stripsProduct;
+    // Track scroll position for active section
+    useEffect(() => {
+        const handleScroll = () => {
+            const sections = ['hydration', 'enzymes', 'strips'];
+            for (const section of sections) {
+                const el = document.getElementById(section);
+                if (el) {
+                    const rect = el.getBoundingClientRect();
+                    if (rect.top <= 200 && rect.bottom >= 200) {
+                        setActiveSection(section);
+                        break;
+                    }
+                }
+            }
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    const scrollToSection = (id: string) => {
+        const el = document.getElementById(id);
+        if (el) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    };
 
     return (
-        <div className="bg-brand-light min-h-screen pt-12 pb-24">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-brand-light min-h-screen">
 
-                {/* Header */}
-                <div className="text-center mb-20">
-                    <span className="text-brand-primary font-bold tracking-widest uppercase text-sm mb-3 block">
-                        The Evidence
-                    </span>
-                    <h1 className="text-4xl md:text-6xl font-serif text-brand-dark font-bold mb-6">
-                        Scientific Mechanisms
-                    </h1>
-                    <p className="text-xl text-brand-dark/70 max-w-2xl mx-auto leading-relaxed">
-                        Understanding the physiological impact of GLP-1 medications and how targeted nutrition restores balance.
-                    </p>
+            {/* Hero Section with Doctor */}
+            <section className="relative pt-16 pb-12 md:pt-24 md:pb-16 overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-b from-brand-cream to-brand-light" />
+                <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-primary/5 rounded-full -translate-y-1/2 translate-x-1/3 blur-3xl" />
+
+                <div className="max-w-6xl mx-auto px-4 relative">
+                    <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+                        {/* Left: Text Content */}
+                        <div className="text-center lg:text-left">
+                            <span className="inline-block bg-brand-dark text-white text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-6">
+                                The Science Behind Relief
+                            </span>
+                            <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-brand-dark mb-6 leading-tight">
+                                How Our Formulas<br />
+                                <span className="text-brand-primary">Actually Work</span>
+                            </h1>
+                            <p className="text-lg md:text-xl text-brand-dark/70 leading-relaxed mb-8">
+                                GLP-1 medications change how your body processes everything. Standard supplements weren't designed for this. Ours were.
+                            </p>
+                        </div>
+
+                        {/* Right: Doctor Card */}
+                        <div className="flex justify-center lg:justify-end">
+                            <div className="bg-white rounded-3xl p-6 md:p-8 shadow-xl border border-brand-primary/10 max-w-md">
+                                <div className="flex items-center gap-4 mb-5">
+                                    <img
+                                        src="/images/DoctorPhoto.png"
+                                        alt="Dr. Sarah Jenkins"
+                                        className="w-20 h-20 rounded-full object-cover border-3 border-brand-primary/20 shadow-lg"
+                                    />
+                                    <div>
+                                        <p className="font-bold text-brand-dark">Dr. Sarah Jenkins, MD</p>
+                                        <p className="text-brand-dark/60 text-sm">Board-Certified in Obesity Medicine</p>
+                                        <div className="flex text-amber-400 mt-1">
+                                            {[...Array(5)].map((_, i) => <Star key={i} size={14} fill="currentColor" />)}
+                                        </div>
+                                    </div>
+                                </div>
+                                <blockquote className="text-brand-dark/80 leading-relaxed italic border-l-4 border-brand-primary pl-4">
+                                    "Most of my patients quit GLP-1 medications within the first month because of side effects they don't know how to manage. I recommend SmoothDescent because their formulas are specifically designed for delayed gastric emptying."
+                                </blockquote>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+            </section>
 
+            {/* Pain Point Navigator - Sticky */}
+            <div className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-brand-primary/10 shadow-sm">
+                <div className="max-w-6xl mx-auto px-4 py-4">
+                    <p className="text-xs text-brand-dark/50 uppercase tracking-widest mb-3 text-center font-semibold">
+                        Jump to your concern
+                    </p>
+                    <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide justify-center flex-wrap">
+                        {painPoints.map((point, i) => {
+                            const Icon = point.icon;
+                            const isActive = activeSection === point.id;
+                            return (
+                                <button
+                                    key={i}
+                                    onClick={() => scrollToSection(point.id)}
+                                    className={`flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-semibold whitespace-nowrap transition-all ${
+                                        isActive
+                                            ? 'bg-brand-dark text-white shadow-lg scale-105'
+                                            : 'bg-brand-cream hover:bg-brand-secondary/50 text-brand-dark'
+                                    }`}
+                                >
+                                    <Icon size={16} />
+                                    {point.label}
+                                </button>
+                            );
+                        })}
+                    </div>
+                </div>
+            </div>
+
+            {/* Trust Badges */}
+            <section className="py-10 bg-gradient-to-b from-white to-brand-cream/30 border-b border-brand-primary/10">
+                <div className="max-w-5xl mx-auto px-4">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        {trustBadges.map((badge, i) => {
+                            const Icon = badge.icon;
+                            return (
+                                <div key={i} className="flex flex-col items-center text-center p-4">
+                                    <div className="w-12 h-12 bg-brand-dark/5 rounded-full flex items-center justify-center mb-3">
+                                        <Icon size={22} className="text-brand-dark" strokeWidth={1.5} />
+                                    </div>
+                                    <span className="text-xs font-bold text-brand-dark uppercase tracking-wider">
+                                        {badge.label}
+                                    </span>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
+            </section>
+
+            {/* Main Content */}
+            <div className="max-w-7xl mx-auto px-4 py-16 md:py-24">
                 <div className="space-y-32">
 
-                    {/* GASTRIC SHIELD+ */}
-                    <section id="hydration" className="scroll-mt-24">
-                        <div className="grid lg:grid-cols-12 gap-12 lg:gap-24 items-start">
-
-                            {/* Content Side */}
-                            <div className="lg:col-span-7 order-1 lg:order-1">
+                    {/* HYDRATION SECTION */}
+                    <section id="hydration" className="scroll-mt-32">
+                        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+                            <div className="lg:col-span-7">
                                 <div className="flex items-center gap-4 mb-8">
-                                    <div className="w-12 h-12 rounded-full bg-yellow-100 flex items-center justify-center flex-shrink-0">
-                                        <Zap className="w-6 h-6 text-yellow-600" />
+                                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center shadow-lg">
+                                        <Zap className="w-7 h-7 text-white" />
                                     </div>
-                                    <h2 className="text-3xl font-serif font-bold text-brand-dark">
-                                        The Hydration Paradox
-                                    </h2>
-                                </div>
-
-                                <div className="prose prose-lg text-brand-dark/80 max-w-none">
-                                    <div className="bg-white p-8 rounded-2xl shadow-sm border border-brand-primary/10 mb-10">
-                                        <h3 className="text-xl font-bold text-brand-dark mb-4 flex items-center gap-2">
-                                            <span className="text-brand-primary">01.</span> The Problem
-                                        </h3>
-                                        <p className="m-0">
-                                            GLP-1 medications slow gastric emptying by up to 70%. When you drink plain water or standard electrolyte drinks, they pool in your stomach with nowhere to go. The result? That heavy, sloshing feeling that makes you MORE nauseous, not less.
-                                        </p>
-                                    </div>
-
-                                    <h3 className="text-2xl font-serif font-bold text-brand-dark mb-6">The Mechanism of Action</h3>
-
-                                    <div className="space-y-8">
-                                        <div>
-                                            <h4 className="font-bold text-brand-dark mb-2 text-lg">Isotonic Osmolality (280-300 mOsm/L)</h4>
-                                            <p>Our electrolyte ratio mirrors your blood plasma exactly. This means the solution passes through the stomach lining via osmosis without requiring normal gastric emptying. Standard sports drinks are hypertonic (350+ mOsm/L), which actually pulls MORE water into your already-slow stomach.</p>
-                                        </div>
-
-                                        <div>
-                                            <h4 className="font-bold text-brand-dark mb-2 text-lg">Precision Electrolyte Balance</h4>
-                                            <ul className="list-none space-y-3 pl-0">
-                                                <li className="flex gap-3">
-                                                    <span className="w-1.5 h-1.5 rounded-full bg-brand-primary mt-2.5 flex-shrink-0"></span>
-                                                    <span><strong>Sodium (200mg):</strong> Critical for fluid retention. GLP-1 users lose sodium fast due to diuresis.</span>
-                                                </li>
-                                                <li className="flex gap-3">
-                                                    <span className="w-1.5 h-1.5 rounded-full bg-brand-primary mt-2.5 flex-shrink-0"></span>
-                                                    <span><strong>Potassium (150mg):</strong> Prevents muscle weakness and fatigue.</span>
-                                                </li>
-                                                <li className="flex gap-3">
-                                                    <span className="w-1.5 h-1.5 rounded-full bg-brand-primary mt-2.5 flex-shrink-0"></span>
-                                                    <span><strong>Magnesium (50mg):</strong> Supports hydration and bowel motility.</span>
-                                                </li>
-                                            </ul>
-                                        </div>
-
-                                        <div>
-                                            <h4 className="font-bold text-brand-dark mb-2 text-lg">Neurological Nausea Defense</h4>
-                                            <p>Clinical research shows Vitamin B6 at therapeutic doses (10-25mg) reduces nausea by modulating serotonin receptors in the brain's vomiting center (chemoreceptor trigger zone). This isn't just hydration. It's a neurological intervention.</p>
-                                        </div>
-                                    </div>
-
-                                    <div className="bg-brand-dark text-white p-8 rounded-2xl mt-12 relative overflow-hidden">
-                                        <div className="absolute top-0 right-0 p-8 opacity-10">
-                                            <Quote size={80} />
-                                        </div>
-                                        <p className="text-lg font-medium italic relative z-10">"Standard electrolyte formulas assume normal gastric function. For GLP-1 users, that assumption is catastrophically wrong. Isotonic, micro-soluble formulation is the only logical solution."</p>
+                                    <div>
+                                        <span className="text-xs font-bold text-brand-primary uppercase tracking-widest">Solution #1</span>
+                                        <h2 className="text-3xl md:text-4xl font-serif font-bold text-brand-dark">
+                                            The Hydration Paradox
+                                        </h2>
                                     </div>
                                 </div>
-                            </div>
 
-                            {/* Product Card Side */}
-                            <div className="lg:col-span-5 order-2 lg:order-2 lg:sticky lg:top-32">
-                                <div className="bg-white rounded-3xl p-6 shadow-xl shadow-brand-dark/5 border border-brand-primary/10">
-                                    <div className="aspect-square bg-gray-100 rounded-2xl mb-6 overflow-hidden">
-                                        <img src={hydrationProduct?.image} alt={hydrationProduct?.name} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+                                {/* Problem Card */}
+                                <div className="bg-white p-8 rounded-2xl shadow-lg border border-brand-primary/10 mb-8">
+                                    <div className="flex items-center gap-2 mb-4">
+                                        <span className="w-8 h-8 bg-red-100 text-red-600 rounded-full flex items-center justify-center text-sm font-bold">!</span>
+                                        <h3 className="text-xl font-bold text-brand-dark">The Problem</h3>
                                     </div>
-                                    <div className="flex justify-between items-start mb-4">
-                                        <div>
-                                            <h3 className="font-serif font-bold text-xl text-brand-dark leading-tight mb-2">{hydrationProduct?.name}</h3>
-                                            <div className="flex items-center gap-1">
-                                                {Array.from({ length: 5 }).map((_, i) => (
-                                                    <Star key={i} className="w-4 h-4 text-brand-primary fill-current" />
-                                                ))}
-                                                <span className="text-sm text-brand-dark/60 ml-2">({hydrationProduct?.reviews} reviews)</span>
-                                            </div>
-                                        </div>
-                                        <span className="font-bold text-xl text-brand-dark">${hydrationProduct?.price}</span>
-                                    </div>
-                                    <Link to={`/product/${hydrationProduct?.id}`} className="block w-full">
-                                        <button className="w-full py-4 bg-brand-dark text-white font-bold rounded-xl hover:bg-brand-primary transition-all flex items-center justify-center gap-2 group">
-                                            Shop Protocol
-                                            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                                        </button>
-                                    </Link>
-                                </div>
-                            </div>
-
-                        </div>
-                    </section>
-
-                    {/* DIGESTIVE ENZYMES */}
-                    <section id="enzymes" className="scroll-mt-24">
-                        <div className="grid lg:grid-cols-12 gap-12 lg:gap-24 items-start">
-
-                            {/* Content Side */}
-                            <div className="lg:col-span-7 order-1 lg:order-1">
-                                <div className="flex items-center gap-4 mb-8">
-                                    <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
-                                        <Leaf className="w-6 h-6 text-green-600" />
-                                    </div>
-                                    <h2 className="text-3xl font-serif font-bold text-brand-dark">
-                                        The Fermentation Problem
-                                    </h2>
-                                </div>
-
-                                <div className="prose prose-lg text-brand-dark/80 max-w-none">
-                                    <div className="bg-white p-8 rounded-2xl shadow-sm border border-brand-primary/10 mb-10">
-                                        <h3 className="text-xl font-bold text-brand-dark mb-4 flex items-center gap-2">
-                                            <span className="text-brand-primary">02.</span> The Problem
-                                        </h3>
-                                        <p className="m-0">
-                                            Your stomach acts as a "holding tank" where food sits for 8-12+ hours instead of the normal 2-4. Warm, stagnant food ferments, creating sulfur gas (rotten egg burps), severe bloating, and inflammatory distress.
-                                        </p>
-                                    </div>
-
-                                    <h3 className="text-2xl font-serif font-bold text-brand-dark mb-6">Enzyme Replacement Therapy</h3>
-
-                                    <div className="grid sm:grid-cols-2 gap-6 mb-8">
-                                        <div className="bg-brand-cream/50 p-6 rounded-xl border border-brand-primary/5">
-                                            <h4 className="font-bold text-brand-dark mb-2">Protease (50,000 HUT)</h4>
-                                            <p className="text-sm">Breaks down protein into amino acids before they putrefy. This is the direct cure for sulfur burps.</p>
-                                        </div>
-                                        <div className="bg-brand-cream/50 p-6 rounded-xl border border-brand-primary/5">
-                                            <h4 className="font-bold text-brand-dark mb-2">Lipase (3,000 FIP)</h4>
-                                            <p className="text-sm">Predigests fats. Fatty foods cause the most significant gastric slowing; lipase accelerates their passage.</p>
-                                        </div>
-                                        <div className="bg-brand-cream/50 p-6 rounded-xl border border-brand-primary/5">
-                                            <h4 className="font-bold text-brand-dark mb-2">Amylase (5,000 DU)</h4>
-                                            <p className="text-sm">Rapidly degrades carbohydrates to prevent starch fermentation and gas bloating.</p>
-                                        </div>
-                                        <div className="bg-brand-cream/50 p-6 rounded-xl border border-brand-primary/5">
-                                            <h4 className="font-bold text-brand-dark mb-2">Ginger Root (100mg)</h4>
-                                            <p className="text-sm">Prokinetic agent. Stimulates gastric smooth muscle to mechanically empty the stomach.</p>
-                                        </div>
-                                    </div>
-
-                                    <div className="bg-brand-dark text-white p-8 rounded-2xl mt-12 relative overflow-hidden">
-                                        <div className="absolute top-0 right-0 p-8 opacity-10">
-                                            <Quote size={80} />
-                                        </div>
-                                        <p className="text-lg font-medium italic relative z-10">"Sulfur burps aren't just embarrassing. They're a sign of bacterial overgrowth. Enzyme supplementation is the mechanical solution to a mechanical problem."</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Product Card Side */}
-                            <div className="lg:col-span-5 order-2 lg:order-2 lg:sticky lg:top-32">
-                                <div className="bg-white rounded-3xl p-6 shadow-xl shadow-brand-dark/5 border border-brand-primary/10">
-                                    <div className="aspect-square bg-gray-100 rounded-2xl mb-6 overflow-hidden">
-                                        <img src={enzymesProduct?.image} alt={enzymesProduct?.name} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
-                                    </div>
-                                    <div className="flex justify-between items-start mb-4">
-                                        <div>
-                                            <h3 className="font-serif font-bold text-xl text-brand-dark leading-tight mb-2">{enzymesProduct?.name}</h3>
-                                            <div className="flex items-center gap-1">
-                                                {Array.from({ length: 5 }).map((_, i) => (
-                                                    <Star key={i} className="w-4 h-4 text-brand-primary fill-current" />
-                                                ))}
-                                                <span className="text-sm text-brand-dark/60 ml-2">({enzymesProduct?.reviews} reviews)</span>
-                                            </div>
-                                        </div>
-                                        <span className="font-bold text-xl text-brand-dark">${enzymesProduct?.price}</span>
-                                    </div>
-                                    <Link to={`/product/${enzymesProduct?.id}`} className="block w-full">
-                                        <button className="w-full py-4 bg-brand-dark text-white font-bold rounded-xl hover:bg-brand-primary transition-all flex items-center justify-center gap-2 group">
-                                            Shop Protocol
-                                            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                                        </button>
-                                    </Link>
-                                </div>
-                            </div>
-
-                        </div>
-                    </section>
-
-                    {/* STRIPS */}
-                    <section id="strips" className="scroll-mt-24">
-                        <div className="grid lg:grid-cols-12 gap-12 lg:gap-24 items-start">
-
-                            {/* Content Side */}
-                            <div className="lg:col-span-7 order-1 lg:order-1">
-                                <div className="flex items-center gap-4 mb-8">
-                                    <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
-                                        <Pill className="w-6 h-6 text-blue-600" />
-                                    </div>
-                                    <h2 className="text-3xl font-serif font-bold text-brand-dark">
-                                        Sublingual Nausea Defense
-                                    </h2>
-                                </div>
-
-                                <div className="prose prose-lg text-brand-dark/80 max-w-none">
-                                    <div className="bg-white p-8 rounded-2xl shadow-sm border border-brand-primary/10 mb-10">
-                                        <h3 className="text-xl font-bold text-brand-dark mb-4 flex items-center gap-2">
-                                            <span className="text-brand-primary">03.</span> The Problem
-                                        </h3>
-                                        <p className="m-0">
-                                            Nausea strikes without warning. When your stomach is delayed, swallowing a traditional anti-nausea pill means waiting 1-2 hours for it to dissolve and absorb. You need relief in minutes, not hours.
-                                        </p>
-                                    </div>
-
-                                    <h3 className="text-2xl font-serif font-bold text-brand-dark mb-6">Why Sublingual Works</h3>
-                                    <p className="mb-8">
-                                        The mucosa under the tongue is highly vascularized. Dissolvable strips bypass the digestive system entirely, delivering active ingredients directly into the bloodstream in 10-30 seconds.
+                                    <p className="text-brand-dark/80 leading-relaxed">
+                                        GLP-1 medications slow gastric emptying by up to <strong>70%</strong>. When you drink plain water or standard electrolyte drinks, they pool in your stomach with nowhere to go. The result? That heavy, sloshing feeling that makes you MORE nauseous, not less.
                                     </p>
+                                </div>
 
-                                    <div className="space-y-6">
-                                        <div className="flex gap-4 items-start">
-                                            <div className="w-8 h-8 rounded-full bg-brand-primary/10 flex items-center justify-center flex-shrink-0 text-brand-primary font-bold text-sm">1</div>
-                                            <div>
-                                                <h4 className="font-bold text-brand-dark">Ginger Root Extract (50mg)</h4>
-                                                <p className="text-sm">Bioactive gingerols reach the brain's chemotrigger zone in under 60 seconds to block nausea signals.</p>
-                                            </div>
+                                {/* Solution */}
+                                <h3 className="text-2xl font-serif font-bold text-brand-dark mb-6">The Mechanism of Action</h3>
+
+                                <div className="space-y-6 mb-8">
+                                    <div className="flex gap-4">
+                                        <div className="w-10 h-10 bg-brand-secondary/30 rounded-xl flex items-center justify-center flex-shrink-0">
+                                            <CheckCircle2 size={20} className="text-brand-dark" />
                                         </div>
-                                        <div className="flex gap-4 items-start">
-                                            <div className="w-8 h-8 rounded-full bg-brand-primary/10 flex items-center justify-center flex-shrink-0 text-brand-primary font-bold text-sm">2</div>
-                                            <div>
-                                                <h4 className="font-bold text-brand-dark">Peppermint Oil (10mg)</h4>
-                                                <p className="text-sm">Acts as a rapid antispasmodic, relaxing the smooth muscles of the esophagus and stomach.</p>
-                                            </div>
-                                        </div>
-                                        <div className="flex gap-4 items-start">
-                                            <div className="w-8 h-8 rounded-full bg-brand-primary/10 flex items-center justify-center flex-shrink-0 text-brand-primary font-bold text-sm">3</div>
-                                            <div>
-                                                <h4 className="font-bold text-brand-dark">L-Theanine (25mg)</h4>
-                                                <p className="text-sm">Neutralizes the anxiety/panic response often triggered by public nausea ("Am I going to be sick here?").</p>
-                                            </div>
+                                        <div>
+                                            <h4 className="font-bold text-brand-dark mb-1">Isotonic Osmolality (280-300 mOsm/L)</h4>
+                                            <p className="text-brand-dark/70 text-sm">Our electrolyte ratio mirrors your blood plasma exactly. This means the solution passes through the stomach lining via osmosis without requiring normal gastric emptying.</p>
                                         </div>
                                     </div>
-
-                                    <div className="bg-brand-dark text-white p-8 rounded-2xl mt-12 relative overflow-hidden">
-                                        <div className="absolute top-0 right-0 p-8 opacity-10">
-                                            <Quote size={80} />
+                                    <div className="flex gap-4">
+                                        <div className="w-10 h-10 bg-brand-secondary/30 rounded-xl flex items-center justify-center flex-shrink-0">
+                                            <CheckCircle2 size={20} className="text-brand-dark" />
                                         </div>
-                                        <p className="text-lg font-medium italic relative z-10">"For acute nausea, speed is the only metric that matters. Sublingual delivery isn't just a convenience. It is mechanically superior."</p>
+                                        <div>
+                                            <h4 className="font-bold text-brand-dark mb-1">Precision Electrolyte Balance</h4>
+                                            <p className="text-brand-dark/70 text-sm">Sodium (200mg) for fluid retention, Potassium (150mg) to prevent fatigue, Magnesium (50mg) for hydration and motility.</p>
+                                        </div>
                                     </div>
+                                    <div className="flex gap-4">
+                                        <div className="w-10 h-10 bg-brand-secondary/30 rounded-xl flex items-center justify-center flex-shrink-0">
+                                            <CheckCircle2 size={20} className="text-brand-dark" />
+                                        </div>
+                                        <div>
+                                            <h4 className="font-bold text-brand-dark mb-1">Neurological Nausea Defense</h4>
+                                            <p className="text-brand-dark/70 text-sm">Vitamin B6 at therapeutic doses (10-25mg) reduces nausea by modulating serotonin receptors in the brain's vomiting center.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Quote */}
+                                <div className="bg-brand-dark text-white p-6 rounded-2xl relative overflow-hidden">
+                                    <Quote size={60} className="absolute top-2 right-2 opacity-10" />
+                                    <p className="text-lg italic relative z-10">"Standard electrolyte formulas assume normal gastric function. For GLP-1 users, that assumption is catastrophically wrong."</p>
                                 </div>
                             </div>
 
-                            {/* Product Card Side */}
-                            <div className="lg:col-span-5 order-2 lg:order-2 lg:sticky lg:top-32">
-                                <div className="bg-white rounded-3xl p-6 shadow-xl shadow-brand-dark/5 border border-brand-primary/10">
-                                    <div className="aspect-square bg-gray-100 rounded-2xl mb-6 overflow-hidden">
-                                        <img src={stripsProduct?.image} alt={stripsProduct?.name} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
-                                    </div>
-                                    <div className="flex justify-between items-start mb-4">
-                                        <div>
-                                            <h3 className="font-serif font-bold text-xl text-brand-dark leading-tight mb-2">{stripsProduct?.name}</h3>
-                                            <div className="flex items-center gap-1">
-                                                {Array.from({ length: 5 }).map((_, i) => (
-                                                    <Star key={i} className="w-4 h-4 text-brand-primary fill-current" />
-                                                ))}
-                                                <span className="text-sm text-brand-dark/60 ml-2">({stripsProduct?.reviews} reviews)</span>
-                                            </div>
+                            {/* Product Card */}
+                            <div className="lg:col-span-5 lg:sticky lg:top-40">
+                                <div className="bg-white rounded-3xl p-6 shadow-xl border border-brand-primary/10">
+                                    <Link to={`/product/${hydrationProduct?.id}`} className="block aspect-square bg-brand-cream rounded-2xl mb-6 overflow-hidden">
+                                        <img src={hydrationProduct?.image} alt={hydrationProduct?.name} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+                                    </Link>
+                                    <h3 className="font-serif font-bold text-xl text-brand-dark mb-2">{hydrationProduct?.name}</h3>
+                                    <div className="flex items-center gap-2 mb-4">
+                                        <div className="flex text-amber-400">
+                                            {[...Array(5)].map((_, i) => <Star key={i} size={16} fill="currentColor" />)}
                                         </div>
-                                        <span className="font-bold text-xl text-brand-dark">${stripsProduct?.price}</span>
+                                        <span className="text-sm text-brand-dark/60">({hydrationProduct?.reviews} reviews)</span>
                                     </div>
-                                    <Link to={`/product/${stripsProduct?.id}`} className="block w-full">
-                                        <button className="w-full py-4 bg-brand-dark text-white font-bold rounded-xl hover:bg-brand-primary transition-all flex items-center justify-center gap-2 group">
-                                            Shop Protocol
-                                            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                    <div className="flex items-center justify-between mb-4">
+                                        <span className="text-2xl font-bold text-brand-dark">${hydrationProduct?.tiers?.[0]?.price}</span>
+                                        <span className="text-sm text-brand-primary font-semibold bg-brand-primary/10 px-3 py-1 rounded-full">Save 33%</span>
+                                    </div>
+                                    <Link to={`/product/${hydrationProduct?.id}`} className="block">
+                                        <button className="w-full py-4 bg-brand-dark text-white font-bold rounded-xl hover:bg-brand-primary transition-all flex items-center justify-center gap-2">
+                                            Shop Now <ArrowRight size={18} />
                                         </button>
                                     </Link>
                                 </div>
                             </div>
+                        </div>
+                    </section>
 
+                    {/* ENZYMES SECTION */}
+                    <section id="enzymes" className="scroll-mt-32">
+                        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+                            <div className="lg:col-span-7">
+                                <div className="flex items-center gap-4 mb-8">
+                                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-green-400 to-emerald-600 flex items-center justify-center shadow-lg">
+                                        <Leaf className="w-7 h-7 text-white" />
+                                    </div>
+                                    <div>
+                                        <span className="text-xs font-bold text-brand-primary uppercase tracking-widest">Solution #2</span>
+                                        <h2 className="text-3xl md:text-4xl font-serif font-bold text-brand-dark">
+                                            The Fermentation Problem
+                                        </h2>
+                                    </div>
+                                </div>
+
+                                <div className="bg-white p-8 rounded-2xl shadow-lg border border-brand-primary/10 mb-8">
+                                    <div className="flex items-center gap-2 mb-4">
+                                        <span className="w-8 h-8 bg-red-100 text-red-600 rounded-full flex items-center justify-center text-sm font-bold">!</span>
+                                        <h3 className="text-xl font-bold text-brand-dark">The Problem</h3>
+                                    </div>
+                                    <p className="text-brand-dark/80 leading-relaxed">
+                                        Your stomach acts as a "holding tank" where food sits for <strong>8-12+ hours</strong> instead of the normal 2-4. Warm, stagnant food ferments, creating sulfur gas (rotten egg burps), severe bloating, and inflammatory distress.
+                                    </p>
+                                </div>
+
+                                <h3 className="text-2xl font-serif font-bold text-brand-dark mb-6">Enzyme Replacement Therapy</h3>
+
+                                <div className="grid sm:grid-cols-2 gap-4 mb-8">
+                                    {[
+                                        { name: 'Protease (50,000 HUT)', desc: 'Breaks down protein before it putrefies. Direct cure for sulfur burps.' },
+                                        { name: 'Lipase (3,000 FIP)', desc: 'Predigests fats to accelerate passage through slowed stomach.' },
+                                        { name: 'Amylase (5,000 DU)', desc: 'Rapidly degrades carbohydrates to prevent gas bloating.' },
+                                        { name: 'Ox Bile (100mg)', desc: 'Replaces gallbladder function for fat digestion.' },
+                                    ].map((item, i) => (
+                                        <div key={i} className="bg-brand-cream/50 p-5 rounded-xl border border-brand-secondary/30">
+                                            <h4 className="font-bold text-brand-dark mb-1 text-sm">{item.name}</h4>
+                                            <p className="text-brand-dark/70 text-xs">{item.desc}</p>
+                                        </div>
+                                    ))}
+                                </div>
+
+                                <div className="bg-brand-dark text-white p-6 rounded-2xl relative overflow-hidden">
+                                    <Quote size={60} className="absolute top-2 right-2 opacity-10" />
+                                    <p className="text-lg italic relative z-10">"Sulfur burps aren't just embarrassing. They're a sign of bacterial overgrowth. Enzyme supplementation is the mechanical solution."</p>
+                                </div>
+                            </div>
+
+                            <div className="lg:col-span-5 lg:sticky lg:top-40">
+                                <div className="bg-white rounded-3xl p-6 shadow-xl border border-brand-primary/10">
+                                    <Link to={`/product/${enzymesProduct?.id}`} className="block aspect-square bg-brand-cream rounded-2xl mb-6 overflow-hidden">
+                                        <img src={enzymesProduct?.image} alt={enzymesProduct?.name} className="w-full h-full object-cover scale-125 hover:scale-130 transition-transform duration-500" />
+                                    </Link>
+                                    <h3 className="font-serif font-bold text-xl text-brand-dark mb-2">{enzymesProduct?.name}</h3>
+                                    <div className="flex items-center gap-2 mb-4">
+                                        <div className="flex text-amber-400">
+                                            {[...Array(5)].map((_, i) => <Star key={i} size={16} fill="currentColor" />)}
+                                        </div>
+                                        <span className="text-sm text-brand-dark/60">({enzymesProduct?.reviews} reviews)</span>
+                                    </div>
+                                    <div className="flex items-center justify-between mb-4">
+                                        <span className="text-2xl font-bold text-brand-dark">${enzymesProduct?.tiers?.[0]?.price}</span>
+                                        <span className="text-sm text-brand-primary font-semibold bg-brand-primary/10 px-3 py-1 rounded-full">Save 30%</span>
+                                    </div>
+                                    <Link to={`/product/${enzymesProduct?.id}`} className="block">
+                                        <button className="w-full py-4 bg-brand-dark text-white font-bold rounded-xl hover:bg-brand-primary transition-all flex items-center justify-center gap-2">
+                                            Shop Now <ArrowRight size={18} />
+                                        </button>
+                                    </Link>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* STRIPS SECTION */}
+                    <section id="strips" className="scroll-mt-32">
+                        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+                            <div className="lg:col-span-7">
+                                <div className="flex items-center gap-4 mb-8">
+                                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-400 to-indigo-600 flex items-center justify-center shadow-lg">
+                                        <Pill className="w-7 h-7 text-white" />
+                                    </div>
+                                    <div>
+                                        <span className="text-xs font-bold text-brand-primary uppercase tracking-widest">Solution #3</span>
+                                        <h2 className="text-3xl md:text-4xl font-serif font-bold text-brand-dark">
+                                            Sublingual Nausea Defense
+                                        </h2>
+                                    </div>
+                                </div>
+
+                                <div className="bg-white p-8 rounded-2xl shadow-lg border border-brand-primary/10 mb-8">
+                                    <div className="flex items-center gap-2 mb-4">
+                                        <span className="w-8 h-8 bg-red-100 text-red-600 rounded-full flex items-center justify-center text-sm font-bold">!</span>
+                                        <h3 className="text-xl font-bold text-brand-dark">The Problem</h3>
+                                    </div>
+                                    <p className="text-brand-dark/80 leading-relaxed">
+                                        Nausea strikes without warning. When your stomach is delayed, swallowing a traditional anti-nausea pill means waiting <strong>1-2 hours</strong> for it to dissolve. You need relief in minutes, not hours.
+                                    </p>
+                                </div>
+
+                                <h3 className="text-2xl font-serif font-bold text-brand-dark mb-6">Why Sublingual Works</h3>
+                                <p className="text-brand-dark/70 mb-6">The mucosa under the tongue is highly vascularized. Dissolvable strips bypass the digestive system entirely, delivering active ingredients directly into the bloodstream in <strong>10-30 seconds</strong>.</p>
+
+                                <div className="space-y-4 mb-8">
+                                    {[
+                                        { num: '1', title: 'Ginger Root Extract (50mg)', desc: 'Bioactive gingerols reach the brain in under 60 seconds to block nausea signals.' },
+                                        { num: '2', title: 'Peppermint Oil (10mg)', desc: 'Rapid antispasmodic that relaxes esophagus and stomach muscles.' },
+                                        { num: '3', title: 'L-Theanine (25mg)', desc: 'Neutralizes the anxiety/panic response triggered by public nausea.' },
+                                    ].map((item) => (
+                                        <div key={item.num} className="flex gap-4 items-start">
+                                            <div className="w-8 h-8 bg-brand-primary/10 rounded-full flex items-center justify-center flex-shrink-0 text-brand-primary font-bold text-sm">{item.num}</div>
+                                            <div>
+                                                <h4 className="font-bold text-brand-dark">{item.title}</h4>
+                                                <p className="text-brand-dark/70 text-sm">{item.desc}</p>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+
+                                <div className="bg-brand-dark text-white p-6 rounded-2xl relative overflow-hidden">
+                                    <Quote size={60} className="absolute top-2 right-2 opacity-10" />
+                                    <p className="text-lg italic relative z-10">"For acute nausea, speed is the only metric that matters. Sublingual delivery is mechanically superior."</p>
+                                </div>
+                            </div>
+
+                            <div className="lg:col-span-5 lg:sticky lg:top-40">
+                                <div className="bg-white rounded-3xl p-6 shadow-xl border border-brand-primary/10">
+                                    <Link to={`/product/${stripsProduct?.id}`} className="block aspect-square bg-brand-cream rounded-2xl mb-6 overflow-hidden">
+                                        <img src={stripsProduct?.image} alt={stripsProduct?.name} className="w-full h-full object-cover scale-125 hover:scale-130 transition-transform duration-500" />
+                                    </Link>
+                                    <h3 className="font-serif font-bold text-xl text-brand-dark mb-2">{stripsProduct?.name}</h3>
+                                    <div className="flex items-center gap-2 mb-4">
+                                        <div className="flex text-amber-400">
+                                            {[...Array(5)].map((_, i) => <Star key={i} size={16} fill="currentColor" />)}
+                                        </div>
+                                        <span className="text-sm text-brand-dark/60">({stripsProduct?.reviews} reviews)</span>
+                                    </div>
+                                    <div className="flex items-center justify-between mb-4">
+                                        <span className="text-2xl font-bold text-brand-dark">${stripsProduct?.tiers?.[0]?.price}</span>
+                                        <span className="text-sm text-brand-primary font-semibold bg-brand-primary/10 px-3 py-1 rounded-full">Save 30%</span>
+                                    </div>
+                                    <Link to={`/product/${stripsProduct?.id}`} className="block">
+                                        <button className="w-full py-4 bg-brand-dark text-white font-bold rounded-xl hover:bg-brand-primary transition-all flex items-center justify-center gap-2">
+                                            Shop Now <ArrowRight size={18} />
+                                        </button>
+                                    </Link>
+                                </div>
+                            </div>
                         </div>
                     </section>
 
                 </div>
             </div>
+
+            {/* Reviews Section */}
+            <section className="py-16 bg-brand-light">
+                <div className="max-w-7xl mx-auto px-4">
+                    <div className="text-center mb-12">
+                        <span className="text-brand-primary font-bold tracking-widest text-xs uppercase">Real Results</span>
+                        <h2 className="text-3xl md:text-4xl font-serif font-bold text-brand-dark mt-2">What Our Customers Say</h2>
+                        <p className="text-brand-dark/60 mt-2">Join 10,000+ satisfied customers</p>
+                    </div>
+
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                        {reviews.slice(0, 25).map((review, index) => (
+                            <div key={review.id || index} className="bg-white rounded-2xl p-5 shadow-sm border border-brand-primary/10 hover:shadow-md transition-shadow">
+                                <div className="flex text-amber-400 mb-2">
+                                    {[...Array(review.stars || 5)].map((_, i) => <Star key={i} size={14} fill="currentColor" />)}
+                                </div>
+                                <h4 className="font-bold text-brand-dark mb-2 text-sm line-clamp-1">{review.headline}</h4>
+                                <p className="text-brand-dark/70 text-xs mb-3 line-clamp-3">{review.body}</p>
+                                <div className="border-t border-brand-primary/10 pt-2">
+                                    <p className="font-semibold text-brand-dark text-xs">{review.author}</p>
+                                    <p className="text-brand-primary text-[10px]">{review.verifiedProduct}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* FAQ Section */}
+            <section className="py-16 bg-white border-t border-brand-primary/10">
+                <div className="max-w-3xl mx-auto px-4">
+                    <div className="text-center mb-12">
+                        <span className="text-brand-primary font-bold tracking-widest text-xs uppercase">Questions?</span>
+                        <h2 className="text-3xl md:text-4xl font-serif font-bold text-brand-dark mt-2">Frequently Asked</h2>
+                    </div>
+
+                    <div className="space-y-4">
+                        {faqs.map((faq, i) => (
+                            <div key={i} className="bg-brand-cream rounded-2xl overflow-hidden">
+                                <button
+                                    onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                                    className="w-full p-6 text-left flex items-center justify-between gap-4"
+                                >
+                                    <span className="font-bold text-brand-dark">{faq.question}</span>
+                                    {openFaq === i ? <Minus size={20} className="text-brand-primary flex-shrink-0" /> : <Plus size={20} className="text-brand-dark/40 flex-shrink-0" />}
+                                </button>
+                                {openFaq === i && (
+                                    <div className="px-6 pb-6 pt-0">
+                                        <p className="text-brand-dark/70">{faq.answer}</p>
+                                    </div>
+                                )}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* Bottom CTA */}
+            <section className="py-16 bg-brand-dark">
+                <div className="max-w-3xl mx-auto px-4 text-center">
+                    <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-4">Ready to Feel Better?</h2>
+                    <p className="text-white/70 mb-8">Join 10,000+ GLP-1 users who've found relief with SmoothDescent.</p>
+                    <Link to="/" className="inline-flex items-center gap-2 bg-white text-brand-dark font-bold px-8 py-4 rounded-full hover:bg-brand-secondary transition-all">
+                        Shop All Products <ArrowRight size={18} />
+                    </Link>
+                </div>
+            </section>
+
         </div>
     );
 };

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { X, ArrowRight, Loader2, Check } from 'lucide-react';
 import { captureUserEmail } from '../lib/pixelUserData';
+import { trackLead } from '../lib/metaPixel';
 
 interface NewsletterModalProps {
     isOpen: boolean;
@@ -49,8 +50,12 @@ export default function NewsletterModal({ isOpen, onClose }: NewsletterModalProp
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email, phone, goal: selectedGoal }),
                 });
+                // Track Lead event for Meta Pixel
+                trackLead(email, 0);
                 setStep('success');
             } catch (error) {
+                // Track Lead even on error (user intent matters)
+                trackLead(email, 0);
                 setStep('success');
             } finally {
                 setStatus('idle');

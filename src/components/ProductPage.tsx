@@ -151,145 +151,235 @@ const ProductPage: React.FC = () => {
 
                   {/* Right: Details & Buy Box */}
                   <div>
-                     <h1 className="text-3xl md:text-4xl font-serif text-brand-dark mb-2">{product.name}</h1>
-                     {product.details && (
-                        <p className="text-lg text-brand-dark/70 mb-4">{product.details.subtitle}</p>
+                     {/* Rating Row */}
+                     <div className="flex items-center gap-2 mb-3 flex-wrap">
+                        <div className="flex text-amber-400">
+                           {[...Array(5)].map((_, i) => (
+                              <Star key={i} size={18} fill="currentColor" strokeWidth={0} />
+                           ))}
+                        </div>
+                        <span className="text-brand-dark font-semibold">Excellent {product.rating}</span>
+                        <span className="text-brand-primary">|</span>
+                        <span className="text-brand-dark/70">{product.reviews.toLocaleString()}+ Trusted Reviews</span>
+                     </div>
+
+                     {/* Title */}
+                     <h1 className="text-3xl md:text-4xl font-bold text-brand-dark mb-2">{product.name}</h1>
+
+                     {/* Subtitle */}
+                     {product.details?.subtitle && (
+                        <p className="text-xl text-brand-accent font-medium mb-4">{product.details.subtitle}</p>
                      )}
 
-                     <div className="flex items-center gap-2 mb-8">
-                        <div className="flex text-brand-secondary">
-                           {[...Array(5)].map((_, i) => (
-                              <Star key={i} size={18} fill={i < product.rating ? "currentColor" : "none"} strokeWidth={i < product.rating ? 0 : 2} />
-                           ))}
-                        </div>
-                        <span className="text-sm text-brand-dark underline font-medium cursor-pointer">{product.reviews} Reviews</span>
-                     </div>
-
-                     {/* Quantity Selector */}
-                     <div className="mb-8">
-                        <h3 className="text-sm font-bold text-brand-dark uppercase tracking-wide mb-4">Choose Quantity</h3>
-                        <div className="space-y-3">
-                           {product.tiers?.map((tier) => (
-                              <div
-                                 key={tier.id}
-                                 onClick={() => setSelectedTierId(tier.id)}
-                                 className={`relative flex items-center justify-between p-4 rounded-xl border-2 cursor-pointer transition-all duration-200 ${selectedTierId === tier.id ? 'border-brand-primary bg-brand-primary/5' : 'border-gray-200 hover:border-brand-primary/50'}`}
-                              >
-                                 {tier.badge && (
-                                    <div className="absolute -top-3 right-4 bg-brand-secondary text-brand-dark text-[10px] font-bold px-2 py-0.5 rounded-sm uppercase tracking-wider shadow-sm">
-                                       {tier.badge}
+                     {/* Feature Checklist */}
+                     {product.details?.checklist && (
+                        <div className="space-y-3 mb-6">
+                           {product.details.checklist.map((item, i) => {
+                              const isLastItem = i === (product.details?.checklist?.length || 0) - 1;
+                              return (
+                                 <div key={i} className="flex items-center gap-3 group">
+                                    <div className="w-6 h-6 bg-brand-dark rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                                       <Check size={14} className="text-white" strokeWidth={3} />
                                     </div>
-                                 )}
-                                 <div>
-                                    <div className="flex items-center gap-2">
-                                       <span className="font-bold text-brand-dark text-lg">{tier.label}</span>
-                                       {tier.saveLabel && (
-                                          <span className="text-xs font-bold text-green-600 bg-green-100 px-2 py-0.5 rounded-full">{tier.saveLabel}</span>
-                                       )}
-                                    </div>
-                                    <p className="text-sm text-gray-500">{tier.subLabel}</p>
-                                 </div>
-                                 <div className="text-right">
-                                    {tier.originalPrice && (
-                                       <div className="text-xs text-gray-400 line-through">${tier.originalPrice.toFixed(2)}</div>
+                                    {isLastItem && item.includes('Satisfaction Guarantee') ? (
+                                       <span className="text-brand-dark text-lg">
+                                          100% <span className="underline decoration-brand-primary decoration-2 underline-offset-2">Satisfaction Guarantee</span> or <span className="underline decoration-brand-primary decoration-2 underline-offset-2">Money Back</span>
+                                       </span>
+                                    ) : (
+                                       <span className="text-brand-dark text-lg">{item}</span>
                                     )}
-                                    <div className="text-xl font-serif font-bold text-brand-dark">${tier.price.toFixed(2)}</div>
                                  </div>
-                              </div>
-                           ))}
+                              );
+                           })}
                         </div>
-                     </div>
+                     )}
 
-                     {/* Frequency Selector */}
-                     {product.subscriptionDiscount && (
-                        <div className="mb-8">
-                           <h3 className="text-sm font-bold text-brand-dark uppercase tracking-wide mb-4">Choose Frequency</h3>
+                     {/* Quantity Selector - Premium Style */}
+                     {product.tiers && (
+                        <div className="mb-6">
                            <div className="space-y-3">
-                              {/* Subscribe Option */}
-                              <div
-                                 onClick={() => setIsSubscribe(true)}
-                                 className={`flex items-start p-4 rounded-xl border-2 cursor-pointer transition-all duration-200 relative ${isSubscribe ? 'border-brand-dark bg-brand-dark/5' : 'border-gray-200'}`}
-                              >
-                                 <div className={`mt-0.5 w-5 h-5 rounded-full border flex items-center justify-center mr-3 ${isSubscribe ? 'border-brand-dark' : 'border-gray-300'}`}>
-                                    {isSubscribe && <div className="w-2.5 h-2.5 rounded-full bg-brand-dark" />}
-                                 </div>
-                                 <div className="flex-grow">
-                                    <div className="flex items-center gap-2">
-                                       <span className="font-bold text-brand-dark">Subscribe & Save 15%</span>
-                                       <RefreshCw size={14} className="text-brand-dark" />
-                                    </div>
-                                    <p className="text-sm text-gray-500 mt-1">
-                                       Best value. Cancel or pause anytime.
-                                    </p>
-                                    <div className="mt-2 text-xs text-brand-dark/70 flex flex-wrap gap-2">
-                                       <span className="flex items-center"><Check size={10} className="mr-1" /> Free Shipping</span>
-                                       <span className="flex items-center"><Check size={10} className="mr-1" /> Priority Inventory</span>
-                                    </div>
-                                 </div>
-                                 <div className="text-right">
-                                    <div className="text-lg font-serif font-bold text-brand-dark">
-                                       ${((currentTier?.price || 0) * (1 - product.subscriptionDiscount)).toFixed(2)}
-                                    </div>
-                                    <div className="text-xs text-gray-400">/ shipment</div>
-                                 </div>
-                              </div>
+                              {product.tiers.map((tier, index) => {
+                                 const isSelected = selectedTierId === tier.id;
+                                 const tierPrice = isSubscribe && product.subscriptionDiscount
+                                    ? tier.price * (1 - product.subscriptionDiscount)
+                                    : tier.price;
+                                 const tierOriginalPrice = tier.originalPrice || 0;
+                                 const savePercent = tier.savePercent || (tierOriginalPrice > 0 ? Math.round(((tierOriginalPrice - tier.price) / tierOriginalPrice) * 100) : 0);
+                                 const isFirstTier = index === 0;
+                                 const isBestValue = tier.badge === 'Best Value';
+                                 const isMostPopular = tier.badge === 'Most Popular';
 
-                              {/* One-time Option */}
-                              <div
-                                 onClick={() => setIsSubscribe(false)}
-                                 className={`flex items-center p-4 rounded-xl border-2 cursor-pointer transition-all duration-200 ${!isSubscribe ? 'border-brand-dark bg-brand-dark/5' : 'border-gray-200'}`}
-                              >
-                                 <div className={`w-5 h-5 rounded-full border flex items-center justify-center mr-3 ${!isSubscribe ? 'border-brand-dark' : 'border-gray-300'}`}>
-                                    {!isSubscribe && <div className="w-2.5 h-2.5 rounded-full bg-brand-dark" />}
-                                 </div>
-                                 <div className="flex-grow">
-                                    <span className="font-bold text-brand-dark">One-Time Purchase</span>
-                                 </div>
-                                 <div className="text-xl font-serif font-bold text-brand-dark">
-                                    ${currentTier?.price.toFixed(2)}
-                                 </div>
-                              </div>
+                                 return (
+                                    <div
+                                       key={tier.id}
+                                       onClick={() => setSelectedTierId(tier.id)}
+                                       className={`relative flex items-center justify-between p-4 rounded-xl border-2 cursor-pointer transition-all duration-300 hover:shadow-md ${
+                                          isSelected
+                                             ? 'border-brand-dark bg-gradient-to-r from-brand-cream to-brand-secondary/20 shadow-sm'
+                                             : 'border-brand-primary/30 hover:border-brand-primary bg-white'
+                                       }`}
+                                    >
+                                       {/* Badge - Most Popular / Best Value */}
+                                       {tier.badge && (
+                                          <div className={`absolute -top-3 right-4 text-[11px] font-bold px-3 py-1 rounded-full shadow-sm ${
+                                             isBestValue
+                                                ? 'bg-gradient-to-r from-brand-accent to-brand-primary text-white'
+                                                : 'bg-brand-dark text-white'
+                                          }`}>
+                                             {isBestValue && '✨ '}{tier.badge}
+                                          </div>
+                                       )}
 
+                                       {/* Left side - Radio + Label */}
+                                       <div className="flex items-center gap-3">
+                                          {/* Radio button */}
+                                          <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all duration-200 ${
+                                             isSelected
+                                                ? 'border-brand-dark bg-brand-dark scale-110'
+                                                : 'border-brand-primary/50 bg-white hover:border-brand-primary'
+                                          }`}>
+                                             {isSelected && <div className="w-2.5 h-2.5 rounded-full bg-white" />}
+                                          </div>
+
+                                          <div>
+                                             <div className="flex items-center gap-2 flex-wrap">
+                                                <span className="font-bold text-brand-dark text-lg">{tier.label}</span>
+                                                {savePercent > 0 && (
+                                                   <span className={`text-xs font-bold px-2.5 py-1 rounded-full ${
+                                                      isFirstTier
+                                                         ? 'bg-brand-dark text-white'
+                                                         : 'bg-brand-primary/20 text-brand-dark border border-brand-primary/30'
+                                                   }`}>
+                                                      SAVE {savePercent}%
+                                                   </span>
+                                                )}
+                                             </div>
+                                             {tier.subLabel && (
+                                                <p className="text-sm text-brand-dark/60 mt-0.5">{tier.subLabel}</p>
+                                             )}
+                                          </div>
+                                       </div>
+
+                                       {/* Right side - Price */}
+                                       <div className="text-right">
+                                          <div className="text-2xl font-bold text-brand-dark">${tierPrice.toFixed(2)}</div>
+                                          {tierOriginalPrice > 0 && tierOriginalPrice > tierPrice && (
+                                             <div className="text-sm text-brand-primary line-through">${tierOriginalPrice.toFixed(2)}</div>
+                                          )}
+                                       </div>
+                                    </div>
+                                 );
+                              })}
                            </div>
+
+                           {/* Subscription Toggle Box */}
+                           {product.subscriptionDiscount && (
+                              <div className="mt-6 p-5 rounded-xl border-2 border-dashed border-brand-secondary bg-gradient-to-br from-brand-cream to-brand-secondary/20">
+                                 {/* Toggle */}
+                                 <div className="flex items-center gap-3 mb-3">
+                                    <button
+                                       onClick={() => setIsSubscribe(!isSubscribe)}
+                                       className={`relative w-14 h-7 rounded-full transition-all duration-300 ${isSubscribe ? 'bg-brand-dark' : 'bg-brand-primary/40'}`}
+                                    >
+                                       <div className={`absolute top-1 w-5 h-5 rounded-full bg-white shadow-md transition-transform duration-300 ${isSubscribe ? 'translate-x-8' : 'translate-x-1'}`} />
+                                    </button>
+                                    <span className="font-bold text-brand-dark text-lg">Save 15% With Automatic Refills</span>
+                                 </div>
+
+                                 <p className="text-sm text-brand-dark/70 mb-4">
+                                    No Commitments. Cancel Anytime. Free items included in first order only.
+                                 </p>
+
+                                 {/* Delivery Dropdown */}
+                                 <div className="bg-white border border-brand-primary/30 rounded-lg px-4 py-3 shadow-sm">
+                                    <span className="text-brand-dark font-medium">Delivered every month</span>
+                                 </div>
+                              </div>
+                           )}
                         </div>
                      )}
 
                      {/* Price & CTA */}
-                     <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 mb-8 sticky bottom-4 z-20 md:static">
-                        <div className="flex items-end justify-between mb-4">
-                           <div>
-                              <p className="text-sm text-gray-500 mb-1">Total Price</p>
+                     {product.tiers ? (
+                        <div className="mb-8 sticky bottom-4 z-20 md:static">
+                           {/* Free Shipping Banner */}
+                           <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
+                              <div className="bg-brand-secondary/40 text-brand-dark text-sm font-semibold px-4 py-2 rounded-full border border-brand-secondary">
+                                 <Truck size={14} className="inline mr-1.5 -mt-0.5" />
+                                 <span className="font-bold">FREE SHIPPING</span> over $50
+                              </div>
                               <div className="flex items-baseline gap-2">
-                                 <span className="text-3xl font-bold font-serif text-brand-dark">${finalPrice.toFixed(2)}</span>
                                  {originalPrice && originalPrice > finalPrice && (
-                                    <>
-                                       <span className="text-sm text-gray-400 line-through">${originalPrice.toFixed(2)}</span>
-                                       <span className="text-xs font-bold text-green-600 bg-green-100 px-2 py-0.5 rounded-full">Save {savings}%</span>
-                                    </>
+                                    <span className="text-lg text-brand-primary line-through">${originalPrice.toFixed(2)}</span>
                                  )}
+                                 <span className="text-3xl font-bold text-brand-dark">${finalPrice.toFixed(2)}</span>
                               </div>
                            </div>
-                        </div>
-                        <Button fullWidth onClick={() => {
-                           if (!currentTier) return;
-                           const label = `${currentTier.label} (${isSubscribe ? 'Subscription' : 'One-Time'})`;
-                           addCartItem({
-                              ...product,
-                              price: finalPrice,
-                              originalPrice: originalPrice
-                           }, currentTier.quantity, label);
-                        }}>
-                           {isSubscribe ? 'Start Subscription' : 'Add To Cart'}
-                        </Button>
-                        <div className="mt-4 flex items-center justify-center gap-4 text-xs text-gray-500">
-                           <span className="flex items-center"><ShieldCheck size={12} className="mr-1" /> 60-Day Guarantee</span>
-                           <span className="flex items-center"><Truck size={12} className="mr-1" /> Free Shipping over $75</span>
-                        </div>
-                     </div>
 
-                     {/* Standard Product Tabs/Accordion (Only for non-Hydration) */}
+                           {/* Add to Cart Button */}
+                           <button
+                              onClick={() => {
+                                 if (!currentTier) return;
+                                 const label = `${currentTier.label} (${isSubscribe ? 'Subscription' : 'One-Time'})`;
+                                 addCartItem({
+                                    ...product,
+                                    price: finalPrice,
+                                    originalPrice: originalPrice
+                                 }, currentTier.quantity, label);
+                              }}
+                              className="w-full bg-brand-dark hover:bg-brand-dark/90 text-white font-bold text-xl py-5 rounded-xl transition-all duration-300 uppercase tracking-wider shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98]"
+                           >
+                              ADD TO CART
+                           </button>
+
+                           {/* Money Back Guarantee */}
+                           <div className="mt-4 bg-gradient-to-r from-brand-cream to-brand-secondary/30 rounded-xl px-4 py-3 flex items-start gap-3 border border-brand-secondary/50">
+                              <div className="w-6 h-6 bg-brand-dark rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                 <ShieldCheck size={14} className="text-white" />
+                              </div>
+                              <p className="text-sm text-brand-dark">
+                                 <span className="italic">Less than 0.1%</span> of customers claim our <span className="font-bold">30 Day Money Back Guarantee*</span>
+                              </p>
+                           </div>
+                        </div>
+                     ) : (
+                        /* Original CTA for other products */
+                        <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 mb-8 sticky bottom-4 z-20 md:static">
+                           <div className="flex items-end justify-between mb-4">
+                              <div>
+                                 <p className="text-sm text-gray-500 mb-1">Total Price</p>
+                                 <div className="flex items-baseline gap-2">
+                                    <span className="text-3xl font-bold font-serif text-brand-dark">${finalPrice.toFixed(2)}</span>
+                                    {originalPrice && originalPrice > finalPrice && (
+                                       <>
+                                          <span className="text-sm text-gray-400 line-through">${originalPrice.toFixed(2)}</span>
+                                          <span className="text-xs font-bold text-green-600 bg-green-100 px-2 py-0.5 rounded-full">Save {savings}%</span>
+                                       </>
+                                    )}
+                                 </div>
+                              </div>
+                           </div>
+                           <Button fullWidth onClick={() => {
+                              if (!currentTier) return;
+                              const label = `${currentTier.label} (${isSubscribe ? 'Subscription' : 'One-Time'})`;
+                              addCartItem({
+                                 ...product,
+                                 price: finalPrice,
+                                 originalPrice: originalPrice
+                              }, currentTier.quantity, label);
+                           }}>
+                              {isSubscribe ? 'Start Subscription' : 'Add To Cart'}
+                           </Button>
+                           <div className="mt-4 flex items-center justify-center gap-4 text-xs text-gray-500">
+                              <span className="flex items-center"><ShieldCheck size={12} className="mr-1" /> 60-Day Guarantee</span>
+                              <span className="flex items-center"><Truck size={12} className="mr-1" /> Free Shipping over $75</span>
+                           </div>
+                        </div>
+                     )}
+
+                     {/* Standard Product Tabs/Accordion */}
                      {!isHydration && (
-                        <div className="space-y-6 border-t border-gray-200 pt-8">
+                        <div className="space-y-6 border-t border-gray-200 pt-8 hidden">
                            {/* Description */}
                            <div>
                               <h3 className="text-lg font-bold text-brand-dark font-serif mb-3">Description</h3>
@@ -358,12 +448,13 @@ const ProductPage: React.FC = () => {
          </div>
 
          {/* RICH CONTENT FOR HYDRATION PAGE */}
-         {isHydration && (
-            <>
-               <HydrationContent />
+         {isHydration && <HydrationContent />}
 
-               {/* Full Width FAQs for Hydration Page */}
-               {product.faqs && product.faqs.length > 0 && (
+         {/* Full Width FAQs for All Products */}
+         {product.faqs && product.faqs.length > 0 && (
+            <>
+               {/* Full Width FAQs */}
+               {product.faqs.length > 0 && (
                   <div className="border-t border-gray-200 bg-white">
                      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
                         <h2 className="text-3xl md:text-4xl font-serif font-bold text-center text-brand-dark mb-12">Frequently Asked Questions</h2>

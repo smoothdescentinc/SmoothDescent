@@ -21,7 +21,7 @@ const Footer: React.FC = () => {
                 <li><Link to="/shop" className="hover:text-brand-primary transition-colors">Shop All</Link></li>
                 <li><Link to="/science" className="hover:text-brand-primary transition-colors">Benefits</Link></li>
                 <li><Link to="/quiz" className="hover:text-brand-primary transition-colors">Take the Quiz</Link></li>
-                <li><a href="/#reviews" className="hover:text-brand-primary transition-colors">Reviews</a></li>
+                <li><Link to="/?section=reviews" className="hover:text-brand-primary transition-colors">Reviews</Link></li>
               </ul>
             </div>
 
@@ -40,18 +40,26 @@ const Footer: React.FC = () => {
               <h4 className="font-bold mb-6 tracking-widest text-xs text-brand-primary uppercase">Support</h4>
               <ul className="space-y-4 text-sm text-brand-light/70">
                 <li><Link to="/contact" className="hover:text-brand-primary transition-colors">Contact Us</Link></li>
-                <li><a href="/#reviews" className="hover:text-brand-primary transition-colors">Reviews</a></li>
+                <li><Link to="/?section=reviews" className="hover:text-brand-primary transition-colors">Reviews</Link></li>
               </ul>
             </div>
 
           </div>
 
-          {/* Disclaimer */}
+          {/* FDA Disclaimer */}
           <div className="border-t border-brand-primary/10 pt-10 text-center">
-            <p className="text-xs text-gray-400 leading-relaxed max-w-4xl mx-auto mb-6">
-              These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease. Not affiliated with, endorsed by, or sponsored by Novo Nordisk, Eli Lilly, or any pharmaceutical manufacturer. Consult your healthcare provider before starting any new supplement regimen, especially if taking prescription medication.
+            <div className="bg-brand-dark/50 border border-brand-primary/20 rounded-lg p-6 max-w-5xl mx-auto mb-6">
+              <p className="text-xs text-gray-300 leading-relaxed mb-4">
+                No statements found on the smoothdescent.com site or advertised by SmoothDescent have been approved by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease. Testimonials found at smoothdescent.com are unverified results, and may not reflect the typical purchaser's experience, may not apply to the average person, and are not intended to represent or guarantee that anyone will achieve the same or similar results.
+              </p>
+              <p className="text-xs text-gray-400 leading-relaxed">
+                Information on the SmoothDescent site is provided for informational purposes only. It is not meant to substitute for medical advice from your physician or other medical professional. You should not use the information contained herein for diagnosing or treating a health problem or disease, or prescribing any medication. Carefully read all product documentation. If you have or suspect that you have a medical problem, promptly contact your regular health care provider.
+              </p>
+            </div>
+            <p className="text-xs text-gray-500">
+              Not affiliated with, endorsed by, or sponsored by Novo Nordisk, Eli Lilly, or any pharmaceutical manufacturer.
             </p>
-            <p className="text-xs text-gray-500 font-serif">
+            <p className="text-xs text-gray-500 font-serif mt-4">
               &copy; 2026 SmoothDescent. All rights reserved.
             </p>
           </div>
