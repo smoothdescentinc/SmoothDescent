@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { X, Lock, Minus, Plus } from 'lucide-react';
+import { X, Lock, Minus, Plus, Bell, Check } from 'lucide-react';
 import { useStore } from '@nanostores/react';
 import { isCartOpen, cartItems, removeCartItem, updateCartQuantity, addCartItem, checkoutUrl, isUpdating } from '../store/cartStore';
 import type { Product } from '../types';
 import { trackInitiateCheckout } from '../lib/metaPixel';
+import { captureUserEmail } from '../lib/pixelUserData';
 
 const FREE_SHIPPING_THRESHOLD = 99.00;
 
@@ -39,6 +40,8 @@ const CartDrawer: React.FC = () => {
     const url = useStore(checkoutUrl);
     const updating = useStore(isUpdating);
     const [isVisible, setIsVisible] = useState(false);
+    const [waitlistEmail, setWaitlistEmail] = useState('');
+    const [waitlistSubmitted, setWaitlistSubmitted] = useState(false);
 
     // Handle animation delay for unmount
     useEffect(() => {
@@ -221,18 +224,48 @@ const CartDrawer: React.FC = () => {
                             <Lock className="w-5 h-5 opacity-50" />
                         </a>
                     ) : (
-                        <button
-                            className="w-full bg-[#fa9f1c] hover:bg-[#e89010] text-black font-extrabold text-lg py-4 rounded-lg shadow-lg flex items-center justify-center gap-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                            disabled={true}
-                            title="Checkout is disabled in Mock Mode or initializing"
-                        >
-                            Checkout (Mock Mode)
-                            <Lock className="w-5 h-5 opacity-50" />
-                        </button>
+                        <div className="bg-brand-cream rounded-xl p-4 border border-brand-primary/20">
+                            <p className="text-brand-dark font-bold text-center mb-2">
+                                Sorry, our New Year's batch sold out!
+                            </p>
+                            <p className="text-brand-dark/70 text-sm text-center mb-4">
+                                We restock every 2 weeks. Want us to remind you?
+                            </p>
+                            {waitlistSubmitted ? (
+                                <div className="flex items-center justify-center gap-2 text-green-600 font-semibold py-3">
+                                    <Check size={20} />
+                                    We'll notify you when back in stock!
+                                </div>
+                            ) : (
+                                <form onSubmit={async (e) => {
+                                    e.preventDefault();
+                                    if (waitlistEmail) {
+                                        await captureUserEmail(waitlistEmail);
+                                        setWaitlistSubmitted(true);
+                                    }
+                                }} className="flex gap-2">
+                                    <input
+                                        type="email"
+                                        value={waitlistEmail}
+                                        onChange={(e) => setWaitlistEmail(e.target.value)}
+                                        placeholder="Enter your email"
+                                        className="flex-1 px-3 py-2.5 rounded-lg border border-brand-primary/30 text-sm focus:outline-none focus:border-brand-primary"
+                                        required
+                                    />
+                                    <button
+                                        type="submit"
+                                        className="bg-brand-dark text-white font-bold px-4 py-2.5 rounded-lg hover:bg-brand-primary transition-colors flex items-center gap-1.5"
+                                    >
+                                        <Bell size={16} />
+                                        Notify Me
+                                    </button>
+                                </form>
+                            )}
+                        </div>
                     )}
 
                     <p className="text-[10px] text-gray-400 text-center mt-3">
-                        By clicking above, you agree to the <a href="#" className="underline">Terms</a>
+                        Questions? Email us at hello@smoothdescent.com
                     </p>
                 </div>
             </div>
