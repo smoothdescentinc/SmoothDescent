@@ -5,11 +5,10 @@ import { PRODUCTS, REVIEWS } from '../constants';
 
 // Pain point navigator data
 const painPoints = [
-    { id: 'hydration', label: 'Nausea & Headaches', icon: Zap, color: 'bg-amber-100 text-amber-700' },
-    { id: 'hydration', label: 'Dehydration', icon: Droplets, color: 'bg-blue-100 text-blue-700' },
-    { id: 'enzymes', label: 'Sulfur Burps', icon: Flame, color: 'bg-green-100 text-green-700' },
-    { id: 'enzymes', label: 'Bloating', icon: Flame, color: 'bg-emerald-100 text-emerald-700' },
-    { id: 'strips', label: 'Public Nausea', icon: Pill, color: 'bg-purple-100 text-purple-700' },
+    { id: 'hydration', label: 'Nausea', icon: Zap },
+    { id: 'hydration', label: 'Dehydration', icon: Droplets },
+    { id: 'enzymes', label: 'Bloating', icon: Flame },
+    { id: 'strips', label: 'Relief', icon: Pill },
 ];
 
 // Trust badges
@@ -81,44 +80,44 @@ const SciencePage: React.FC = () => {
         <div className="bg-brand-light min-h-screen">
 
             {/* Hero Section with Doctor */}
-            <section className="relative pt-16 pb-12 md:pt-24 md:pb-16 overflow-hidden">
+            <section className="relative pt-12 pb-8 md:pt-24 md:pb-16 overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-b from-brand-cream to-brand-light" />
-                <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-primary/5 rounded-full -translate-y-1/2 translate-x-1/3 blur-3xl" />
+                <div className="absolute top-0 right-0 w-[400px] md:w-[600px] h-[400px] md:h-[600px] bg-brand-primary/5 rounded-full -translate-y-1/2 translate-x-1/3 blur-3xl" />
 
                 <div className="max-w-6xl mx-auto px-4 relative">
-                    <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+                    <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
                         {/* Left: Text Content */}
                         <div className="text-center lg:text-left">
-                            <span className="inline-block bg-brand-dark text-white text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-6">
+                            <span className="inline-block bg-brand-dark text-white text-[10px] sm:text-xs font-bold uppercase tracking-widest px-3 sm:px-4 py-1.5 sm:py-2 rounded-full mb-4 sm:mb-6">
                                 The Science Behind Relief
                             </span>
-                            <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-brand-dark mb-6 leading-tight">
+                            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-brand-dark mb-4 sm:mb-6 leading-tight">
                                 How Our Formulas<br />
                                 <span className="text-brand-primary">Actually Work</span>
                             </h1>
-                            <p className="text-lg md:text-xl text-brand-dark/70 leading-relaxed mb-8">
+                            <p className="text-base sm:text-lg md:text-xl text-brand-dark/70 leading-relaxed mb-6 sm:mb-8">
                                 GLP-1 medications change how your body processes everything. Standard supplements weren't designed for this. Ours were.
                             </p>
                         </div>
 
                         {/* Right: Doctor Card */}
                         <div className="flex justify-center lg:justify-end">
-                            <div className="bg-white rounded-3xl p-6 md:p-8 shadow-xl border border-brand-primary/10 max-w-md">
-                                <div className="flex items-center gap-4 mb-5">
+                            <div className="bg-white rounded-2xl sm:rounded-3xl p-5 sm:p-6 md:p-8 shadow-xl border border-brand-primary/10 max-w-md w-full">
+                                <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-5">
                                     <img
                                         src="/images/DoctorPhoto.png"
                                         alt="Dr. Sarah Jenkins"
-                                        className="w-20 h-20 rounded-full object-cover border-3 border-brand-primary/20 shadow-lg"
+                                        className="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover border-2 sm:border-3 border-brand-primary/20 shadow-lg flex-shrink-0"
                                     />
-                                    <div>
-                                        <p className="font-bold text-brand-dark">Dr. Sarah Jenkins, MD</p>
-                                        <p className="text-brand-dark/60 text-sm">Board-Certified in Obesity Medicine</p>
+                                    <div className="min-w-0">
+                                        <p className="font-bold text-brand-dark text-sm sm:text-base">Dr. Sarah Jenkins, MD</p>
+                                        <p className="text-brand-dark/60 text-xs sm:text-sm">Board-Certified in Obesity Medicine</p>
                                         <div className="flex text-amber-400 mt-1">
-                                            {[...Array(5)].map((_, i) => <Star key={i} size={14} fill="currentColor" />)}
+                                            {[...Array(5)].map((_, i) => <Star key={i} size={12} className="sm:w-3.5 sm:h-3.5" fill="currentColor" />)}
                                         </div>
                                     </div>
                                 </div>
-                                <blockquote className="text-brand-dark/80 leading-relaxed italic border-l-4 border-brand-primary pl-4">
+                                <blockquote className="text-brand-dark/80 leading-relaxed italic border-l-4 border-brand-primary pl-3 sm:pl-4 text-sm sm:text-base">
                                     "Most of my patients quit GLP-1 medications within the first month because of side effects they don't know how to manage. I recommend SmoothDescent because their formulas are specifically designed for delayed gastric emptying."
                                 </blockquote>
                             </div>
@@ -129,25 +128,20 @@ const SciencePage: React.FC = () => {
 
             {/* Pain Point Navigator - Sticky */}
             <div className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-brand-primary/10 shadow-sm">
-                <div className="max-w-6xl mx-auto px-4 py-4">
-                    <p className="text-xs text-brand-dark/50 uppercase tracking-widest mb-3 text-center font-semibold">
-                        Jump to your concern
+                <div className="max-w-6xl mx-auto px-4 py-3">
+                    <p className="text-[10px] text-brand-dark/50 uppercase tracking-widest mb-2 text-center font-medium">
+                        Find your solution
                     </p>
-                    <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide justify-center flex-wrap">
+                    <div className="flex justify-center gap-2">
                         {painPoints.map((point, i) => {
                             const Icon = point.icon;
-                            const isActive = activeSection === point.id;
                             return (
                                 <button
                                     key={i}
                                     onClick={() => scrollToSection(point.id)}
-                                    className={`flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-semibold whitespace-nowrap transition-all ${
-                                        isActive
-                                            ? 'bg-brand-dark text-white shadow-lg scale-105'
-                                            : 'bg-brand-cream hover:bg-brand-secondary/50 text-brand-dark'
-                                    }`}
+                                    className="flex items-center gap-1.5 px-3 py-2 rounded-full text-xs font-semibold whitespace-nowrap bg-brand-dark text-white hover:bg-brand-primary transition-all"
                                 >
-                                    <Icon size={16} />
+                                    <Icon size={12} />
                                     {point.label}
                                 </button>
                             );
@@ -178,27 +172,27 @@ const SciencePage: React.FC = () => {
             </section>
 
             {/* Main Content */}
-            <div className="max-w-7xl mx-auto px-4 py-16 md:py-24">
-                <div className="space-y-32">
+            <div className="max-w-7xl mx-auto px-4 py-12 sm:py-16 md:py-24">
+                <div className="space-y-20 sm:space-y-32">
 
                     {/* HYDRATION SECTION */}
-                    <section id="hydration" className="scroll-mt-32">
-                        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+                    <section id="hydration" className="scroll-mt-28 sm:scroll-mt-32">
+                        <div className="grid lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-16 items-start">
                             <div className="lg:col-span-7">
-                                <div className="flex items-center gap-4 mb-8">
-                                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center shadow-lg">
-                                        <Zap className="w-7 h-7 text-white" />
+                                <div className="flex items-start sm:items-center gap-3 sm:gap-4 mb-6 sm:mb-8">
+                                    <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center shadow-lg flex-shrink-0">
+                                        <Zap className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
                                     </div>
                                     <div>
-                                        <span className="text-xs font-bold text-brand-primary uppercase tracking-widest">Solution #1</span>
-                                        <h2 className="text-3xl md:text-4xl font-serif font-bold text-brand-dark">
+                                        <span className="text-[10px] sm:text-xs font-bold text-brand-primary uppercase tracking-widest">Solution #1</span>
+                                        <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-brand-dark">
                                             The Hydration Paradox
                                         </h2>
                                     </div>
                                 </div>
 
                                 {/* Problem Card */}
-                                <div className="bg-white p-8 rounded-2xl shadow-lg border border-brand-primary/10 mb-8">
+                                <div className="bg-white p-5 sm:p-8 rounded-xl sm:rounded-2xl shadow-lg border border-brand-primary/10 mb-6 sm:mb-8">
                                     <div className="flex items-center gap-2 mb-4">
                                         <span className="w-8 h-8 bg-red-100 text-red-600 rounded-full flex items-center justify-center text-sm font-bold">!</span>
                                         <h3 className="text-xl font-bold text-brand-dark">The Problem</h3>
@@ -430,25 +424,25 @@ const SciencePage: React.FC = () => {
             </div>
 
             {/* Reviews Section */}
-            <section className="py-16 bg-brand-light">
+            <section className="py-12 sm:py-16 bg-brand-light">
                 <div className="max-w-7xl mx-auto px-4">
-                    <div className="text-center mb-12">
-                        <span className="text-brand-primary font-bold tracking-widest text-xs uppercase">Real Results</span>
-                        <h2 className="text-3xl md:text-4xl font-serif font-bold text-brand-dark mt-2">What Our Customers Say</h2>
-                        <p className="text-brand-dark/60 mt-2">Join 10,000+ satisfied customers</p>
+                    <div className="text-center mb-8 sm:mb-12">
+                        <span className="text-brand-primary font-bold tracking-widest text-[10px] sm:text-xs uppercase">Real Results</span>
+                        <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-brand-dark mt-2">What Our Customers Say</h2>
+                        <p className="text-brand-dark/60 mt-2 text-sm sm:text-base">Join 10,000+ satisfied customers</p>
                     </div>
 
-                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                    <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 sm:gap-4">
                         {reviews.slice(0, 25).map((review, index) => (
-                            <div key={review.id || index} className="bg-white rounded-2xl p-5 shadow-sm border border-brand-primary/10 hover:shadow-md transition-shadow">
-                                <div className="flex text-amber-400 mb-2">
-                                    {[...Array(review.stars || 5)].map((_, i) => <Star key={i} size={14} fill="currentColor" />)}
+                            <div key={review.id || index} className="bg-white rounded-xl sm:rounded-2xl p-3 sm:p-5 shadow-sm border border-brand-primary/10 hover:shadow-md transition-shadow">
+                                <div className="flex text-amber-400 mb-1.5 sm:mb-2">
+                                    {[...Array(review.stars || 5)].map((_, i) => <Star key={i} size={10} className="sm:w-3.5 sm:h-3.5" fill="currentColor" />)}
                                 </div>
-                                <h4 className="font-bold text-brand-dark mb-2 text-sm line-clamp-1">{review.headline}</h4>
-                                <p className="text-brand-dark/70 text-xs mb-3 line-clamp-3">{review.body}</p>
-                                <div className="border-t border-brand-primary/10 pt-2">
-                                    <p className="font-semibold text-brand-dark text-xs">{review.author}</p>
-                                    <p className="text-brand-primary text-[10px]">{review.verifiedProduct}</p>
+                                <h4 className="font-bold text-brand-dark mb-1.5 sm:mb-2 text-[11px] sm:text-sm line-clamp-1">{review.headline}</h4>
+                                <p className="text-brand-dark/70 text-[10px] sm:text-xs mb-2 sm:mb-3 line-clamp-2 sm:line-clamp-3">{review.body}</p>
+                                <div className="border-t border-brand-primary/10 pt-1.5 sm:pt-2">
+                                    <p className="font-semibold text-brand-dark text-[10px] sm:text-xs">{review.author}</p>
+                                    <p className="text-brand-primary text-[8px] sm:text-[10px]">{review.verifiedProduct}</p>
                                 </div>
                             </div>
                         ))}

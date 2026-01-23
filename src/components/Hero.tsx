@@ -1,13 +1,29 @@
 import React from 'react';
 import Button from './Button';
-import { Check, ShieldCheck, Star } from 'lucide-react';
+import { Check, ShieldCheck, Star, Stethoscope, ClipboardCheck, Leaf, Award, Truck, Heart, FlaskConical, RefreshCw, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import DoctorCard from './DoctorCard';
 
+const MARQUEE_ITEMS = [
+  { icon: ShieldCheck, text: "Formulated for GLP-1 Users" },
+  { icon: Award, text: "30-Day Money-Back Guarantee" },
+  { icon: FlaskConical, text: "cGMP Certified" },
+  { icon: Truck, text: "Free Shipping $50+" },
+  { icon: Heart, text: "10,000+ Happy Customers" },
+  { icon: RefreshCw, text: "Subscribe & Save 20%" },
+];
+
+const TRUST_SEALS = [
+  { icon: Stethoscope, label: 'Physician Formulated' },
+  { icon: ClipboardCheck, label: 'Third-Party Tested' },
+  { icon: Leaf, label: 'Clean Ingredients' },
+  { icon: Award, label: 'Made in USA' },
+];
+
 const Hero: React.FC = () => {
   return (
-    <section className="relative overflow-hidden bg-brand-light pt-8 pb-10 lg:pt-12 lg:pb-12 font-sans px-4">
-      <div className="max-w-7xl mx-auto">
+    <section className="relative overflow-hidden bg-brand-light pt-8 pb-0 lg:pt-12 lg:pb-0 font-sans">
+      <div className="max-w-7xl mx-auto px-4">
         <div className="flex flex-col lg:grid lg:grid-cols-[2fr_3fr] gap-8 lg:gap-16 items-center">
 
           {/* Visual (Mobile: Order 1, Desktop: Order 2) */}
@@ -109,6 +125,81 @@ const Hero: React.FC = () => {
 
           </div>
 
+        </div>
+      </div>
+
+      {/* Trust Seals - Elegant Ribbon */}
+      <div className="relative mt-10 mb-0">
+        {/* Decorative line above */}
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-secondary to-transparent" />
+
+        <div className="bg-gradient-to-b from-brand-cream/80 to-brand-light py-4 md:py-5 overflow-x-auto scrollbar-hide">
+          <div className="max-w-4xl mx-auto px-4">
+            <div className="flex justify-center items-center gap-x-0 min-w-max">
+              {TRUST_SEALS.map((seal, index) => {
+                const Icon = seal.icon;
+                return (
+                  <React.Fragment key={index}>
+                    <div className="flex items-center gap-1.5 md:gap-2 px-2 md:px-4 group cursor-default">
+                      <div className="relative flex-shrink-0">
+                        <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-gradient-to-br from-brand-secondary/60 to-brand-secondary/20 flex items-center justify-center ring-1 ring-brand-secondary/30 group-hover:ring-brand-primary/50 transition-all duration-300">
+                          <Icon size={12} className="md:w-[15px] md:h-[15px] text-brand-dark" strokeWidth={1.8} />
+                        </div>
+                      </div>
+                      <span className="text-brand-dark/90 font-medium text-[10px] md:text-sm tracking-wide whitespace-nowrap">
+                        {seal.label}
+                      </span>
+                    </div>
+                    {index < TRUST_SEALS.length - 1 && (
+                      <div className="flex items-center justify-center w-4 md:w-6 flex-shrink-0">
+                        <Sparkles size={8} className="md:w-2.5 md:h-2.5 text-brand-secondary" />
+                      </div>
+                    )}
+                  </React.Fragment>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        {/* Decorative line below */}
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-secondary to-transparent" />
+      </div>
+
+      {/* Scrolling Marquee - Luxe Dark Bar */}
+      <div className="relative bg-brand-dark overflow-hidden">
+        {/* Subtle texture overlay */}
+        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\'/%3E%3C/svg%3E")' }} />
+
+        {/* Gradient edges for seamless loop feel */}
+        <div className="absolute left-0 top-0 bottom-0 w-16 md:w-24 bg-gradient-to-r from-brand-dark to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-16 md:w-24 bg-gradient-to-l from-brand-dark to-transparent z-10 pointer-events-none" />
+
+        <div className="py-3.5 md:py-4 whitespace-nowrap">
+          <div className="inline-flex items-center animate-marquee hover:[animation-play-state:paused]">
+            {[...Array(4)].map((_, setIndex) => (
+              <div key={setIndex} className="flex items-center">
+                {MARQUEE_ITEMS.map((item, i) => {
+                  const Icon = item.icon;
+                  return (
+                    <div key={`${setIndex}-${i}`} className="flex items-center px-5 md:px-8 group">
+                      <div className="w-6 h-6 rounded-full bg-brand-primary/15 flex items-center justify-center mr-2.5 group-hover:bg-brand-primary/25 transition-colors duration-300">
+                        <Icon
+                          size={13}
+                          className="text-brand-primary"
+                          strokeWidth={2}
+                        />
+                      </div>
+                      <span className="text-white/90 font-medium text-[13px] tracking-wide whitespace-nowrap group-hover:text-white transition-colors duration-300">
+                        {item.text}
+                      </span>
+                      <div className="w-1 h-1 rounded-full bg-brand-primary/40 ml-5 md:ml-8" />
+                    </div>
+                  );
+                })}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

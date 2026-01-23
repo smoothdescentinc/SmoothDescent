@@ -10,18 +10,19 @@ const FAQ: React.FC = () => {
   };
 
   return (
-    <section id="faq" className="py-24 bg-brand-light">
+    <section id="faq" className="py-12 sm:py-16 md:py-24 bg-brand-light">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-16">
-          <h2 className="text-3xl md:text-5xl font-serif text-brand-dark font-bold text-center md:text-left">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6 mb-10 sm:mb-16">
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-serif text-brand-dark font-bold text-center md:text-left">
             Any last questions?
           </h2>
           <button
             onClick={() => document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' })}
-            className="flex-shrink-0 bg-brand-primary hover:bg-[#B88E8A] text-brand-light px-8 py-4 rounded-full font-bold text-lg shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 flex items-center gap-2 group"
+            className="flex-shrink-0 bg-brand-primary hover:bg-[#B88E8A] text-brand-light px-5 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-sm sm:text-lg shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 flex items-center gap-2 group"
           >
-            No? Try SmoothDescent now
+            <span className="hidden sm:inline">No? Try SmoothDescent now</span>
+            <span className="sm:hidden">Try SmoothDescent</span>
             <span className="group-hover:translate-x-1 transition-transform">→</span>
           </button>
         </div>

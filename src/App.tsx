@@ -3,7 +3,6 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import CartDrawer from './components/CartDrawer';
 import Hero from './components/Hero';
-import TrustMarquee from './components/TrustMarquee';
 import Reviews from './components/Reviews';
 import Quiz from './components/Quiz';
 import ValueProps from './components/ValueProps';
@@ -19,15 +18,12 @@ import UsVsThem from './components/UsVsThem';
 import PromiseSection from './components/PromiseSection';
 import ContactForm from './components/ContactForm';
 import DoctorSection from './components/DoctorSection';
-import TrustBadges from './components/TrustBadges';
 import SaleBanner from './components/SaleBanner';
 import { trackPageView } from './lib/metaPixel';
 
 const Home = () => (
   <>
     <Hero />
-    <TrustBadges />
-    <TrustMarquee />
     <ProductGrid />
     <ValueProps />
     <Reviews />
