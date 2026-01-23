@@ -1,13 +1,14 @@
 /**
  * Meta Pixel Tracking Library
  *
- * Dual tracking approach for maximum accuracy:
- * 1. Direct fbq() calls - Primary, fires immediately
- * 2. GTM Data Layer - Backup, for GTM-based workflows
+ * Triple tracking approach for maximum accuracy:
+ * 1. Direct fbq() calls - Primary browser tracking
+ * 2. Conversions API - Server-side backup (bypasses ad blockers)
+ * 3. GTM Data Layer - Legacy backup
  *
  * Features:
  * - SHA-256 email/phone hashing for Advanced Matching
- * - Event deduplication via eventID
+ * - Event deduplication via eventID (same ID for browser + server)
  * - Safe tracking with error handling
  * - Debug mode logging
  */
@@ -151,6 +152,65 @@ function firePixelEvent(
 }
 
 /**
+ * Get Meta cookies for better attribution
+ */
+function getMetaCookies(): { fbc?: string; fbp?: string } {
+    if (typeof document === 'undefined') return {};
+
+    const cookies = document.cookie.split(';').reduce((acc, cookie) => {
+        const [key, value] = cookie.trim().split('=');
+        acc[key] = value;
+        return acc;
+    }, {} as Record<string, string>);
+
+    return {
+        fbc: cookies['_fbc'],
+        fbp: cookies['_fbp']
+    };
+}
+
+/**
+ * Send event to Conversions API (server-side)
+ * This bypasses ad blockers and iOS restrictions
+ */
+async function sendToCAPI(
+    eventName: string,
+    eventId: string,
+    eventData: Record<string, any> = {},
+    hashedUserData: Record<string, string> = {}
+) {
+    if (typeof window === 'undefined') return;
+
+    try {
+        const { fbc, fbp } = getMetaCookies();
+
+        const response = await fetch('/api/meta-capi', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                eventName,
+                eventId,
+                eventData,
+                userData: hashedUserData,
+                sourceUrl: window.location.href,
+                fbc,
+                fbp
+            })
+        });
+
+        if (DEBUG_MODE) {
+            const result = await response.json();
+            console.log(`[CAPI] Server response for ${eventName}:`, result);
+        }
+    } catch (error) {
+        // Silent fail - don't break the user experience
+        if (DEBUG_MODE) {
+            console.error('[CAPI] Error sending event:', error);
+        }
+    }
+}
+
+/**
  * Update user data for Advanced Matching
  * Call this when you capture new user information
  */
@@ -242,7 +302,7 @@ export function pushToDataLayer(
 
 /**
  * Track event with customer data (Advanced Matching wrapper)
- * Fires BOTH direct fbq() and Data Layer for redundancy
+ * Fires browser pixel, CAPI, and Data Layer for maximum coverage
  */
 export async function trackWithCustomerData(
     event: string,
@@ -255,10 +315,11 @@ export async function trackWithCustomerData(
         city?: string;
         state?: string;
         zip?: string;
-    }
+    },
+    sendServerSide: boolean = true
 ) {
     try {
-        // Generate event ID ONCE for deduplication across both channels
+        // Generate event ID ONCE for deduplication across ALL channels
         const eventId = generateEventId();
 
         // Hash sensitive data for Advanced Matching
@@ -297,10 +358,15 @@ export async function trackWithCustomerData(
             await updatePixelUserData(userData);
         }
 
-        // PRIMARY: Fire direct fbq() call
+        // 1. PRIMARY: Fire direct fbq() call (browser)
         firePixelEvent(event, params, eventId);
 
-        // BACKUP: Push to Data Layer for GTM
+        // 2. SERVER: Send to Conversions API (bypasses ad blockers)
+        if (sendServerSide) {
+            sendToCAPI(event, eventId, params, hashedUserData);
+        }
+
+        // 3. BACKUP: Push to Data Layer for GTM
         pushToDataLayer(event, { ...params, eventID: eventId }, hashedUserData);
 
     } catch (error) {
@@ -371,10 +437,13 @@ export function trackAddToCart(product: {
         num_items: product.quantity
     };
 
-    // PRIMARY: Direct fbq() call
+    // 1. PRIMARY: Direct fbq() call (browser)
     firePixelEvent('AddToCart', eventData, eventId);
 
-    // BACKUP: GTM Data Layer
+    // 2. SERVER: Conversions API
+    sendToCAPI('AddToCart', eventId, eventData);
+
+    // 3. BACKUP: GTM Data Layer
     pushToDataLayer('AddToCart', { ...eventData, eventID: eventId });
 }
 
@@ -394,10 +463,13 @@ export function trackInitiateCheckout(cart: {
         num_items: cart.items.reduce((sum, i) => sum + i.quantity, 0)
     };
 
-    // PRIMARY: Direct fbq() call
+    // 1. PRIMARY: Direct fbq() call (browser)
     firePixelEvent('InitiateCheckout', eventData, eventId);
 
-    // BACKUP: GTM Data Layer
+    // 2. SERVER: Conversions API
+    sendToCAPI('InitiateCheckout', eventId, eventData);
+
+    // 3. BACKUP: GTM Data Layer
     pushToDataLayer('InitiateCheckout', { ...eventData, eventID: eventId });
 }
 
