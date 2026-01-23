@@ -1,15 +1,22 @@
 /**
- * Tracking Utility Library
- * 
- * Centralized helpers for GTM Data Layer tracking with:
- * - SHA-256 email/phone hashing for advanced matching
+ * Meta Pixel Tracking Library
+ *
+ * Dual tracking approach for maximum accuracy:
+ * 1. Direct fbq() calls - Primary, fires immediately
+ * 2. GTM Data Layer - Backup, for GTM-based workflows
+ *
+ * Features:
+ * - SHA-256 email/phone hashing for Advanced Matching
+ * - Event deduplication via eventID
  * - Safe tracking with error handling
  * - Debug mode logging
- * - Type-safe wrappers
  */
 
 // Check if we're in debug mode
 const DEBUG_MODE = import.meta.env.PUBLIC_META_PIXEL_DEBUG === 'true';
+
+// Meta Pixel ID - centralized for easy updates
+const META_PIXEL_ID = '3411322252377394';
 
 // Define Data Layer type
 type DataLayerEvent = {
@@ -20,10 +27,23 @@ type DataLayerEvent = {
     [key: string]: any;
 };
 
-// Safe access to dataLayer
+// Define fbq function type for Meta Pixel
+type FbqFunction = {
+    (action: 'track', event: string, params?: Record<string, any>, options?: { eventID?: string }): void;
+    (action: 'trackCustom', event: string, params?: Record<string, any>, options?: { eventID?: string }): void;
+    (action: 'init', pixelId: string, userData?: Record<string, string>): void;
+    callMethod?: (...args: any[]) => void;
+    queue?: any[];
+    loaded?: boolean;
+    version?: string;
+};
+
+// Safe access to dataLayer and fbq
 declare global {
     interface Window {
         dataLayer: DataLayerEvent[];
+        fbq: FbqFunction;
+        _fbq?: FbqFunction;
     }
 }
 
@@ -84,7 +104,111 @@ export async function hashPhone(phone: string): Promise<string> {
 }
 
 /**
- * Push event to GTM Data Layer
+ * Fire direct Meta Pixel event via fbq()
+ * This is the PRIMARY tracking method - more reliable than GTM
+ */
+function firePixelEvent(
+    eventName: string,
+    eventData: Record<string, any> = {},
+    eventId?: string
+) {
+    if (typeof window === 'undefined' || typeof window.fbq !== 'function') {
+        if (DEBUG_MODE) {
+            console.warn('[Meta Pixel] fbq not available, skipping direct pixel fire');
+        }
+        return;
+    }
+
+    try {
+        // Standard Meta events vs custom events
+        const standardEvents = [
+            'PageView', 'ViewContent', 'AddToCart', 'InitiateCheckout',
+            'Purchase', 'Lead', 'CompleteRegistration', 'AddPaymentInfo',
+            'AddToWishlist', 'Search', 'Contact', 'CustomizeProduct',
+            'Donate', 'FindLocation', 'Schedule', 'StartTrial',
+            'SubmitApplication', 'Subscribe'
+        ];
+
+        const isStandardEvent = standardEvents.includes(eventName);
+        const options = eventId ? { eventID: eventId } : undefined;
+
+        if (isStandardEvent) {
+            window.fbq('track', eventName, eventData, options);
+        } else {
+            window.fbq('trackCustom', eventName, eventData, options);
+        }
+
+        if (DEBUG_MODE) {
+            console.log(`[Meta Pixel] Fired ${isStandardEvent ? 'standard' : 'custom'} event:`, {
+                event: eventName,
+                data: eventData,
+                eventId
+            });
+        }
+    } catch (error) {
+        console.error('[Meta Pixel] Error firing pixel event:', error);
+    }
+}
+
+/**
+ * Update user data for Advanced Matching
+ * Call this when you capture new user information
+ */
+export async function updatePixelUserData(userData: {
+    email?: string;
+    phone?: string;
+    firstName?: string;
+    lastName?: string;
+    city?: string;
+    state?: string;
+    zip?: string;
+    country?: string;
+}) {
+    if (typeof window === 'undefined' || typeof window.fbq !== 'function') {
+        return;
+    }
+
+    try {
+        const hashedData: Record<string, string> = {};
+
+        if (userData.email) {
+            hashedData.em = await hashEmail(userData.email);
+        }
+        if (userData.phone) {
+            hashedData.ph = await hashPhone(userData.phone);
+        }
+        if (userData.firstName) {
+            hashedData.fn = await sha256(userData.firstName.toLowerCase().trim());
+        }
+        if (userData.lastName) {
+            hashedData.ln = await sha256(userData.lastName.toLowerCase().trim());
+        }
+        if (userData.city) {
+            hashedData.ct = await sha256(userData.city.toLowerCase().trim());
+        }
+        if (userData.state) {
+            hashedData.st = await sha256(userData.state.toLowerCase().trim());
+        }
+        if (userData.zip) {
+            hashedData.zp = await sha256(userData.zip.replace(/\s/g, ''));
+        }
+        if (userData.country) {
+            hashedData.country = await sha256(userData.country.toLowerCase().trim());
+        }
+
+        // Re-init pixel with updated user data for Advanced Matching
+        window.fbq('init', META_PIXEL_ID, hashedData);
+
+        if (DEBUG_MODE) {
+            console.log('[Meta Pixel] Updated user data for Advanced Matching:', Object.keys(hashedData));
+        }
+    } catch (error) {
+        console.error('[Meta Pixel] Error updating user data:', error);
+    }
+}
+
+/**
+ * Push event to GTM Data Layer (BACKUP method)
  */
 export function pushToDataLayer(
     eventName: string,
@@ -109,15 +233,16 @@ export function pushToDataLayer(
         window.dataLayer.push(payload);
 
         if (DEBUG_MODE) {
-            console.log(`[Tracking] Pushed to Data Layer:`, payload);
+            console.log(`[GTM Data Layer] Pushed event:`, payload);
         }
     } catch (error) {
-        console.error('[Tracking] Error pushing to Data Layer:', error);
+        console.error('[GTM Data Layer] Error pushing event:', error);
     }
 }
 
 /**
  * Track event with customer data (Advanced Matching wrapper)
+ * Fires BOTH direct fbq() and Data Layer for redundancy
  */
 export async function trackWithCustomerData(
     event: string,
@@ -133,7 +258,10 @@ export async function trackWithCustomerData(
     }
 ) {
     try {
-        // Hash sensitive data
+        // Generate event ID ONCE for deduplication across both channels
+        const eventId = generateEventId();
+
+        // Hash sensitive data for Advanced Matching
         const hashedUserData: Record<string, string> = {};
 
         if (userData?.email) {
@@ -164,8 +292,16 @@ export async function trackWithCustomerData(
             hashedUserData.zp = await sha256(userData.zip.toLowerCase().trim());
         }
 
-        // Push to Data Layer
-        pushToDataLayer(event, { ...params, eventID: generateEventId() }, hashedUserData);
+        // Update pixel with user data for Advanced Matching (if we have user data)
+        if (userData && Object.keys(userData).length > 0) {
+            await updatePixelUserData(userData);
+        }
+
+        // PRIMARY: Fire direct fbq() call
+        firePixelEvent(event, params, eventId);
+
+        // BACKUP: Push to Data Layer for GTM
+        pushToDataLayer(event, { ...params, eventID: eventId }, hashedUserData);
 
     } catch (error) {
         console.error('[Tracking] Error processing customer data:', event, error);
@@ -199,15 +335,21 @@ export function trackViewContent(product: {
     price: number;
     category?: string;
 }) {
-    // ViewContent generally doesn't have user data unless logged in, but we use the generic pusher
-    pushToDataLayer('ViewContent', {
+    const eventId = generateEventId();
+    const eventData = {
         content_name: product.name,
         content_ids: [product.id],
         content_type: 'product',
         content_category: product.category || 'General',
         value: product.price,
         currency: 'USD'
-    });
+    };
+
+    // PRIMARY: Direct fbq() call
+    firePixelEvent('ViewContent', eventData, eventId);
+
+    // BACKUP: GTM Data Layer
+    pushToDataLayer('ViewContent', { ...eventData, eventID: eventId });
 }
 
 /**
@@ -219,14 +361,21 @@ export function trackAddToCart(product: {
     price: number;
     quantity: number;
 }) {
-    pushToDataLayer('AddToCart', {
+    const eventId = generateEventId();
+    const eventData = {
         content_name: product.name,
         content_ids: [product.id],
         content_type: 'product',
         value: product.price * product.quantity,
         currency: 'USD',
         num_items: product.quantity
-    });
+    };
+
+    // PRIMARY: Direct fbq() call
+    firePixelEvent('AddToCart', eventData, eventId);
+
+    // BACKUP: GTM Data Layer
+    pushToDataLayer('AddToCart', { ...eventData, eventID: eventId });
 }
 
 /**
@@ -236,13 +385,20 @@ export function trackInitiateCheckout(cart: {
     items: Array<{ id: string; quantity: number }>;
     total: number;
 }) {
-    pushToDataLayer('InitiateCheckout', {
+    const eventId = generateEventId();
+    const eventData = {
         content_ids: cart.items.map(i => i.id),
         content_type: 'product',
         value: cart.total,
         currency: 'USD',
         num_items: cart.items.reduce((sum, i) => sum + i.quantity, 0)
-    });
+    };
+
+    // PRIMARY: Direct fbq() call
+    firePixelEvent('InitiateCheckout', eventData, eventId);
+
+    // BACKUP: GTM Data Layer
+    pushToDataLayer('InitiateCheckout', { ...eventData, eventID: eventId });
 }
 
 /**
@@ -264,3 +420,64 @@ export async function trackPurchase(order: {
     }, order.email ? { email: order.email } : undefined);
 }
 
+/**
+ * Track PageView for SPA navigation
+ * Call this on route changes in your React Router
+ */
+export function trackPageView(url?: string) {
+    if (typeof window === 'undefined' || typeof window.fbq !== 'function') {
+        return;
+    }
+
+    try {
+        window.fbq('track', 'PageView');
+
+        if (DEBUG_MODE) {
+            console.log('[Meta Pixel] PageView tracked:', url || window.location.href);
+        }
+    } catch (error) {
+        console.error('[Meta Pixel] Error tracking PageView:', error);
+    }
+}
+
+/**
+ * Track ViewCategory when user browses product category/shop page
+ */
+export function trackViewCategory(category: {
+    name: string;
+    productCount?: number;
+}) {
+    const eventId = generateEventId();
+    const eventData = {
+        content_category: category.name,
+        content_type: 'product_group',
+        num_items: category.productCount
+    };
+
+    // ViewCategory is a custom event (not standard)
+    firePixelEvent('ViewCategory', eventData, eventId);
+    pushToDataLayer('ViewCategory', { ...eventData, eventID: eventId });
+}
+
+/**
+ * Track Search queries
+ */
+export function trackSearch(searchTerm: string) {
+    const eventId = generateEventId();
+    const eventData = {
+        search_string: searchTerm
+    };
+
+    firePixelEvent('Search', eventData, eventId);
+    pushToDataLayer('Search', { ...eventData, eventID: eventId });
+}
+
+/**
+ * Track Contact form submissions
+ */
+export function trackContact() {
+    const eventId = generateEventId();
+
+    firePixelEvent('Contact', {}, eventId);
+    pushToDataLayer('Contact', { eventID: eventId });
+}
